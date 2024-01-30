@@ -1,0 +1,48 @@
+:root {
+  --background-color: #04203a;
+  --text-color: #DCDCDC;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Ubuntu', sans-serif
+
+}
+
+a {
+  color: var(--text-color);
+}
+
+.game-cover {
+  width: 25%;
+  height: auto;
+}
+
+.game-cover img {
+  width: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+  nav {
+    justify-content: center;
+  }
+
+  main {
+    justify-content: center;
+  }
+
+  ul {
+    list-style-type: none;
+    justify-content: center;
+    padding: 0;
+  }
+}
