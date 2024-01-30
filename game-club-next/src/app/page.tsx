@@ -1,8 +1,8 @@
 export default function HomePage() {
   return (
     <div>
-      <h1>Home Page</h1>
-      <p>This is the /home page</p>
+      <h1>Welcome to Game Club!</h1>
+      <p>This is the homepage of Game Club</p>
     </div>
   )
 }
