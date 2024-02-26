@@ -20,34 +20,10 @@ export default function RootLayout({
                 <a href="/lfg">LFG</a>
               </li>
               <li>
-                <a href="/login">login</a>
+                <a href="/reviews">Reviews</a>
               </li>
               <li>
-                <a href="/profile">profile</a>
-              </li>
-              <li>
-                <a href="/register">register</a>
-              </li>
-              <li>
-                <a href="/reviews">reviews</a>
-              </li>
-              <li>
-                <a href="/user-forum">user-forum</a>
-              </li>
-              <li>
-                <a href="/user-lfg">user-lfg</a>
-              </li>
-              <li>
-                <a href="/user-reviews">user-reviews</a>
-              </li>
-              <li>
-                <a href="/write-comment">write-comment</a>
-              </li>
-              <li>
-                <a href="/write-forum">write-forum</a>
-              </li>
-              <li>
-                <a href="/write-review">write-review</a>
+                <a href="/forum">Forum</a>
               </li>
             </ul>
           </nav>
