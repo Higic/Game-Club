@@ -1,6 +1,7 @@
 :root {
   --background-color: #04203a;
-  --text-color: #DCDCDC;
+  --color1: #ACB3BF;
+  --text-color: #000000;
 }
 
 ul {
@@ -9,7 +10,6 @@ ul {
 
 .content {
   width: 60%;
-  /* center the div */
   margin: 0 auto;
 }
 
@@ -24,15 +24,14 @@ ul {
   justify-content: space-evenly;
 }
 
-button {
+.menuButton{
   cursor: pointer;
-  background-color: #ACB3BF;
-  color: #000000;
+  background-color: var(--color1);
+  color: var(--text-color);
   height: 75px;
-  width: 200px;
+  width: 100%;
   font-size: 32px;
 }
-
 
 body {
   background-color: var(--background-color);

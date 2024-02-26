@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import Link from "next/link"
-import "./global.css"
-import { useRouter } from "next/navigation"
+import Link from "next/link";
+import "./global.css";
+import { useRouter } from "next/navigation";
 
 export default function NavBar({}) {
   const router = useRouter();
@@ -13,18 +13,32 @@ export default function NavBar({}) {
   return (
     <nav className="menuButtons">
       <div className="navItem">
-        <button type="button" onClick={() => router.push("/reviews")}>
+        <button
+          className="menuButton"
+          type="button"
+          onClick={() => router.push("/reviews")}
+        >
           Reviews
         </button>
       </div>
       <div className="navItem">
-        <button type="button" onClick={() => router.push("/lfg")}>
+        <button
+          className="menuButton"
+          type="button"
+          onClick={() => router.push("/lfg")}
+        >
           LFG
         </button>
       </div>
-      <button type="button" onClick={() => router.push("/forum")}>
-        Forum
-      </button>
+      <div className="navItem">
+        <button
+          className="menuButton"
+          type="button"
+          onClick={() => router.push("/forum")}
+        >
+          Forum
+        </button>
+      </div>
     </nav>
   );
 }
