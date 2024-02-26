@@ -3,6 +3,37 @@
   --text-color: #DCDCDC;
 }
 
+ul {
+  list-style-type: none;
+}
+
+.content {
+  width: 60%;
+  /* center the div */
+  margin: 0 auto;
+}
+
+/* Use div buffer to generate extra space between two elements */
+.buffer {
+  height: 100px;
+
+}
+
+.menuButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  cursor: pointer;
+  background-color: #ACB3BF;
+  color: #000000;
+  height: 75px;
+  width: 200px;
+  font-size: 32px;
+}
+
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
