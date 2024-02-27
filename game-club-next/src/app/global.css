@@ -31,6 +31,19 @@ ul {
   height: 75px;
   width: 100%;
   font-size: 32px;
+  border-radius: 15px;
+}
+
+/* Review styling */
+.review {
+  padding: 15px;
+  background-color: var(--color1);
+  border-radius: 15px;
+  display: flex;
+}
+
+.profileData {
+  width: 30%;
 }
 
 body {
