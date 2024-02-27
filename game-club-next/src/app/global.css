@@ -1,6 +1,7 @@
 :root {
   --background-color: #04203a;
-  --color1: #ACB3BF;
+  --backgroung2: #0b4f6c;
+  --color1: #acb3bf;
   --text-color: #000000;
 }
 
@@ -8,15 +9,27 @@ ul {
   list-style-type: none;
 }
 
+.title {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+  border-color: #000000;
+  font-size: 60px;
+  border-style: solid;
+  border-radius: 20px;
+  height: 100px;
+}
+
 .content {
   width: 60%;
   margin: 0 auto;
+  background-color: var(--backgroung2);
 }
 
 /* Use div buffer to generate extra space between two elements */
 .buffer {
   height: 100px;
-
 }
 
 .menuButtons {
@@ -24,7 +37,7 @@ ul {
   justify-content: space-evenly;
 }
 
-.menuButton{
+.menuButton {
   cursor: pointer;
   background-color: var(--color1);
   color: var(--text-color);
@@ -54,8 +67,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  font-family: 'Ubuntu', sans-serif
-
+  font-family: "Ubuntu", sans-serif;
 }
 
 a {

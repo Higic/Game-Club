@@ -1,5 +1,6 @@
 import "./global.css";
 import NavBar from "./navbar";
+import Title from "./title";
 
 export const metadata = {
   title: "Next.js",
@@ -16,6 +17,8 @@ export default function RootLayout({
       <body>
         <div className="content">
           <main>
+            <div className="buffer"></div>
+            <Title/>
             <div className="buffer"></div>
             <NavBar/>
             <div className="buffer"></div>
