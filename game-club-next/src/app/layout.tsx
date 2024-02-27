@@ -18,6 +18,7 @@ export default function RootLayout({
           <main>
             <div className="buffer"></div>
             <NavBar/>
+            <div className="buffer"></div>
 
             <div>{children}</div>
           </main>
