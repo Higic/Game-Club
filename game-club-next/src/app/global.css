@@ -4,6 +4,12 @@
   --color1: #acb3bf;
   --button-hover: #696969;
   --text-color: #000000;
+
+  --global-padding: 5px;
+  --global-margin: 10px;
+
+  --smooth: 15px;
+
 }
 
 ul {
@@ -18,19 +24,52 @@ ul {
   border-color: #000000;
   font-size: 60px;
   border-style: solid;
-  border-radius: 20px;
+  border-radius: var(--smooth);
   height: fit-content;
 }
 
 .content {
   width: 60%;
+  min-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   background-color: var(--backgroung2);
+  border-bottom-left-radius: var(--smooth);
+  border-bottom-right-radius: var(--smooth);
 }
 
 /* Use div buffer to generate extra space between two elements */
 .buffer {
   height: 100px;
+}
+.reviewInput {
+  display: flex;
+  flex-direction: row;
+  margin: var(--global-margin);
+}
+
+.reviewInputCol {
+  width: 10%;
+  min-width: 70px;
+  max-width: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+textarea {
+  height: 120px;
+  resize: none;
+  width: 100%;
+  padding: var(--global-padding);
+}
+
+select {
+  width: 100%;
+  text-align: center;
+}
+
+.ratingButton {
+  cursor: pointer;
 }
 
 .menuButtons {
@@ -45,7 +84,7 @@ ul {
   height: 75px;
   width: 100%;
   font-size: 32px;
-  border-radius: 15px;
+  border-radius: var(--smooth);
 }
 
 button:hover {
@@ -63,15 +102,16 @@ button:hover {
   color: var(--text-color);
   font-size: 20px;
   text-align: center;
-  padding-bottom: 5px; /* Tää on kursed mut siin for now */
-  border-radius: 50%;
+  padding-bottom: var(--global-padding);
+  border-radius: var(--smooth);
 }
 
 /* Review styling */
 .review {
-  padding: 15px;
+  padding: var(--global-padding);
+  margin: var(--global-margin);
   background-color: var(--color1);
-  border-radius: 15px;
+  border-radius: var(--smooth);
   display: flex;
 }
 
@@ -82,6 +122,7 @@ button:hover {
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+  margin-top: 0;
 }
 
 main {
@@ -103,10 +144,11 @@ a {
   width: auto;
   max-width: 100%;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: var(--smooth);
 }
 
-@media only screen and (max-width: 800px) {
+
+@media only screen and (max-width: 600px) {
   nav {
     justify-content: center;
   }
@@ -119,5 +161,16 @@ a {
     list-style-type: none;
     justify-content: center;
     padding: 0;
+  }
+
+  .content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    min-width: 500px;
+  }
+
+  body {
+    margin: 0;
   }
 }
