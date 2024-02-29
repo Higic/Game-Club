@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Review(props: { username: string; review: string; rating: number; }) {
     const { username, review, rating } = props;
   return (

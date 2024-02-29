@@ -2,6 +2,7 @@
   --background-color: #04203a;
   --backgroung2: #0b4f6c;
   --color1: #acb3bf;
+  --button-hover: #696969;
   --text-color: #000000;
 }
 
@@ -18,7 +19,7 @@ ul {
   font-size: 60px;
   border-style: solid;
   border-radius: 20px;
-  height: 100px;
+  height: fit-content;
 }
 
 .content {
@@ -45,6 +46,25 @@ ul {
   width: 100%;
   font-size: 32px;
   border-radius: 15px;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+.profileButton {
+  cursor: pointer;
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  height: 50px;
+  width: 50px;
+  background-color: var(--color1);
+  color: var(--text-color);
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: 5px; /* Tää on kursed mut siin for now */
+  border-radius: 50%;
 }
 
 /* Review styling */

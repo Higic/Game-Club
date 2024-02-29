@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Review from "./review";
 
-// eslint-disable-next-line @next/next/no-async-client-component
-export default function ReviewPage() {
+export default function Page() {
 
   const [count, setCount] = useState(0);
   const getGameReviews = () => {

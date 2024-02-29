@@ -1,4 +1,4 @@
-export default async function UserComments() {
+export default function Page() {
     return (
       <div>
         <h1>User comments page</h1>

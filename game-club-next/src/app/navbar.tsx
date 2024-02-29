@@ -3,6 +3,7 @@
 import Link from "next/link";
 import "./global.css";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function NavBar({}) {
   const router = useRouter();
@@ -10,35 +11,47 @@ export default function NavBar({}) {
     console.log("clicked button ", arg0);
   }
 
+  const [game, setGame] = useState("1");
+  const [user, setUser] = useState("2");
+
   return (
-    <nav className="menuButtons">
-      <div className="navItem">
+    <div>
         <button
-          className="menuButton"
+          className="profileButton"
           type="button"
-          onClick={() => router.push("/reviews")}
+          onClick={() => router.push(`/users/${user}`)}
         >
-          Reviews
+          🏠
         </button>
-      </div>
-      <div className="navItem">
-        <button
-          className="menuButton"
-          type="button"
-          onClick={() => router.push("/lfg")}
-        >
-          LFG
-        </button>
-      </div>
-      <div className="navItem">
-        <button
-          className="menuButton"
-          type="button"
-          onClick={() => router.push("/forum")}
-        >
-          Forum
-        </button>
-      </div>
-    </nav>
+      <nav className="menuButtons">
+        <div className="navItem">
+          <button
+            className="menuButton"
+            type="button"
+            onClick={() => router.push(`/games/${game}/reviews`)}
+          >
+            Reviews
+          </button>
+        </div>
+        <div className="navItem">
+          <button
+            className="menuButton"
+            type="button"
+            onClick={() => router.push(`/games/${game}/lfg`)}
+          >
+            LFG
+          </button>
+        </div>
+        <div className="navItem">
+          <button
+            className="menuButton"
+            type="button"
+            onClick={() => router.push(`/games/${game}/forum`)}
+          >
+            Forum
+          </button>
+        </div>
+      </nav>
+    </div>
   );
 }

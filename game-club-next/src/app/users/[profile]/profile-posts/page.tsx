@@ -1,7 +1,7 @@
-export default async function HomePage() {
+export default function Page() {
     return (
       <div>
-        <h1>User Forum page</h1>
+        <h1>User Posts page</h1>
       </div>
     )
   }

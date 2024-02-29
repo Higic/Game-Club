@@ -1,4 +1,4 @@
-export default async function HomePage() {
+export default function Page() {
     return (
       <div>
         <h1>User LFG page</h1>
