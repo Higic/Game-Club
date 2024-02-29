@@ -6,29 +6,31 @@ type Review = {
     game: string; // game id
     score: number;
     text: string;
-    author: User["id"];
+    user: User["id"];
 }
 
 type Lfg = {
     id: Types.ObjectId | string; // lfg id
     game: string; // game id
-    author: User["id"];
+    user: User["id"];
     text: string;
 
 
 }
 
 type ForumPost = {
-    id: Types.ObjectId | string;
+    id: Types.ObjectId | string; // forum post id
     game: string; // game id
     title: string;
     text: string;
-    author: User["id"];
+    user: User["id"];
 }
 
 type ForumComment = {
-    id: Types.ObjectId | string;
-    forumPostId: ForumPost["id"];
+    id: Types.ObjectId | string; // comment id
+    forumPostId: ForumPost["id"]; // original forum post id
     text: string;
-    author: User["id"];
+    user: User["id"];
 }
+
+export type { Review, Lfg, ForumPost, ForumComment };
