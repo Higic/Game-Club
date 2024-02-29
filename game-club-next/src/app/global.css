@@ -72,6 +72,11 @@ select {
   cursor: pointer;
 }
 
+.reviewData {
+  width: 70%;
+  overflow-wrap: break-word;
+}
+
 .menuButtons {
   display: flex;
   justify-content: space-evenly;

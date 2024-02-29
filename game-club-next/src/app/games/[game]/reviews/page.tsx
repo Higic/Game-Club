@@ -47,6 +47,11 @@ export default function Page() {
           review={"Tässä vähän testiarvosteluu, en tykänny mut maistu hyvält."}
           rating={5}
         ></Review>
+        <Review
+          username={"Toinen Isoasdsadsadsda dasadsasddasasdäijä"}
+          review={"AAAAAAA AAAAAAAAAAAAAAA AAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+          rating={1}
+        ></Review>
         {}
       </div>
     </div>

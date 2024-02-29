@@ -6,7 +6,7 @@ export default function Review(props: { username: string; review: string; rating
         <p>{username}</p>
       </div>
       <div className="reviewData">
-        <p>{review}</p>
+        <p className="reviewText">{review}</p>
         <p>Rating: {rating}/5</p>
       </div>
     </div>
