@@ -15,5 +15,4 @@ the website uses the following frameworks and libraries:
 
 - React
 - NextJS
-- Tailwind CSS
 - MongoDB
