@@ -1,16 +1,15 @@
 import Image from "next/image";
 
-export default function Review(props: { imgUrl: string; username: string; review: string; rating: number; }) {
-    const { imgUrl, username, review, rating } = props;
+export default function Review(props: { username: string; review: string; rating: number; }) {
+    const { username, review, rating } = props;
   return (
     <div className="review">
       <div className="profileData">
-        <Image src={imgUrl} alt="profile picture"></Image>
         <p>{username}</p>
       </div>
       <div className="reviewData">
         <p>{review}</p>
-        <p>{rating}</p>
+        <p>Rating: {rating}/5</p>
       </div>
     </div>
   );

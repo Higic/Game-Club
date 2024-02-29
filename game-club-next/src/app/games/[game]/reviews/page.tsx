@@ -20,14 +20,11 @@ export default function ReviewPage() {
     <div>
       <div className="mainContent">
         <Review
-          imgUrl={""}
           username={"Testerino"}
           review={"Tässä vähän testiarvosteluu, en tykänny mut maistu hyvält."}
           rating={5}
         ></Review>
-        <p>Count: {count}</p>
       </div>
-      <button onClick={() => setCount(count + 1)}>Create demo review</button>
     </div>
   );
 }
