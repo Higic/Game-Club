@@ -22,12 +22,12 @@ export default function Page() {
 
   return (
     <div>
-      <form action="" className="reviewInput">
+      <form action="" className="postForm">
         <textarea
           rows={4}
           placeholder="Write a review..."
         ></textarea>
-        <div className="reviewInputCol">
+        <div className="postInputColumn">
           <div>
             <select name="Rating">
               <option value="1">1/5</option>

@@ -14,15 +14,10 @@
   --written-text-font-size: 20px;
   --written-title-font-size: 28px;
 
-  --buffer-height: 100px;
+  --buffer-height: 50px;
 
 
 }
-
-ul {
-  list-style-type: none;
-}
-
 
 .title {
   display: flex;
@@ -35,6 +30,40 @@ ul {
   border-style: solid;
   border-radius: var(--smooth);
   height: fit-content;
+}
+
+.menuButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.menuButton {
+  cursor: pointer;
+  background-color: var(--button);
+  color: var(--text-color);
+  height: 75px;
+  width: 100%;
+  font-size: 32px;
+  border-radius: var(--smooth);
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+.profileButton {
+  cursor: pointer;
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  height: 50px;
+  width: 50px;
+  background-color: var(--button);
+  color: var(--text-color);
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: var(--global-padding);
+  border-radius: var(--smooth);
 }
 
 .content {
@@ -52,39 +81,9 @@ ul {
 .buffer {
   height: var(--buffer-height);
 }
-.reviewInput, .lfgInput {
-  display: flex;
-  flex-direction: row;
-  margin: var(--global-margin);
-}
 
-.lfgSubmit {
-  height: 100%;
-}
 
-.reviewInputCol {
-  width: 10%;
-  min-width: 70px;
-  max-width: 90px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-textarea {
-  height: 120px;
-  font-size: var(--written-text-font-size);
-  resize: none;
-  width: 100%;
-  padding: var(--global-padding);
-
-}
-.lfgInput textarea {
-  font-size: var(--written-text-font-size);
-  height: 70px;
-  overflow: hidden;
-  
-}
-
+/* Styling for posting and posted content */
 .post {
   padding: var(--global-padding);
   margin: var(--global-margin);
@@ -122,51 +121,52 @@ textarea {
   cursor: pointer;
 }
 
+.postForm{
+  display: flex;
+  flex-direction: row;
+  margin: var(--global-margin);
+}
 
+.postInputColumn {
+  width: 10%;
+  min-width: 70px;
+  max-width: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lfgSubmit {
+  height: 100%;
+}
+
+textarea {
+  height: 120px;
+  font-size: var(--written-text-font-size);
+  resize: none;
+  width: 100%;
+  padding: var(--global-padding);
+
+}
+.lfgInput textarea {
+  font-size: var(--written-text-font-size);
+  height: 70px;
+  overflow: hidden;
+  
+}
+
+/* Used for the review rating score */
 select {
   width: 100%;
   text-align: center;
 }
 
-.ratingButton {
-  cursor: pointer;
+
+/* Miscellaneous styling */
+
+ul {
+  list-style-type: none;
 }
-
-
-.menuButtons {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.menuButton {
-  cursor: pointer;
-  background-color: var(--button);
-  color: var(--text-color);
-  height: 75px;
-  width: 100%;
-  font-size: 32px;
-  border-radius: var(--smooth);
-}
-
-button:hover {
-  background-color: var(--button-hover);
-}
-
-.profileButton {
-  cursor: pointer;
-  position: fixed;
-  right: 15px;
-  top: 15px;
-  height: 50px;
-  width: 50px;
-  background-color: var(--button);
-  color: var(--text-color);
-  font-size: 20px;
-  text-align: center;
-  padding-bottom: var(--global-padding);
-  border-radius: var(--smooth);
-}
-
 
 body {
   background-color: var(--background-color);
@@ -184,19 +184,8 @@ a {
   color: var(--text-color);
 }
 
-.game-cover {
-  width: 25%;
-  height: auto;
-}
 
-.game-cover img {
-  width: auto;
-  max-width: 100%;
-  object-fit: cover;
-  border-radius: var(--smooth);
-}
-
-
+/* Styling for smaller viewports */
 @media only screen and (max-width: 600px) {
   nav {
     justify-content: center;
