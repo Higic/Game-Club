@@ -25,7 +25,6 @@ export default function Page() {
       <form action="" className="reviewInput">
         <textarea
           rows={4}
-          value={""}
           placeholder="Write a review..."
         ></textarea>
         <div className="reviewInputCol">

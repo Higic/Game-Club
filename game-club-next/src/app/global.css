@@ -2,6 +2,7 @@
   --background-color: #04203a;
   --backgroung2: #0b4f6c;
   --color1: #acb3bf;
+  --button: #e5e5e5;
   --button-hover: #696969;
   --text-color: #000000;
 
@@ -10,11 +11,18 @@
 
   --smooth: 15px;
 
+  --written-text-font-size: 20px;
+  --written-title-font-size: 28px;
+
+  --buffer-height: 100px;
+
+
 }
 
 ul {
   list-style-type: none;
 }
+
 
 .title {
   display: flex;
@@ -22,6 +30,7 @@ ul {
   width: 90%;
   margin: 0 auto;
   border-color: #000000;
+  background-color: var(--color1);
   font-size: 60px;
   border-style: solid;
   border-radius: var(--smooth);
@@ -30,6 +39,7 @@ ul {
 
 .content {
   width: 60%;
+  font-size: var(--written-text-font-size);
   min-width: 600px;
   max-width: 1200px;
   margin: 0 auto;
@@ -40,12 +50,16 @@ ul {
 
 /* Use div buffer to generate extra space between two elements */
 .buffer {
-  height: 100px;
+  height: var(--buffer-height);
 }
-.reviewInput {
+.reviewInput, .lfgInput {
   display: flex;
   flex-direction: row;
   margin: var(--global-margin);
+}
+
+.lfgSubmit {
+  height: 100%;
 }
 
 .reviewInputCol {
@@ -58,10 +72,56 @@ ul {
 }
 textarea {
   height: 120px;
+  font-size: var(--written-text-font-size);
   resize: none;
   width: 100%;
   padding: var(--global-padding);
+
 }
+.lfgInput textarea {
+  font-size: var(--written-text-font-size);
+  height: 70px;
+  overflow: hidden;
+  
+}
+
+.post {
+  padding: var(--global-padding);
+  margin: var(--global-margin);
+  background-color: var(--color1);
+  border-radius: var(--smooth);
+  display: flex;
+}
+
+.postProfile {
+  width: 20%;
+  overflow-wrap: break-word;
+  padding-right: var(--global-padding);
+}
+
+.postData {
+
+  width: 65%;
+  overflow-wrap: break-word;
+}
+
+.postButton {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.postButton button {
+  width: 40px;
+  height: 40px;
+  padding: var(--global-padding);
+  background-color: var(--button);
+  color: var(--text-color);
+  border-radius: var(--smooth);
+  cursor: pointer;
+}
+
 
 select {
   width: 100%;
@@ -72,10 +132,6 @@ select {
   cursor: pointer;
 }
 
-.reviewData {
-  width: 70%;
-  overflow-wrap: break-word;
-}
 
 .menuButtons {
   display: flex;
@@ -84,7 +140,7 @@ select {
 
 .menuButton {
   cursor: pointer;
-  background-color: var(--color1);
+  background-color: var(--button);
   color: var(--text-color);
   height: 75px;
   width: 100%;
@@ -103,7 +159,7 @@ button:hover {
   top: 15px;
   height: 50px;
   width: 50px;
-  background-color: var(--color1);
+  background-color: var(--button);
   color: var(--text-color);
   font-size: 20px;
   text-align: center;
@@ -111,18 +167,6 @@ button:hover {
   border-radius: var(--smooth);
 }
 
-/* Review styling */
-.review {
-  padding: var(--global-padding);
-  margin: var(--global-margin);
-  background-color: var(--color1);
-  border-radius: var(--smooth);
-  display: flex;
-}
-
-.profileData {
-  width: 30%;
-}
 
 body {
   background-color: var(--background-color);
