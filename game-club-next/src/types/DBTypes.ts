@@ -9,6 +9,35 @@ type User = {
     bio: string | null;
 }
 
+type Review = {
+    id: Types.ObjectId | string;
+    game: string;
+    user: Types.ObjectId | string;
+    score: number;
+    text: string | null;
+}
+
+type LFG = {
+    id: Types.ObjectId | string;
+    game: string;
+    user: Types.ObjectId | string;
+    text: string;
+}
+
+type ForumPost = {
+    id: Types.ObjectId | string;
+    game: string;
+    user: Types.ObjectId | string;
+    title: string;
+    text: string;
+}
+
+type ForumComment = {
+    id: Types.ObjectId | string;
+    forumPostId: Types.ObjectId | string;
+    user: Types.ObjectId | string;
+    text: string;
+}
 
 
-export type {User};
+export type {User, Review, LFG, ForumPost, ForumComment};
