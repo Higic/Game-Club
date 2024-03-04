@@ -36,6 +36,8 @@ type LFG = {
     text: string;
 }
 
+type LFGInput = Omit<LFG, 'id'>;
+
 type ForumPost = {
     id: Types.ObjectId | string;
     game: string;
@@ -67,6 +69,7 @@ export type {
     ReviewInput,
     ReviewUpdate,
     LFG, 
+    LFGInput,
     ForumPost, 
     ForumComment, 
     TokenContent
