@@ -1,7 +1,7 @@
 type ForumPost {
     id: ID!
     game: String!
-    user: User!
+    author: User!
     tittle: String!
     text: String!
 }
@@ -14,7 +14,7 @@ input ForumPostInput {
 type Query {
     forumPostById(id: ID!): ForumPost
     forumPostsByGame(game: String!): [ForumPost]
-    forumPostsByUser(userId: ID!): [ForumPost]
+    forumPostsByAuthor(authorId: ID!): [ForumPost]
 }
 
 type Mutation {

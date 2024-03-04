@@ -18,7 +18,7 @@ const LFGResolver = {
     Mutation: {
         createLfg: async (_: undefined, args: { input: LFGInput }, context: MyContext) => {
             isLoggedIn(context);
-            args.input.user = context.userdata?.user.id;
+            args.input.author = context.userdata?.user.id;
             return await LFGModel.create(args.input);
         },
         deleteLfg: async (_: undefined, args: { id: string }, context: MyContext) => {
@@ -32,3 +32,5 @@ const LFGResolver = {
         },
     },
 };
+
+export default LFGResolver;

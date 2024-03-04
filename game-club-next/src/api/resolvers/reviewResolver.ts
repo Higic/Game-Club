@@ -1,4 +1,4 @@
-import { Review, ReviewInput } from "@/types/DBTypes";
+import { Review, ReviewInput, ReviewUpdate } from "@/types/DBTypes";
 import reviewModel from "../models/reviewModel";
 import MyContext from "@/types/MyContext";
 import { isLoggedIn } from "@/functions/authorize";
@@ -16,14 +16,15 @@ const reviewResolver = {
         },
     },
     Mutation: {
-        createReview: async (_: undefined, args: { input: Omit<Review, 'id'> }, context: MyContext) => {
+        createReview: async (_: undefined, args: { input: ReviewInput }, context: MyContext) => {
             isLoggedIn(context);
             args.input.author = context.userdata?.user.id;
             return await reviewModel.create(args.input);
         },
-        updateReview: async (_: undefined, args: { id: string, input: Omit<Review, 'game' | 'author' | 'id'> }, context: MyContext) => {
+        updateReview: async (_: undefined, args: { id: string, input: ReviewUpdate }, context: MyContext) => {
             isLoggedIn(context);
-            return await reviewModel.findByIdAndUpdate(args.id, args.input, { new: true });
+            const filter = {_id: args.id, author: context.userdata?.user.id};
+            return await reviewModel.findByIdAndUpdate(filter, args.input, { new: true });
         },
         deleteReview: async (_: undefined, args: { id: string }, context: MyContext) => {
             isLoggedIn(context);

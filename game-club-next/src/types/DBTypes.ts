@@ -32,7 +32,7 @@ type ReviewUpdate = Omit<Review, 'game' | 'author' | 'id'>;
 type LFG = {
     id: Types.ObjectId | string;
     game: string;
-    user: Types.ObjectId | string;
+    author: Types.ObjectId | string;
     text: string;
 }
 
@@ -41,17 +41,25 @@ type LFGInput = Omit<LFG, 'id'>;
 type ForumPost = {
     id: Types.ObjectId | string;
     game: string;
-    user: Types.ObjectId | string;
+    author: Types.ObjectId | string;
     title: string;
     text: string;
 }
 
+type ForumPostInput = Omit<ForumPost, 'id'>;
+
+type ForumPostUpdate = Omit<ForumPost, 'game' | 'author' | 'id'>;
+
 type ForumComment = {
     id: Types.ObjectId | string;
     forumPostId: Types.ObjectId | string;
-    user: Types.ObjectId | string;
+    author: Types.ObjectId | string;
     text: string;
 }
+
+type ForumCommentInput = Omit<ForumComment, 'id'>;
+
+type ForumCommentUpdate = Pick<ForumComment, 'text'>;
 
 type TokenContent = {
     token: string;
@@ -71,6 +79,10 @@ export type {
     LFG, 
     LFGInput,
     ForumPost, 
+    ForumPostInput,
+    ForumPostUpdate,
     ForumComment, 
+    ForumCommentInput,
+    ForumCommentUpdate,
     TokenContent
 };

@@ -20,7 +20,7 @@ input ReviewModify {
 type Query {
     reviewById(id: ID!):Review
     reviewsByGame(game: String!): [Review]
-    reviewsByUser(authorId: ID!): [Review]
+    reviewsByAuthor(authorId: ID!): [Review]
 }
 
 type Mutation {

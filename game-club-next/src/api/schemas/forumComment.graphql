@@ -1,13 +1,13 @@
 type ForumComment {
     id: ID!
     forumPostID: ID!
-    user: User!
+    author: User!
     text: String!
 }
 
 type Query {
     commentsByForumPost(forumPostID: ID!): [ForumComment]
-    commentsByUser(userId: ID!): [ForumComment]
+    commentsByauthor(authorId: ID!): [ForumComment]
     commentById(id: ID!): ForumComment  
 }
 
