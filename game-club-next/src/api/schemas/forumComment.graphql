@@ -1,0 +1,18 @@
+type ForumComment {
+    id: ID!
+    forumPostID: ID!
+    user: User!
+    text: String!
+}
+
+type Query {
+    commentsByForumPost(forumPostID: ID!): [ForumComment]
+    commentsByUser(userId: ID!): [ForumComment]
+    commentById(id: ID!): ForumComment  
+}
+
+type Mutation {
+    createForumComment(text: String!): ForumComment
+    updateForumComment(text: String!): ForumComment
+    deleteForumComment(id: ID!): ForumComment
+}

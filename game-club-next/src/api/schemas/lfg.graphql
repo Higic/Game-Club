@@ -1,0 +1,22 @@
+type LFG {
+    id: ID!
+    game: String!
+    user: User!
+    text: String!
+}
+
+input LFGInput {
+    game: String!
+    text: String!
+}
+
+type Query {
+    lfgById(id: ID!): LFG
+    lfgsByUser(userId: ID!): [LFG]
+    lfgsByGame(game: String!): [LFG]
+}
+
+type Mutation {
+    createLfg(input: LFGInput): LFG
+    deleteLfg(id: ID!): LFG
+}

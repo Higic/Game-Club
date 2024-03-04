@@ -33,4 +33,20 @@ type ForumComment = {
     user: User["id"];
 }
 
-export type { Review, Lfg, ForumPost, ForumComment };
+type MessageResponse = {
+    message: string;
+  };
+
+type ErrorResponse = MessageResponse & {
+    stack?: string;
+  };
+
+
+export type { 
+    Review, 
+    Lfg, 
+    ForumPost, 
+    ForumComment, 
+    MessageResponse, 
+    ErrorResponse
+};

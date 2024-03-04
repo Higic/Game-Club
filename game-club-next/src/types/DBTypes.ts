@@ -9,6 +9,14 @@ type User = {
     bio: string | null;
 }
 
+type UserOutput = Omit<User, 'password' | 'role'>;
+
+type UserInput = Omit<User, 'id' | 'role'>;
+
+type LoginUser = Omit<User, 'password'>;
+
+type Credentials = Pick<User, 'username' | 'password'>;
+
 type Review = {
     id: Types.ObjectId | string;
     game: string;
@@ -39,5 +47,21 @@ type ForumComment = {
     text: string;
 }
 
+type TokenContent = {
+    token: string;
+    user: LoginUser;
+}
 
-export type {User, Review, LFG, ForumPost, ForumComment};
+
+export type {
+    User, 
+    UserInput, 
+    UserOutput, 
+    LoginUser, 
+    Credentials, 
+    Review,
+    LFG, 
+    ForumPost, 
+    ForumComment, 
+    TokenContent
+};

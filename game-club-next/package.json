@@ -9,6 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "@graphql-tools/load-files": "^7.0.0",
+    "apollo-server": "^3.13.0",
+    "dotenv": "^16.4.5",
+    "graphql": "^16.8.1",
+    "graphql-middleware": "^6.1.35",
+    "helmet": "^7.1.0",
     "mongoose": "^8.2.0",
     "next": "14.1.0",
     "react": "^18",

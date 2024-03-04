@@ -1,0 +1,24 @@
+type ForumPost {
+    id: ID!
+    game: String!
+    user: User!
+    tittle: String!
+    text: String!
+}
+
+input ForumPostInput {
+    tittle: String!
+    text: String!
+}
+
+type Query {
+    forumPostById(id: ID!): ForumPost
+    forumPostsByGame(game: String!): [ForumPost]
+    forumPostsByUser(userId: ID!): [ForumPost]
+}
+
+type Mutation {
+    createForumPost(input: ForumPostInput): ForumPost
+    updateForumPost(input: ForumPostInput): ForumPost
+    deleteForumPost(id: ID!): ForumPost
+}
