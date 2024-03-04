@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
-import { User } from "./DBTypes";
+import { UserOutput } from "./DBTypes";
 
-type Review = {
+/*type Review = {
     id: Types.ObjectId | string; // review id
     game: string; // game id
     score: number;
@@ -31,22 +31,29 @@ type ForumComment = {
     forumPostId: ForumPost["id"]; // original forum post id
     text: string;
     user: User["id"];
-}
+}*/
 
 type MessageResponse = {
     message: string;
-  };
+};
 
 type ErrorResponse = MessageResponse & {
     stack?: string;
-  };
+};
+
+type UserResponse = MessageResponse & {
+    user: UserOutput;
+};
+
+type LoginResponse = MessageResponse & {
+    token: string;
+    user: UserOutput;
+};
 
 
-export type { 
-    Review, 
-    Lfg, 
-    ForumPost, 
-    ForumComment, 
-    MessageResponse, 
+export type {
+    UserResponse,
+    LoginResponse,
+    MessageResponse,
     ErrorResponse
 };
