@@ -1,7 +1,7 @@
 type Review {
     id: ID!
     game: String!
-    user: User!
+    author: User!
     score: Int!
     text: String!
 }
@@ -20,7 +20,7 @@ input ReviewModify {
 type Query {
     reviewById(id: ID!):Review
     reviewsByGame(game: String!): [Review]
-    reviewsByUser(userId: ID!): [Review]
+    reviewsByUser(authorId: ID!): [Review]
 }
 
 type Mutation {

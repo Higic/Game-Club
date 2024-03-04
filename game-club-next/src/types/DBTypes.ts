@@ -1,7 +1,7 @@
 import {Document, Types} from 'mongoose';
 
 
-type User = {
+type User = Partial<Document> &{
     id: Types.ObjectId | string;
     username: string;
     password: string;
@@ -18,12 +18,16 @@ type LoginUser = Omit<User, 'password'>;
 type Credentials = Pick<User, 'username' | 'password'>;
 
 type Review = {
-    id: Types.ObjectId | string;
+    id?: Types.ObjectId | string;
     game: string;
-    user: Types.ObjectId | string;
+    author: Types.ObjectId | User;
     score: number;
     text: string | null;
 }
+
+type ReviewInput = Omit<Review, 'id'>;
+
+type ReviewUpdate = Omit<Review, 'game' | 'author' | 'id'>;
 
 type LFG = {
     id: Types.ObjectId | string;
@@ -60,6 +64,8 @@ export type {
     LoginUser, 
     Credentials, 
     Review,
+    ReviewInput,
+    ReviewUpdate,
     LFG, 
     ForumPost, 
     ForumComment, 
