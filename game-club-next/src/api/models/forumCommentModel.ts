@@ -8,7 +8,7 @@ const forumCommentModel = new mongoose.Schema<ForumComment>({
         ref: 'ForumPost', 
         required: true
     },
-    user: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User', 
         required: true

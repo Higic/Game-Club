@@ -6,7 +6,7 @@ const LFGModel = new mongoose.Schema<LFG>({
         type: String, 
         required: true
     },
-    user: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User', 
         required: true
