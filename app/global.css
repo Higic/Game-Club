@@ -83,6 +83,17 @@ button:hover {
 }
 
 
+/* User management */
+
+.userForm {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  margin: var(--global-margin);
+}
+
+
+
 /* Styling for posting and posted content */
 .post {
   padding: var(--global-padding);
