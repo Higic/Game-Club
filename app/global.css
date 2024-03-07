@@ -19,6 +19,10 @@
 
 }
 
+h1, h2, h3 {
+  margin: var(--global-margin);
+}
+
 .title {
   display: flex;
   justify-content: center;
@@ -80,6 +84,14 @@ button:hover {
 /* Use div buffer to generate extra space between two elements */
 .buffer {
   height: var(--buffer-height);
+}
+
+/*HomePage*/
+.homePageIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--global-margin);
 }
 
 
@@ -163,7 +175,7 @@ textarea {
   font-size: var(--written-text-font-size);
   height: 70px;
   overflow: hidden;
-  
+
 }
 
 /* Used for the review rating score */

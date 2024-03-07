@@ -1,8 +1,8 @@
 export default function HomePage() {
   return (
-    <div>
-      <h1>Welcome to Game Club!</h1>
-      <p>This is the homepage of Game Club</p>
+    <div className="homePageIntro">
+        <h1>Welcome to Game Club!</h1>
+        <p>Use the search bar to find the game you are looking for</p>
     </div>
   )
 }
