@@ -8,8 +8,8 @@ export default function Title() {
   const [title, setTitle] = useState("Game Club");
 
   return (
-    <div className="title">
+    <h1 className="title">
       {title}
-    </div>
+    </h1>
   );
 }

@@ -15,17 +15,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="content">
-          <main>
+          <main className="content">
             <div className="buffer"></div>
             <Title/>
             <div className="buffer"></div>
             <NavBar/>
             <div className="buffer"></div>
 
-            <div>{children}</div>
+            {children}
           </main>
-        </div>
       </body>
     </html>
   );
