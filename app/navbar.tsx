@@ -6,19 +6,27 @@ import { useState } from "react";
 
 export default function NavBar({}) {
   const router = useRouter();
-  function doSomething(arg0: string): void {
-    console.log("clicked button ", arg0);
-  }
 
   const [game, setGame] = useState("1");
-  const [user, setUser] = useState("2");
+  const [userId, setUserId] = useState("2");
+
+  const [userData, setUserData] = useState({
+    uid: userId,
+    username: "",
+    email: "",
+    bio: ""
+  });
+
+  const handleProfileNavigate = () => {
+    router.push(`/users/${userId}`);
+  }
 
   return (
     <div>
         <button
           className="profileButton"
           type="button"
-          onClick={() => router.push(`/users/${user}`)}
+          onClick={handleProfileNavigate}
         >
           🏠
         </button>
