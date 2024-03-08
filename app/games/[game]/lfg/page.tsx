@@ -1,19 +1,10 @@
 import LfgPost from "./lfgPost";
+import LfgPostForm from "@/app/games/[game]/lfg/LfgPostForm";
 
 export default function Page() {
   return (
     <div>
-      <form action="" className="postForm">
-        <textarea
-          rows={4}
-          maxLength={100}
-          placeholder="Make a post..."
-        ></textarea>
-        <div className="postInputColumn">
-          <div></div>
-          <input type="submit" value="Submit" className="lfgSubmit"></input>
-        </div>
-      </form>
+      <LfgPostForm/>
       <LfgPost
         username={"Timoteijus"}
         text={"Looking for a group to play with"}

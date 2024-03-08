@@ -10,6 +10,7 @@
   --global-margin: 10px;
 
   --smooth: 15px;
+  --less-smooth: 5px;
 
   --written-text-font-size: 20px;
   --written-title-font-size: 28px;
@@ -150,37 +151,40 @@ button:hover {
   margin: var(--global-margin);
 }
 
-.postInputColumn {
-  width: 10%;
-  min-width: 70px;
-  max-width: 90px;
+/* Styling for forms */
+
+.form-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  font-size: var(--written-text-font-size);
+  background-color: var(--color1);
 }
 
-.lfgSubmit {
-  height: 100%;
+.form-container * {
+  margin: var(--global-margin);
+  padding: var(--global-padding);
+  border-radius: var(--less-smooth);
+  font-size: var(--written-text-font-size);
 }
 
-textarea {
+.form-container h2 {
+  font-size: var(--written-title-font-size);
+  text-align: center;
+}
+
+.form-container label {
+  padding: 0px;
+  margin-bottom: 0px;;
+}
+
+.form-container textarea {
   height: 120px;
   font-size: var(--written-text-font-size);
   resize: none;
-  width: 100%;
-  padding: var(--global-padding);
-
-}
-.lfgInput textarea {
-  font-size: var(--written-text-font-size);
-  height: 70px;
-  overflow: hidden;
-
 }
 
 /* Used for the review rating score */
 select {
-  width: 100%;
   text-align: center;
 }
 

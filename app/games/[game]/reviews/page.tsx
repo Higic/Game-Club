@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Review from "./review";
+import ReviewPostForm from "./ReviewPostForm";
 import { Review as reviewType } from "../../../../types/MessageTypes";
 
 export default function Page() {
@@ -22,24 +23,7 @@ export default function Page() {
 
   return (
     <div>
-      <form action="" className="postForm">
-        <textarea
-          rows={4}
-          placeholder="Write a review..."
-        ></textarea>
-        <div className="postInputColumn">
-          <div>
-            <select name="Rating">
-              <option value="1">1/5</option>
-              <option value="2">2/5</option>
-              <option value="3">3/5</option>
-              <option value="4">4/5</option>
-              <option value="5">5/5</option>
-            </select>
-          </div>
-          <input type="submit" value="Submit"></input>
-        </div>
-      </form>
+      <ReviewPostForm />
       <div className="mainContent">
         <Review
           username={"Testerino"}
