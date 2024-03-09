@@ -7,7 +7,7 @@ export default function Login() {
   let MAX_USERNAME_LENGTH = 20;
 
   const [formData, setFormData] = useState({
-    username: "",
+    user_name: "",
     password: "",
   });
 
@@ -21,7 +21,7 @@ export default function Login() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (!formData.username || !formData.password) {
+    if (!formData.user_name || !formData.password) {
       alert("All fields are required");
       return;
     }
@@ -35,8 +35,8 @@ export default function Login() {
         <label>Username:</label>
         <input
           type="text"
-          name="username"
-          value={formData.username}
+          name="user_name"
+          value={formData.user_name}
           onChange={handleChange}
         />
         <label>Password:</label>

@@ -53,7 +53,6 @@ input ReviewModify {
 type User {
     id: ID!
     user_name: String!
-    email: String!
     bio: String
 }
 
@@ -75,14 +74,12 @@ input Credentials {
 
 input UserInput {
   user_name: String!
-  email: String!
   password: String!
   bio: String
 }
 
 input UserModify {
   user_name: String
-  email: String
   password: String
 }
 

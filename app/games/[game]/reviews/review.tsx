@@ -1,9 +1,9 @@
-export default function Review(props: { username: string; review: string; rating: number; }) {
-    const { username, review, rating } = props;
+export default function Review(props: { user_name: string; review: string; rating: number; }) {
+    const { user_name, review, rating } = props;
   return (
     <div className="post">
       <div className="postProfile">
-        <p>{username}</p>
+        <p>{user_name}</p>
       </div>
       <div className="postData">
         <p>{review}</p>

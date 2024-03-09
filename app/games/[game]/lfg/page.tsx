@@ -6,11 +6,11 @@ export default function Page() {
     <div>
       <LfgPostForm/>
       <LfgPost
-        username={"Timoteijus"}
+        user_name={"Timoteijus"}
         text={"Looking for a group to play with"}
       />
       <LfgPost
-        username={"xxdemonslayer69xx"}
+        user_name={"xxdemonslayer69xx"}
         text={"DID YOU KNOW THAT IN TERMS OF POKEMON AND HUMAN"}
       />
     </div>

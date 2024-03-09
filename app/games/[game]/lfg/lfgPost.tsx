@@ -1,9 +1,9 @@
-export default function LfgPost(props: { username: string; text: string; }) {
-    const { username, text} = props;
+export default function LfgPost(props: { user_name: string; text: string; }) {
+    const { user_name, text} = props;
   return (
     <div className="post">
       <div className="postProfile">
-        <p>{username}</p>
+        <p>{user_name}</p>
       </div>
       <div className="postData">
         <p>{text}</p>

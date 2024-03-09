@@ -17,12 +17,12 @@ export default function Page() {
       <ReviewPostForm />
       <div className="mainContent">
         <Review
-          username={"Testerino"}
+          user_name={"Testerino"}
           review={"Tässä vähän testiarvosteluu, en tykänny mut maistu hyvält."}
           rating={5}
         ></Review>
         <Review
-          username={"Toinen Isoasdsadsadsda dasadsasddasasdäijä"}
+          user_name={"Toinen Isoasdsadsadsda dasadsasddasasdäijä"}
           review={"AAAAAAA AAAAAAAAAAAAAAA AAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
           rating={1}
         ></Review>

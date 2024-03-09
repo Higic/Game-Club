@@ -2,21 +2,12 @@
 
 import { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
+import { REGISTER_MUTATION } from "@/app/api/graphql/mutations/userMutations";
 
 // experimenting with register mutation variable
 // testing functionality, doesn't work yet
 // goes with useMutation hook
-const REGISTER_MUTATION = gql`
-  mutation Register($user: UserInput!) {
-    register(user: $user) {
-      user {
-        id
-        user_name
-        email
-      }
-    }
-  }
-`;
+
 
 export default function Register() {
   let MIN_USERNAME_LENGTH = 4;
@@ -24,12 +15,21 @@ export default function Register() {
 
   // useMutation hook
   const [registerMutation, { loading: registerLoading, error: registerError }] = useMutation(REGISTER_MUTATION);
+  if (registerLoading) console.log("Registering user...");
+  if (registerError) console.error(registerError);
 
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
+    user_name: "",
     password: "",
     confirmPassword: "",
+  });
+
+  const [apiData, setApiData] = useState({
+    user: {
+      user_name: formData.user_name,
+      password: formData.password,
+      bio: "",
+    },
   });
 
   const handleChange = (e: any) => {
@@ -46,11 +46,10 @@ export default function Register() {
       alert("Passwords do not match");
       return;
     }
-    // if username or email is already taken, alert user
+    // if user_name is already taken, alert user
 
     if (
-      !formData.username ||
-      !formData.email ||
+      !formData.user_name ||
       !formData.password ||
       !formData.confirmPassword
     ) {
@@ -58,8 +57,8 @@ export default function Register() {
       return;
     }
     if (
-      formData.username.length < MIN_USERNAME_LENGTH ||
-      formData.username.length > MAX_USERNAME_LENGTH
+      formData.user_name.length < MIN_USERNAME_LENGTH ||
+      formData.user_name.length > MAX_USERNAME_LENGTH
     ) {
       alert(
         `Username must be between ${MIN_USERNAME_LENGTH} and ${MAX_USERNAME_LENGTH} characters`
@@ -70,7 +69,7 @@ export default function Register() {
     // send to api
     // experimenting. Try to register user with registerMutation, doesn't work yet
     try {
-      const result = await registerMutation({ variables: { user: formData } });
+      const result = await registerMutation({ variables: { user: apiData } });
       console.log(result.data.register);
     } catch (error) {
       console.error(error);
@@ -82,15 +81,8 @@ export default function Register() {
       <label>Username:</label>
       <input
         type="text"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <label>Email:</label>
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
+        name="user_name"
+        value={formData.user_name}
         onChange={handleChange}
       />
       <label>Password:</label>
@@ -108,6 +100,7 @@ export default function Register() {
         onChange={handleChange}
       />
       <button type="submit">Submit</button>
+
     </form>
   );
 }

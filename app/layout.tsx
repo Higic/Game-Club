@@ -1,4 +1,5 @@
 import "./global.css";
+import { ApolloWrapper } from "./lib/apollo-wrapper";
 import NavBar from "./navbar";
 import Title from "./title";
 
@@ -22,7 +23,9 @@ export default function RootLayout({
             <NavBar/>
             <div className="buffer"></div>
 
+            <ApolloWrapper>
             {children}
+            </ApolloWrapper>
           </main>
       </body>
     </html>

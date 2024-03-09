@@ -12,8 +12,7 @@ export default function NavBar({}) {
 
   const [userData, setUserData] = useState({
     uid: userId,
-    username: "",
-    email: "",
+    user_name: "",
     bio: ""
   });
 

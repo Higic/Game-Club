@@ -4,8 +4,7 @@ import { useState } from "react";
 
 interface User {
   uid: string;
-  username: string;
-  email: string;
+  user_name: string;
   bio: string;
 }
 
@@ -13,8 +12,7 @@ export default function Page({ params }: { params: { uid: string } }) {
 
   const [userData, setUserData] = useState<User>({
     uid: params.uid,
-    username: "user",
-    email: "email@example.com",
+    user_name: "user",
     bio: "This is a bio"
   });
 
@@ -23,8 +21,7 @@ export default function Page({ params }: { params: { uid: string } }) {
 
   return (
     <div>
-      <h1>{userData.username}</h1>
-      <div>email: {userData.email}</div>
+      <h1>{userData.user_name}</h1>
       <div>Bio: {userData.bio}</div>
     </div>
   );
