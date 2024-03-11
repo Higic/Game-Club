@@ -7,16 +7,29 @@ import { useState } from "react";
 export default function NavBar({}) {
   const router = useRouter();
 
+  // fetch token from localStorage
+
+
   const [game, setGame] = useState("1");
-  const [userId, setUserId] = useState("2");
+  const userId = localStorage.getItem("userId");
+  const user_name = localStorage.getItem("user_name");
+  const bio = localStorage.getItem("bio");
+
+
 
   const [userData, setUserData] = useState({
     uid: userId,
-    user_name: "",
-    bio: ""
+    user_name: user_name,
+    bio: bio
   });
 
   const handleProfileNavigate = () => {
+    if (userId === "null") {
+      router.push("/login");
+    }
+    else 
+
+
     router.push(`/users/${userId}`);
   }
 

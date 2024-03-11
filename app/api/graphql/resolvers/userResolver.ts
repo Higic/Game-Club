@@ -18,7 +18,7 @@ const userResolver = {
     },
     Mutation: {
         login: async (_: undefined, args: {credentials: Credentials}) => {
-            return await fetchData<LoginResponse>(`${process.env.AUTH_URL}/users`, {
+            return await fetchData<LoginResponse>(`${process.env.AUTH_URL}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
