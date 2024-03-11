@@ -66,8 +66,19 @@ type Game {
     description: String!
     publisher: String!
     genre: String!
-    releaseDate: Date!
+}
 
+input GameInput {
+    game_name: String!
+    description: String!
+    publisher: String!
+    genre: String!
+}
+
+input GameModify {
+    description: String!
+    publisher: String!
+    genre: String!
 }
 
 type LoginResponse {

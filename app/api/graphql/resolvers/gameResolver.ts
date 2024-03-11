@@ -1,4 +1,4 @@
-import { Game } from "@/types/DBTypes";
+import { Game, GameInput, GameUpdate } from "@/types/DBTypes";
 import gameModel from "../models/gameModel";
 import MyContext from "@/types/MyContext";
 import { isAdmin } from "@/functions/authorize";
@@ -17,11 +17,11 @@ const gameResolver = {
     },
 
     Mutation: {
-        createGame: async (_: undefined, args: {input: Omit<Game, "id">}, context: MyContext) => {
+        createGame: async (_: undefined, args: {input: GameInput}, context: MyContext) => {
             isAdmin(context);
             return await gameModel.create(args.input);
         },
-        updateGame: async (_: undefined, args: {id: string, input: Partial<Omit<Game, "id">>}, context: MyContext) => {
+        updateGame: async (_: undefined, args: {id: string, input: GameUpdate}, context: MyContext) => {
             isAdmin(context);
             return await gameModel.findByIdAndUpdate(args.id, args.input, {new: true});
         },

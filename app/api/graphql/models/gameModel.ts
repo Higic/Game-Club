@@ -15,10 +15,6 @@ const gameModel = new mongoose.Schema<Game>({
         type: String,
         required: true
     },
-    releaseDate: {
-        type: String,
-        required: true
-    }
 });
 
 export default mongoose.models.Game || mongoose.model<Game>('Game', gameModel);

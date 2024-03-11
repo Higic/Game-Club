@@ -1,4 +1,4 @@
-import {Date, Document, Types} from 'mongoose';
+import {Document, Types} from 'mongoose';
 
 /**
  * Here lies the types for the database models
@@ -73,9 +73,11 @@ type Game = {
     game_name: string;
     publisher: string;
     genre: string;
-    releaseDate: Date;
 }
 
+type GameInput = Omit<Game, 'id'>;
+
+type GameUpdate = Partial<Omit<Game, 'id'>>;
 
 export type {
     User, 
@@ -95,5 +97,7 @@ export type {
     ForumCommentInput,
     ForumCommentUpdate,
     TokenContent,
-    Game
+    Game,
+    GameInput,
+    GameUpdate
 };
