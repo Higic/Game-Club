@@ -1,17 +1,17 @@
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { ApolloServer } from "@apollo/server";
 import { NextRequest } from "next/server";
-import typeDefs from "./schemas";
 import mongoose from "mongoose";
+import typeDefs from "./schemas";
 import resolvers from "./resolvers";
 
-const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
+const uri = process.env.DATABASE_URL;
 
 const connectDB = async () => {
   try {
     if (uri) {
       await mongoose.connect(uri);
-      console.log("🎉 connected to database successfully");
+      console.log("🎉 connected to database successfully via apollo");
     }
   } catch (error) {
     console.error(error);

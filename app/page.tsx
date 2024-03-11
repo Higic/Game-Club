@@ -1,4 +1,7 @@
+import connectMongo from "@/utils/db";
+
 export default function HomePage() {
+  
   return (
     <div className="homePageIntro">
         <h1>Welcome to Game Club!</h1>

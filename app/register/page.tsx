@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "@/app/api/graphql/mutations/userMutations";
+import { UserInput } from "@/types/DBTypes";
 
 // experimenting with register mutation variable
 // testing functionality, doesn't work yet
@@ -10,28 +11,22 @@ import { REGISTER_MUTATION } from "@/app/api/graphql/mutations/userMutations";
 
 
 export default function Register() {
-  let MIN_USERNAME_LENGTH = 4;
-  let MAX_USERNAME_LENGTH = 20;
-
-  // useMutation hook
-  const [registerMutation, { loading: registerLoading, error: registerError }] = useMutation(REGISTER_MUTATION);
-  if (registerLoading) console.log("Registering user...");
-  if (registerError) console.error(registerError);
-
+  
   const [formData, setFormData] = useState({
     user_name: "",
     password: "",
     confirmPassword: "",
   });
-
-  const [apiData, setApiData] = useState({
-    user: {
-      user_name: formData.user_name,
-      password: formData.password,
-      bio: "",
-    },
-  });
-
+  
+  // useMutation hook
+  const [registerMutation, { loading: registerLoading, error: registerError }] = useMutation(REGISTER_MUTATION);
+  
+  const apiData: UserInput = {
+    user_name: formData.user_name,
+    password: formData.password,
+    bio: null
+  };
+  
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
@@ -39,15 +34,18 @@ export default function Register() {
       [name]: value,
     });
   };
-
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    // if user_name is already taken, alert user
-
+    
+    // DISABLED FOR TESTING
+    let MIN_USERNAME_LENGTH = 4;
+    let MAX_USERNAME_LENGTH = 20;
+    // user validation
     if (
       !formData.user_name ||
       !formData.password ||
@@ -65,7 +63,12 @@ export default function Register() {
       );
       return;
     }
-    console.log(formData);
+    
+
+    // Get username and password from data
+    console.log(apiData);
+
+
     // send to api
     // experimenting. Try to register user with registerMutation, doesn't work yet
     try {

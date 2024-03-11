@@ -13,3 +13,14 @@ mutation Mutation($user: UserInput!) {
 }
 `;
 
+export const LOGIN_MUTATION = gql`
+mutation Mutation($user: UserInput!) {
+  login(user: $user) {
+    message
+    user {
+      id
+      user_name
+    }
+  }
+}
+`;
