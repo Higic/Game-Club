@@ -14,6 +14,10 @@ const isLoggedIn = (context: MyContext): void => {
     }
 };
 
+/**
+ * Check if the user is an admin
+ * @param context
+ */
 const isAdmin = (context: MyContext): void => {
     isLoggedIn(context);
     if (context.userdata && context.userdata.user.role !== 'admin') {

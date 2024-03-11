@@ -4,6 +4,11 @@ import "./global.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+/**
+ * NavBar component
+ * - Handles navigation between different game pages
+ * - Uses the useRouter hook to navigate to different pages
+ */
 export default function NavBar({}) {
   const router = useRouter();
 
