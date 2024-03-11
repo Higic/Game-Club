@@ -14,13 +14,15 @@ mutation Mutation($user: UserInput!) {
 `;
 
 export const LOGIN_MUTATION = gql`
-mutation Mutation($user: UserInput!) {
-  login(user: $user) {
-    message
+mutation Mutation($credentials: Credentials!) {
+  login(credentials: $credentials) {
     user {
-      id
       user_name
+      id
+      bio
     }
+    token
+    message
   }
 }
 `;
