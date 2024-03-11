@@ -2,8 +2,8 @@ import { LFG } from "@/types/DBTypes";
 import mongoose from "mongoose";
 
 const LFGModel = new mongoose.Schema<LFG>({
-    game: {
-        type: String, 
+    game_id: {
+        type: mongoose.Schema.Types.ObjectId, 
         required: true
     },
     author: {

@@ -2,7 +2,7 @@ import { Review } from "@/types/DBTypes";
 import mongoose from "mongoose";
 
 const reviewModel = new mongoose.Schema<Review>({
-    game: {
+    game_id: {
         type: String, 
         required: true
     },

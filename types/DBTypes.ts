@@ -1,4 +1,4 @@
-import {Document, Types} from 'mongoose';
+import {Date, Document, Types} from 'mongoose';
 
 
 type User = Partial<Document> &{
@@ -19,7 +19,7 @@ type Credentials = Pick<User, 'user_name' | 'password'>;
 
 type Review = {
     id?: Types.ObjectId | string;
-    game: string;
+    game_id: Types.ObjectId | string;
     author: Types.ObjectId | User;
     score: number;
     text: string | null;
@@ -31,7 +31,7 @@ type ReviewUpdate = Omit<Review, 'game' | 'author' | 'id'>;
 
 type LFG = {
     id: Types.ObjectId | string;
-    game: string;
+    game_id: Types.ObjectId | string;
     author: Types.ObjectId | string;
     text: string;
 }
@@ -40,7 +40,7 @@ type LFGInput = Omit<LFG, 'id'>;
 
 type ForumPost = {
     id: Types.ObjectId | string;
-    game: string;
+    game_id: Types.ObjectId | string;
     author: Types.ObjectId | string;
     title: string;
     text: string;
@@ -66,6 +66,14 @@ type TokenContent = {
     user: LoginUser;
 }
 
+type Game = {
+    id: Types.ObjectId | string;
+    game_name: string;
+    publisher: string;
+    genre: string;
+    releaseDate: Date;
+}
+
 
 export type {
     User, 
@@ -84,5 +92,6 @@ export type {
     ForumComment, 
     ForumCommentInput,
     ForumCommentUpdate,
-    TokenContent
+    TokenContent,
+    Game
 };

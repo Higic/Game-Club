@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 
 
 const forumPostModel = new mongoose.Schema<ForumPost>({
-    game: {
-        type: String, 
+    game_id: {
+        type: mongoose.Schema.Types.ObjectId, 
         required: true
     },
     author: {

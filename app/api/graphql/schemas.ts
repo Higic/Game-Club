@@ -56,6 +56,16 @@ type User {
     bio: String
 }
 
+type Game {
+    id: ID!
+    game_name: String!
+    description: String!
+    publisher: String!
+    genre: String!
+    releaseDate: Date!
+
+}
+
 type LoginResponse {
   token: String
   message: String!
@@ -87,6 +97,9 @@ type Query {
     users: [User]
     userById(id: ID!): User
     checkToken: UserResponse
+    games: [Game]
+    gameById(id: ID!): Game
+    gameByName(game_name: String!): Game
     reviewById(id: ID!):Review
     reviewsByGame(game: String!): [Review]
     reviewsByAuthor(authorId: ID!): [Review]
@@ -108,6 +121,9 @@ type Mutation {
     deleteUser: UserResponse
     adminUpdateUser(user: UserModify!, id: ID!): UserResponse
     adminDeleteUser(id: ID!): UserResponse
+    createGame(input: GameInput): Game
+    updateGame(id: ID!, input: GameModify): Game
+    deleteGame(id: ID!): Game
     createReview(input: ReviewInput): Review
     updateReview(id: ID!, input: ReviewModify): Review
     deleteReview(id: ID!): Review
