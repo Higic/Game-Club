@@ -5,6 +5,9 @@ import mongoose from "mongoose";
 import typeDefs from "./schemas";
 import resolvers from "./resolvers";
 
+/**
+ * Connect to the database
+ */
 const uri = process.env.DATABASE_URL;
 
 const connectDB = async () => {
@@ -19,12 +22,18 @@ const connectDB = async () => {
 };
 connectDB();
 
-
+/**
+ * Create the Apollo Server
+ */
 const server = new ApolloServer({
   resolvers,
   typeDefs,
 });
 
+/**
+ * Create the Next.js handler
+ * @param server
+ */
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   context: async (req, res) => ({
     req,

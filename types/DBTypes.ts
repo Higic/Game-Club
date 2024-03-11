@@ -1,6 +1,8 @@
 import {Date, Document, Types} from 'mongoose';
 
-
+/**
+ * Here lies the types for the database models
+ */
 type User = Partial<Document> &{
     id: Types.ObjectId | string;
     user_name: string;

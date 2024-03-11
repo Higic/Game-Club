@@ -1,3 +1,7 @@
+/**
+ * This file contains the schema for the GraphQL API
+ * Contains the types and queries for the API
+ */
 const typeDefs = `#graphql
 type ForumComment {
     id: ID!

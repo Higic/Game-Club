@@ -5,11 +5,14 @@ import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "@/app/api/graphql/mutations/userMutations";
 import { UserInput } from "@/types/DBTypes";
 
-// experimenting with register mutation variable
-// testing functionality, doesn't work yet
-// goes with useMutation hook
-
-
+/**
+  * Register component
+  * - Handles user registration
+  * - Uses useMutation hook to send data to the server
+  * - Uses the REGISTER_MUTATION from userMutations.ts
+  * - Handles form data and validation
+  * - Sends data to the server
+  */
 export default function Register() {
   
   const [formData, setFormData] = useState({
@@ -64,13 +67,9 @@ export default function Register() {
       return;
     }
     
-
     // Get username and password from data
     console.log(apiData);
 
-
-    // send to api
-    // experimenting. Try to register user with registerMutation, doesn't work yet
     try {
       const result = await registerMutation({ variables: { user: apiData } });
       console.log(result.data.register);

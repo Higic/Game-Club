@@ -1,5 +1,8 @@
 import connectMongo from "@/utils/db";
 
+/**
+ * This is the home page of the app
+ */
 export default function HomePage() {
   
   return (

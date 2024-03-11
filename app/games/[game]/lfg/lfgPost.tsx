@@ -1,5 +1,7 @@
 export default function LfgPost(props: { user_name: string; text: string; }) {
-    const { user_name, text} = props;
+
+  const { user_name, text} = props;
+  
   return (
     <div className="post">
       <div className="postProfile">

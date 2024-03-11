@@ -1,7 +1,10 @@
+import { GetStaticProps } from "next";
 import "./global.css";
 import { ApolloWrapper } from "./lib/apollo-wrapper";
 import NavBar from "./navbar";
 import Title from "./title";
+import { gql, useQuery } from "@apollo/client";
+import { GET_USER_BY_ID } from "./api/graphql/queries/userQueries";
 
 export const metadata = {
   title: "Game Club",
@@ -13,6 +16,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en">
       <body>

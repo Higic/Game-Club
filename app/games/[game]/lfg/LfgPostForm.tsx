@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function LfgPostForm() {
     const [text, setText] = useState("");
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         console.log("LfgPostForm .  Text: " + text);
         //Do Database Send stuff
