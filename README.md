@@ -1,7 +1,7 @@
 # Game-Club
 A book club for video games made as a project for Metropolia UAS course Web-development 2.
 <br><br>
-The website is built using React NextJS.
+The website is built using React NextJS and uses Graphql and mongoDB as the backend.
 
 ## Table of Contents
 
@@ -23,8 +23,7 @@ The project is meant for gamers who are looking for reviews and discussions abou
 ## Features
 
 ## Installation
-Clone this repository and navigate to `game-club-next`-directory.\
-Use `npm i` to install required dependencies.\
+Clone this repository and to install required dependencies via `npm i`.\
 After that `npm run dev` to start the development server.\
 It will open the dev server on `localhost:3000` by default.
 
@@ -42,3 +41,5 @@ This project uses the following frameworks and libraries:
 - NextJS
 - MongoDB
 - GraphQL
+
+## Check out the website here!

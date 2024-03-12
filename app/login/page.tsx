@@ -29,12 +29,22 @@ export default function Login() {
 
   const handleSubmit =  async (e: any) => {
     e.preventDefault();
+
+    // Data validation
     if (!formData.user_name || !formData.password) {
       alert("All fields are required");
       return;
     }
+
+    if (formData.user_name.length < MIN_USERNAME_LENGTH || formData.user_name.length > MAX_USERNAME_LENGTH) {
+      alert(`Username must be between ${MIN_USERNAME_LENGTH} and ${MAX_USERNAME_LENGTH} characters`);
+      return;
+    }
+
+    // Log form data
     console.log(formData);
-    // send to api
+    
+    // Send to api
     try {
       const result = await loginMutation({ variables: {credentials: formData}})
       // login message
