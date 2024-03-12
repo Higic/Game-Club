@@ -33,12 +33,7 @@ const reviewResolver = {
         deleteReview: async (_: undefined, args: { id: string }, context: MyContext) => {
             isLoggedIn(context);
             const user = GetUserById(context.userdata?.user.id);
-            if (user?.role !== 'admin') {
-                const filter = {_id: args.id, owner: context.userdata?.user.id};
-                return await reviewModel.findOneAndDelete(filter);
-            } else {
-                return await reviewModel.findByIdAndDelete(args.id);
-            }
+            return await reviewModel.findByIdAndDelete(args.id);
         },
     },
 };

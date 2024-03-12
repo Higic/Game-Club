@@ -33,12 +33,8 @@ const forumPostResolver = {
         deleteForumPost: async (_: undefined, args: { id: string }, context: MyContext) => {
             isLoggedIn(context);
             const user = GetUserById(context.userdata?.user.id);
-            if (user?.role !== 'admin') {
-                const filter = {_id: args.id, user: context.userdata?.user.id};
-                return await forumPostModel.findOneAndDelete(filter);
-            } else {
                 return await forumPostModel.findByIdAndDelete(args.id);
-            }
+            
         },
     },
 };

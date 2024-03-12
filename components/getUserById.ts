@@ -1,13 +1,12 @@
 import { GET_USER_BY_ID } from "@/app/api/graphql/queries/userQueries";
-import { User, UserOutput, UserOutputWithRole } from "@/types/DBTypes";
+import { User, UserOutput} from "@/types/DBTypes";
 import { useQuery } from "@apollo/client";
 
-export default function GetUserById(id: string): UserOutputWithRole | null {
+export default function GetUserById(id: string): UserOutput | null {
 
-    let user: UserOutputWithRole = {
+    let user: UserOutput = {
         id: "",
         user_name: "",
-        role: "user",
         bio: "",
     };
     const { loading, error, data } = useQuery(GET_USER_BY_ID, {
@@ -20,7 +19,6 @@ export default function GetUserById(id: string): UserOutputWithRole | null {
         user.id = data.userById.id;
         user.user_name = data.userById.user_name;
         user.bio = data.userById.bio;
-        user.role = data.userById.role;
     }
     if (user.id !== "" && user.id !== null) {
         return user;
