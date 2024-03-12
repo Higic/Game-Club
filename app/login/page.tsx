@@ -19,7 +19,7 @@ export default function Login() {
 
   const handleChange = (e: any) => {
 
-    
+
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -37,23 +37,16 @@ export default function Login() {
     // send to api
     try {
       const result = await loginMutation({ variables: {credentials: formData}})
-      
       // login message
       console.log(result.data.login.message);
-
-
-      // save token to local storage
-      localStorage.setItem("token", result.data.login.token);
-      localStorage.setItem("userId", result.data.login.user.id);
-
-      console.log("current user token: ", localStorage.getItem("token"));
-      console.log("current user id: ", localStorage.getItem("userId"));
+      //set result.data.login.token to cookies
+      document.cookie = `token=${result.data.login.token}; max-age=300; path=/`;
 
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <div>
       <h1>Login page</h1>
