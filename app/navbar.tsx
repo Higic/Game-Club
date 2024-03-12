@@ -40,13 +40,15 @@ export default function NavBar({}) {
 
   return (
     <div>
+      <div>
         <button
           className="profileButton"
           type="button"
           onClick={handleProfileNavigate}
         >
-          🏠
+          🏠 Profile
         </button>
+      </div>
       <nav className="menuButtons">
         <div className="navItem">
           <button

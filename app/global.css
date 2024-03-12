@@ -65,7 +65,7 @@ button:hover {
   width: 50px;
   background-color: var(--button);
   color: var(--text-color);
-  font-size: 20px;
+  font-size: 15px;
   text-align: center;
   padding-bottom: var(--global-padding);
   border-radius: var(--smooth);
