@@ -1,17 +1,19 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_LFG_MUTATION = gql`
-createLfg(input: $input) {
-    id
-    text
-    game
+mutation Mutation($input: LFGInput) {
+  createLfg(input: $input) {
     user {
       user_name
       id
       bio
     }
+    text
+    id
+    game
   }
 }
+
 `;
 
 export const DELETE_LFG_MUTATION = gql`
