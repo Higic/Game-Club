@@ -18,9 +18,6 @@ export default function GetLoggedInUser(): UserOutput | null {
         bio: "",
     };
 
-    if (token === undefined) {
-        return null;
-    }
     console.log("token: ", token);
     const { loading, error, data } = useQuery(CHECK_TOKEN, {
         variables: { token: token },
