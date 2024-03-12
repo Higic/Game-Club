@@ -4,6 +4,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ALL_USERS } from "../api/graphql/queries/userQueries";
 import { UserOutput } from "@/types/DBTypes";
 import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
+import { CREATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
+import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
 
 
 function Users () {
@@ -69,13 +71,62 @@ function CreateForumComment() {
 }
 
 function CreateReview() {
+  const formData = {
+    text: "This is a test review",
+    score: 5,
+    game: "Metal Gear Rising 2 - Revengeance"
+  }
+
+  const [createReviewMutation, {loading: createReviewLoading, error: createReviewError}] = useMutation(CREATE_REVIEW_MUTATION);
+
+  const handleCreate = async () => {
+    console.log("Creating review...");
+
+    try {
+      const result = await createReviewMutation({variables: {input: formData}});
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
     return (
-      <button>
+      <button onClick={handleCreate}>
         Create review
       </button>
     )
   
+}
+
+function CreateLfg() {
+
+  const [createLfgMutation, {loading: createLfgLoading, error: createLfgError}] = useMutation(CREATE_LFG_MUTATION);
+
+  const formData = {
+    text: "This is a test LFG",
+    game: "Metal Gear Rising 2 - Revengeance"
+  }
+
+  // Note, when using this, get the formData from the DOM
+
+
+  const handleCreate = async () => {
+    console.log("Creating LFG...");
+
+    try {
+      const result = await createLfgMutation({variables: {input: formData}})
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
+
+  return (
+    <button onClick={handleCreate}>
+      Create LFG
+    </button>
+  )
 }
 
 
@@ -123,8 +174,8 @@ export default function Debug() {
           <button>deleteGame</button>
           <button>deleteForumPost</button>
           <button>deleteForumComment</button>
-          <button>createReview</button>
-          <button>createLfg</button>
+          <CreateReview></CreateReview>
+          <CreateLfg></CreateLfg>
           <button>createForumPost</button>
           <button>createForumComment</button>
           <button>adminUpdateUser</button>
