@@ -133,6 +133,7 @@ type Mutation {
     login(credentials: Credentials!): LoginResponse
     register(user: UserInput!): UserResponse
     updateUser(user: UserModify!): UserResponse
+    updateBio(bio: String!): UserResponse
     deleteUser: UserResponse
     adminUpdateUser(user: UserModify!, id: ID!): UserResponse
     adminDeleteUser(id: ID!): UserResponse

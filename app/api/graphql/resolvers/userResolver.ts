@@ -46,6 +46,17 @@ const userResolver = {
                 body: JSON.stringify(args.user),
             });
         },
+        updateBio: async (_: undefined, args: {bio: string}, context: MyContext) => {
+            isLoggedIn(context);
+            return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${context.userdata?.token}`,
+                },
+                body: JSON.stringify({bio: args.bio}),
+            });
+        },
         deleteUser: async (_: undefined, __: undefined, context: MyContext) => {
             isLoggedIn(context);
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {

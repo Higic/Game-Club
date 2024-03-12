@@ -39,6 +39,18 @@ mutation Mutation($user: UserModify!) {
 }
 `;
 
+export const UPDATE_BIO_MUTATION = gql`
+mutation Mutation($bio: String!) {
+  updateBio(bio: $bio) {
+    user {
+      user_name
+      id
+      bio
+    }
+  }
+}
+`;
+
 export const DELETE_USER_MUTATION = gql`
 mutation Mutation {
   deleteUser {
