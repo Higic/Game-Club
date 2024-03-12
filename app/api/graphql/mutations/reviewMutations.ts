@@ -1,0 +1,49 @@
+import { gql } from "@apollo/client";
+
+export const CREATE_REVIEW_MUTATION = gql`
+  mutation Mutation($input: ReviewInput) {
+    createReview(input: $input) {
+      id
+      text
+      score
+      game
+      author {
+        id
+        user_name
+        bio
+      }
+    }
+  }
+`;
+
+export const UPDATE_REVIEW_MUTATION = gql`
+  mutation Mutation($updateReviewId: ID!, $input: ReviewModify) {
+    updateReview(id: $updateReviewId, input: $input) {
+      id
+      text
+      score
+      game
+      author {
+        id
+        user_name
+        bio
+      }
+    }
+  }
+`;
+
+export const DELETE_REVIEW_MUTATION = gql`
+  mutation Mutation($deleteReviewId: ID!) {
+    deleteReview(id: $deleteReviewId) {
+      id
+      text
+      score
+      game
+      author {
+        id
+        user_name
+        bio
+      }
+    }
+  }
+`;
