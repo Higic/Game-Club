@@ -5,6 +5,9 @@ import { UserResponse, LoginResponse } from '@/types/MessageTypes';
 import MyContext from '@/types/MyContext';
 import { Token } from 'graphql';
 
+/**
+ * This file contains resolvers for the user api.
+ */
 const userResolver = {
     Query: {
         users: async () => {
@@ -52,6 +55,17 @@ const userResolver = {
                     Authorization: `Bearer ${context.userdata?.token}`,
                 },
                 body: JSON.stringify(args.user),
+            });
+        },
+        updateBio: async (_: undefined, args: {bio: string}, context: MyContext) => {
+            isLoggedIn(context);
+            return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${context.userdata?.token}`,
+                },
+                body: JSON.stringify({bio: args.bio}),
             });
         },
         deleteUser: async (_: undefined, __: undefined, context: MyContext) => {

@@ -1,5 +1,8 @@
 import { gql } from "@apollo/client";
 
+/**
+ * This file contains mutations for the user api.
+ */
 export const REGISTER_MUTATION = gql`
 mutation Mutation($user: UserInput!) {
   register(user: $user) {
@@ -30,6 +33,18 @@ mutation Mutation($credentials: Credentials!) {
 export const UPDATE_USER_MUTATION = gql`
 mutation Mutation($user: UserModify!) {
   updateUser(user: $user) {
+    user {
+      user_name
+      id
+      bio
+    }
+  }
+}
+`;
+
+export const UPDATE_BIO_MUTATION = gql`
+mutation Mutation($bio: String!) {
+  updateBio(bio: $bio) {
     user {
       user_name
       id

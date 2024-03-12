@@ -6,7 +6,7 @@ export default function ForumPostForm() {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         console.log("ForumPostForm handleSubmit. Title: " + title + " Text: " + text);
         //Do Database Send stuff

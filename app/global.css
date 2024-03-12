@@ -37,6 +37,11 @@ h1, h2, h3 {
   height: fit-content;
 }
 
+.title:hover {
+  background-color: var(--button-hover);
+
+}
+
 .menuButtons {
   display: flex;
   justify-content: space-evenly;

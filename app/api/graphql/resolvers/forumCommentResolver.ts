@@ -3,6 +3,9 @@ import forumCommentModel from "../models/forumCommentModel";
 import MyContext from "@/types/MyContext";
 import { isLoggedIn } from "@/functions/authorize";
 
+/**
+ * This file contains resolvers for the forumComment api.
+ */
 const forumCommentResolver = {
     Query: {
         forumCommentById: async (_: undefined, args: { id: string }) => {

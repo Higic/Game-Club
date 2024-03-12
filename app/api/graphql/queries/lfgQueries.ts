@@ -1,5 +1,8 @@
 import { gql } from "@apollo/client";
 
+/**
+ * This file contains queries for the lfg api.
+ */
 export const GET_LFG_BY_ID = gql`
 query Query($lfgById: ID!) {
   lfgById(id: $lfgById) {

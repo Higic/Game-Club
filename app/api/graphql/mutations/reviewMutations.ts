@@ -1,5 +1,8 @@
 import { gql } from "@apollo/client";
 
+/**
+ * This file contains mutations for the review api.
+ */
 export const CREATE_REVIEW_MUTATION = gql`
   mutation Mutation($input: ReviewInput) {
     createReview(input: $input) {

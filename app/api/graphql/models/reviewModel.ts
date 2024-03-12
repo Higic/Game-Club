@@ -1,6 +1,9 @@
 import { Review } from "@/types/DBTypes";
 import mongoose from "mongoose";
 
+/**
+ * This file contains models for the reviews. This is used by mongoose to create the schema.
+ */
 const reviewModel = new mongoose.Schema<Review>({
     game_id: {
         type: String, 

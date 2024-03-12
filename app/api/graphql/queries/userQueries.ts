@@ -1,5 +1,8 @@
 import { gql } from "@apollo/client";
 
+/**
+ * This file contains queries for the user api.
+ */
 export const GET_USER_BY_ID = gql`
 query Query($userById: ID!) {
   userById(id: $userById) {

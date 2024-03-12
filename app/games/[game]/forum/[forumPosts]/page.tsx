@@ -1,3 +1,7 @@
+/**
+ * A specific forum post for a specific game. Pulls the forum comment data from database that are linked to the original post.
+ */
+
 export default function Page({ params }: { params: { forumPosts: string } }) {
 
   return (

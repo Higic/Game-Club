@@ -1,5 +1,8 @@
 import { gql } from "@apollo/client";
 
+/**
+ * This file contains queries for the game api.
+ */
 export const GET_ALL_GAMES = gql`
 query Query {
   games {

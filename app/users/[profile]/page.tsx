@@ -51,7 +51,7 @@ function ProfileData({id}: {id: string}) {
 
   return (
     <div>
-      <h1>{userData.user_name}</h1>
+      <h1>Name: {userData.user_name}</h1>
       <p>Bio: {userData.bio}</p>
     </div>
   )

@@ -1,6 +1,9 @@
 import { Game } from "@/types/DBTypes";
 import mongoose from "mongoose";
 
+/**
+ * This file contains models for the game api. This is used by mongoose to create the schema.
+ */
 const gameModel = new mongoose.Schema<Game>({
     game_name: {
         type: String,

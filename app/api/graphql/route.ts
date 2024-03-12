@@ -6,6 +6,11 @@ import typeDefs from "./schemas";
 import resolvers from "./resolvers";
 
 /**
+ * This file is the entry point for the graphql server.
+ */
+
+
+/**
  * Connect to the database
  */
 const uri = process.env.DATABASE_URL;

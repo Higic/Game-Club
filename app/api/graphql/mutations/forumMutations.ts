@@ -1,5 +1,9 @@
 import { gql } from "@apollo/client";
 
+
+/**
+ * This file contains mutations for the forum api.
+ */
 export const CREATE_FORUM_POST_MUTATION = gql`
   mutation Mutation($input: ForumPostInput) {
     createForumPost(input: $input) {

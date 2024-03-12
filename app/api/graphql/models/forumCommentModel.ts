@@ -1,7 +1,9 @@
 import { ForumComment } from "@/types/DBTypes";
 import mongoose from "mongoose";
 
-
+/**
+ * This file contains models for the forum comments. This is used by mongoose to create the schema.
+ */
 const forumCommentModel = new mongoose.Schema<ForumComment>({
     forumPostId: {
         type: mongoose.Schema.Types.ObjectId,

@@ -3,6 +3,9 @@ import { LFGInput } from "@/types/DBTypes";
 import { isLoggedIn } from "@/functions/authorize";
 import LFGModel from "../models/LFGModel";
 
+/**
+ * This file contains resolvers for the lfg api.
+ */
 const LFGResolver = {
     Query: {
         lfgById: async (_: undefined, args: { id: string }) => {

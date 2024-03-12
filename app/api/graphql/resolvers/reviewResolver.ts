@@ -3,6 +3,9 @@ import reviewModel from "../models/reviewModel";
 import MyContext from "@/types/MyContext";
 import { isLoggedIn } from "@/functions/authorize";
 
+/**
+ * This file contains resolvers for the review api.
+ */
 const reviewResolver = {
     Query: {
         reviewById: async (_: undefined, args: { id: string }) => {
