@@ -71,6 +71,16 @@ button:hover {
   border-radius: var(--smooth);
 }
 
+.logoutButton {
+  cursor: pointer;
+  position: fixed;
+  right: 15px;
+  top: 75px;
+  height: 50px;
+  width: 50px;
+  border-radius: var(--smooth);
+}
+
 .content {
   width: 60%;
   font-size: var(--written-text-font-size);

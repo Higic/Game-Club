@@ -13,14 +13,11 @@ export default function NavBar({}) {
   const router = useRouter();
 
   // fetch token from localStorage
-
-
   const [game, setGame] = useState("1");
+
   const userId = localStorage.getItem("userId");
   const user_name = localStorage.getItem("user_name");
   const bio = localStorage.getItem("bio");
-
-
 
   const [userData, setUserData] = useState({
     uid: userId,
@@ -32,10 +29,21 @@ export default function NavBar({}) {
     if (userId === "null") {
       router.push("/login");
     }
-    else 
+    else router.push(`/users/${userId}`);
+  }
 
+  const handleLogout = () => {
+    console.log("User token before logout: ", localStorage.getItem("token"));
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("bio");
+    console.log("Logging out... Current user token: ", localStorage.getItem("token"));
+    window.location.reload();
+  };
 
-    router.push(`/users/${userId}`);
+  const isLoggedin = () => {
+    return userId !== null;
   }
 
   return (
@@ -48,6 +56,11 @@ export default function NavBar({}) {
         >
           🏠 Profile
         </button>
+        {isLoggedin() && (
+          <button className="logoutButton" type="button" onClick={handleLogout}>
+            🚪Logout
+          </button>
+          )}
       </div>
       <nav className="menuButtons">
         <div className="navItem">

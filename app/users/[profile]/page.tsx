@@ -4,6 +4,7 @@ import { GET_USER_BY_ID } from "@/app/api/graphql/queries/userQueries";
 import { useQuery } from "@apollo/client";
 import { getStaticProps } from "next/dist/build/templates/pages";
 import { useRouter } from "next/navigation";
+import router from "next/router";
 import { useState } from "react";
 
 interface User {
@@ -19,7 +20,7 @@ export default function Page({ params }: { params: { uid: string } }) {
   
   return (
     <div>
-      <ProfileData id={params}/>
+      <ProfileData id={params.uid}/>
     </div>
   );
 }
@@ -47,6 +48,7 @@ function ProfileData({id}: {id: string}) {
       bio: data.userById.bio,
     });
   }
+
   return (
     <div>
       <h1>{userData.user_name}</h1>
