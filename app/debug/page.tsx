@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_ALL_USERS } from "../api/graphql/queries/userQueries";
+import { GET_ALL_USERS, GET_USER_BY_ID } from "../api/graphql/queries/userQueries";
 import { UserOutput } from "@/types/DBTypes";
 import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
 import { CREATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
@@ -27,6 +27,26 @@ function Users () {
       ))}
     </div>
   );
+}
+
+function UserById() {
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+    variables: {userById: "65ef54c456be0c640735155f"}
+  });
+  return (
+    <div>
+      <h2>User by ID</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: ${error.message}</p>}
+      {data && 
+        <div>
+          <p>name: {data.userById.user_name}, </p>
+          <p>id: {data.userById.id}, </p>
+          <p>bio: {data.userById.bio}</p>
+        </div>
+      }
+    </div>
+  )
 }
 
 function UpdateBio() {
@@ -143,7 +163,7 @@ export default function Debug() {
           <button>users</button>
           <Users></Users>
           <UpdateBio></UpdateBio>
-          <button>usersById</button>
+          <UserById></UserById>
           <button>reviewsByGame</button>
           <button>reviewById</button>
           <button>lfgByUser</button>
