@@ -18,12 +18,13 @@ export default function GetLoggedInUser(): UserOutput | null {
         bio: "",
     };
 
+
     console.log("token: ", token);
     const { loading, error, data } = useQuery(CHECK_TOKEN, {
         variables: { token: token },
-    
+
     });
-    
+
 
     if (loading) console.log("loading...");
     if (error) console.log("error: ", error);
