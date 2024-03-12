@@ -1,9 +1,85 @@
 "use client";
 
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_ALL_USERS } from "../api/graphql/queries/userQueries";
+import { UserOutput } from "@/types/DBTypes";
+import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
 
 
-export default function Login() {
- 
+function Users () {
+  const { loading, error, data } = useQuery(GET_ALL_USERS); 
+  return (
+    <div>
+      <h2>Users</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: ${error.message}</p>}
+      {data && data.users.map((user: UserOutput) => (
+        <div key={user.id} className="post">
+          <p>name: {user.user_name}, </p>
+          <p>id: {user.id}, </p>
+          <p>bio: {user.bio}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function UpdateBio() {
+
+
+  const [updateBioMutation, {loading: updateUserLoading, error: updateUserError}] = useMutation(UPDATE_BIO_MUTATION);
+
+  const handleUpdate = async () => {
+    console.log("Updating user...");
+
+    const formData = {
+      bio: "this is a test"
+    }
+
+    try {
+      const result = await updateBioMutation({variables: {bio: "65ef54c456be0c640735155f"}});
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return (
+    <button onClick={handleUpdate}>
+      Update bio
+    </button>
+  )
+}
+
+function CreateForumPost() {
+  
+  return (
+    <button>
+      Create forum post
+    </button>
+  )
+}
+
+function CreateForumComment() {
+
+  return (
+    <button>
+      Create forum comment
+    </button>
+  )
+}
+
+function CreateReview() {
+  
+    return (
+      <button>
+        Create review
+      </button>
+    )
+  
+}
+
+
+export default function Debug() {
   return (
     <div>
       <h1>Debug page</h1>
@@ -11,6 +87,8 @@ export default function Login() {
         <h2>Queries</h2>
         <div>
           <button>users</button>
+          <Users></Users>
+          <UpdateBio></UpdateBio>
           <button>usersById</button>
           <button>reviewsByGame</button>
           <button>reviewById</button>
