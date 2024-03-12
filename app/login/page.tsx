@@ -54,7 +54,7 @@ export default function Login() {
       // login message
       console.log(result.data.login.message);
       //set result.data.login.token to cookies
-      document.cookie = `token=${result.data.login.token}; max-age=300; path=/`;
+      document.cookie = `token=${result.data.login.token}; max-age=3000; path=/`;
 
     } catch (error) {
       console.error(error);
