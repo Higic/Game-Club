@@ -21,13 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
           <main className="content">
+            <ApolloWrapper>
             <div className="buffer"></div>
             <Title/>
             <div className="buffer"></div>
             <NavBar/>
             <div className="buffer"></div>
 
-            <ApolloWrapper>
             {children}
             </ApolloWrapper>
           </main>

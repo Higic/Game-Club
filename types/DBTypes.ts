@@ -15,7 +15,7 @@ type UserOutput = Pick<User, 'id' | 'user_name' | 'bio'>;
 
 type UserInput = Omit<User, 'id' | 'role'>;
 
-type LoginUser = Omit<User, 'password'>;
+type LoginUser = Omit<User, 'password' | 'role'>;
 
 type Credentials = Pick<User, 'user_name' | 'password'>;
 

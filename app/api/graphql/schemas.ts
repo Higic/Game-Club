@@ -111,7 +111,7 @@ input UserModify {
 type Query {
     users: [User]
     userById(id: ID!): User
-    checkToken: UserResponse
+    checkToken(token: ID!): UserResponse
     games: [Game]
     gameById(id: ID!): Game
     gameByName(game_name: String!): Game

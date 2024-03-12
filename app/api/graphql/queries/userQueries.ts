@@ -21,9 +21,14 @@ query Query {
 `;
 
 export const CHECK_TOKEN = gql`
-query Query {
-  checkToken {
+query Query($token: ID!) {
+  checkToken(token: $token) {
     message
+    user {
+      bio
+      id
+      user_name
+    }
   }
 }
 `;

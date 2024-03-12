@@ -3,21 +3,29 @@ import { isAdmin, isLoggedIn } from '@/functions/authorize';
 import { Credentials, User, UserInput } from '@/types/DBTypes';
 import { UserResponse, LoginResponse } from '@/types/MessageTypes';
 import MyContext from '@/types/MyContext';
+import { Token } from 'graphql';
 
 const userResolver = {
     Query: {
         users: async () => {
             return await fetchData<User[]>(`${process.env.AUTH_URL}/users`);
         },
-        userById: async (_: undefined, args: {id: string}) => {
+        userById: async (_: undefined, args: { id: string }) => {
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/${args.id}`);
         },
-        checkToken: async (_: undefined, __: undefined, context: MyContext) => {
-            return await {user: context.userdata?.user};
+        checkToken: async (_: undefined, args: {token:string}) => {
+            console.log("token inside check " + args.token);
+            return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/token`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${args.token}`,
+                },
+            });
         },
     },
     Mutation: {
-        login: async (_: undefined, args: {credentials: Credentials}) => {
+        login: async (_: undefined, args: { credentials: Credentials }) => {
             return await fetchData<LoginResponse>(`${process.env.AUTH_URL}/auth/login`, {
                 method: 'POST',
                 headers: {
@@ -26,7 +34,7 @@ const userResolver = {
                 body: JSON.stringify(args.credentials),
             });
         },
-        register: async (_: undefined, args: {user: UserInput}) => {
+        register: async (_: undefined, args: { user: UserInput }) => {
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
                 method: 'POST',
                 headers: {
@@ -35,7 +43,7 @@ const userResolver = {
                 body: JSON.stringify(args.user),
             });
         },
-        updateUser: async (_: undefined, args: {id: string, user: UserInput}, context: MyContext) => {
+        updateUser: async (_: undefined, args: { id: string, user: UserInput }, context: MyContext) => {
             isLoggedIn(context);
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
                 method: 'PUT',
@@ -56,7 +64,7 @@ const userResolver = {
                 },
             });
         },
-        adminDeleteUser: async (_: undefined, args: {id: string}, context: MyContext) => {
+        adminDeleteUser: async (_: undefined, args: { id: string }, context: MyContext) => {
             isAdmin(context);
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/${args.id}`, {
                 method: 'DELETE',
@@ -66,7 +74,7 @@ const userResolver = {
                 },
             });
         },
-        adminUpdateUser: async (_: undefined, args: {id: string, user: UserInput}, context: MyContext) => {
+        adminUpdateUser: async (_: undefined, args: { id: string, user: UserInput }, context: MyContext) => {
             isAdmin(context);
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/${args.id}`, {
                 method: 'PUT',

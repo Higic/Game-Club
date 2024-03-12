@@ -2,49 +2,40 @@
 
 import "./global.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CHECK_TOKEN } from "./api/graphql/queries/userQueries";
+import { useQuery } from "@apollo/client";
+import Cookies from "js-cookie";
+import { UserOutput } from "@/types/DBTypes";
+import { set } from "mongoose";
+import GetLoggedInUser from "@/components/getLoggedInUser";
 
 /**
  * NavBar component
  * - Handles navigation between different game pages
  * - Uses the useRouter hook to navigate to different pages
  */
-export default function NavBar({}) {
+export default function NavBar({ }) {
   const router = useRouter();
 
   // fetch token from localStorage
   const [game, setGame] = useState("1");
 
-  const userId = localStorage.getItem("userId");
-  const user_name = localStorage.getItem("user_name");
-  const bio = localStorage.getItem("bio");
 
-  const [userData, setUserData] = useState({
-    uid: userId,
-    user_name: user_name,
-    bio: bio
+
+ /* const { loading, error, data } = useQuery(CHECK_TOKEN, {
+    variables: { token: Cookies.get("token")},
   });
 
-  const handleProfileNavigate = () => {
-    if (userId === "null") {
-      router.push("/login");
-    }
-    else router.push(`/users/${userId}`);
+  if (loading) return <div><p>Loading...</p></div>;
+  if (error) return <div><p>Error: {error.message}</p></div>;
+  if (data) {
+    console.log("data: ", data);
   }
 
-  const handleLogout = () => {
-    console.log("User token before logout: ", localStorage.getItem("token"));
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("user_name");
-    localStorage.removeItem("bio");
-    console.log("Logging out... Current user token: ", localStorage.getItem("token"));
-    window.location.reload();
-  };
+  let { user } = data.user;*/
 
-  const isLoggedin = () => {
-    return userId !== null;
-  }
+  let user = GetLoggedInUser();
 
   return (
     <div>
@@ -52,15 +43,18 @@ export default function NavBar({}) {
         <button
           className="profileButton"
           type="button"
-          onClick={handleProfileNavigate}
+          onClick={() => router.push(`/users/${user?.id}`)}
         >
           🏠 Profile
         </button>
-        {isLoggedin() && (
-          <button className="logoutButton" type="button" onClick={handleLogout}>
+        {user ? (
+          <button className="logoutButton" type="button">
             🚪Logout
           </button>
-          )}
+        ) : (
+          <button className="loginButton" type="button">
+            🚪Login
+          </button>)}
       </div>
       <nav className="menuButtons">
         <div className="navItem">
@@ -92,5 +86,6 @@ export default function NavBar({}) {
         </div>
       </nav>
     </div>
-  );
-}
+  )
+};
+
