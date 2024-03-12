@@ -6,13 +6,17 @@ import { UserOutput } from "@/types/DBTypes";
 import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
 import { CREATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
 import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
+import Cookies from "js-cookie";
 
 /**
  * This file contains the debug page of the app. Used for testing the earlier versions of the functions.
  */
 
 function CheckToken () {
-  const { loading, error, data } = useQuery(CHECK_TOKEN);
+  const token = Cookies.get("token");
+  const { loading, error, data } = useQuery(CHECK_TOKEN, {
+    variables: {token: token},
+  });
   console.log("checking token");
   return (
     <div>
