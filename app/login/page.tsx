@@ -8,8 +8,12 @@ import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { LOGIN_MUTATION } from "@/app/api/graphql/mutations/userMutations";
 import { Credentials } from "@/types/DBTypes";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+
+  const router = useRouter();
+
   let MIN_USERNAME_LENGTH = 4;
   let MAX_USERNAME_LENGTH = 20;
 
@@ -59,6 +63,10 @@ export default function Login() {
     } catch (error) {
       console.error(error);
     }
+
+    router.refresh();
+
+    
   };
 
   return (
