@@ -7,6 +7,9 @@ import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
 import { CREATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
 import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
 
+/**
+ * This file contains the debug page of the app. Used for testing the earlier versions of the functions.
+ */
 
 function Users () {
   const { loading, error, data } = useQuery(GET_ALL_USERS); 

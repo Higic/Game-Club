@@ -1,6 +1,9 @@
 import { LFG } from "@/types/DBTypes";
 import mongoose from "mongoose";
 
+/**
+ * This file contains models for the LFG. This is used by mongoose to create the schema.
+ */
 const LFGModel = new mongoose.Schema<LFG>({
     game_id: {
         type: mongoose.Schema.Types.ObjectId, 

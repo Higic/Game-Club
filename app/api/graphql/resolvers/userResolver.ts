@@ -4,6 +4,9 @@ import { Credentials, User, UserInput } from '@/types/DBTypes';
 import { UserResponse, LoginResponse } from '@/types/MessageTypes';
 import MyContext from '@/types/MyContext';
 
+/**
+ * This file contains resolvers for the user api.
+ */
 const userResolver = {
     Query: {
         users: async () => {

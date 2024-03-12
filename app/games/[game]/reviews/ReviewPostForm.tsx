@@ -1,12 +1,16 @@
 "use client";
 
+/**
+ * This component is the form used in the review page for makign reveiws. It generates a database entry for the review.
+ */
+
 import { useState } from "react";
 
 export default function ReviewPostForm() {
     const [text, setText] = useState("");
     const [rating, setRating] = useState("1");
 
-    const handelSubmit = async (e) => {
+    const handelSubmit = async (e: any) => {
         e.preventDefault();
         console.log("ReviewPostForm handleSubmit. Rating: " + rating + " Text: " + text);
         //Do Database Send stuff

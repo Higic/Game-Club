@@ -3,6 +3,9 @@ import forumPostModel from "../models/forumPostModel";
 import { isLoggedIn } from "@/functions/authorize";
 import MyContext from "@/types/MyContext";
 
+/**
+ * This file contains resolvers for the forumPost api.
+ */
 const forumPostResolver = {
     Query: {
         forumPostById: async (_: undefined, args: { id: string }) => {

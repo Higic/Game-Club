@@ -1,5 +1,8 @@
 import { gql } from "@apollo/client";
 
+/**
+ * This file contains queries for the review api.
+ */
 export const GET_REVIEW_BY_ID = gql`
 query Query($reviewById: ID!) {
   reviewById(id: $reviewById) {

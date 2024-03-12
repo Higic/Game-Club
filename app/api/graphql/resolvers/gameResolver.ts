@@ -3,6 +3,9 @@ import gameModel from "../models/gameModel";
 import MyContext from "@/types/MyContext";
 import { isAdmin } from "@/functions/authorize";
 
+/**
+ * This file contains resolvers for the game api.
+ */
 const gameResolver = {
     Query: {
         games: async () => {
