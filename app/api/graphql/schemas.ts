@@ -135,8 +135,6 @@ type Mutation {
     updateUser(user: UserModify!): UserResponse
     updateBio(bio: String!): UserResponse
     deleteUser: UserResponse
-    adminUpdateUser(user: UserModify!, id: ID!): UserResponse
-    adminDeleteUser(id: ID!): UserResponse
     createGame(input: GameInput): Game
     updateGame(id: ID!, input: GameModify): Game
     deleteGame(id: ID!): Game

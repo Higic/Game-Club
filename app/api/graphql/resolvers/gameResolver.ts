@@ -1,7 +1,6 @@
 import { Game, GameInput, GameUpdate } from "@/types/DBTypes";
 import gameModel from "../models/gameModel";
 import MyContext from "@/types/MyContext";
-import { isAdmin } from "@/functions/authorize";
 
 /**
  * This file contains resolvers for the game api.
@@ -21,15 +20,12 @@ const gameResolver = {
 
     Mutation: {
         createGame: async (_: undefined, args: {input: GameInput}, context: MyContext) => {
-            isAdmin(context);
             return await gameModel.create(args.input);
         },
         updateGame: async (_: undefined, args: {id: string, input: GameUpdate}, context: MyContext) => {
-            isAdmin(context);
             return await gameModel.findByIdAndUpdate(args.id, args.input, {new: true});
         },
         deleteGame: async (_: undefined, args: {id: string}, context: MyContext) => {
-            isAdmin(context);
             return await gameModel.findByIdAndDelete(args.id);
         },
     }

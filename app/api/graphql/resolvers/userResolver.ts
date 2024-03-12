@@ -1,5 +1,5 @@
 import fetchData from '@/functions/fetchData';
-import { isAdmin, isLoggedIn } from '@/functions/authorize';
+import { isLoggedIn } from '@/functions/authorize';
 import { Credentials, User, UserInput } from '@/types/DBTypes';
 import { UserResponse, LoginResponse } from '@/types/MessageTypes';
 import MyContext from '@/types/MyContext';
@@ -76,27 +76,6 @@ const userResolver = {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${context.userdata?.token}`,
                 },
-            });
-        },
-        adminDeleteUser: async (_: undefined, args: { id: string }, context: MyContext) => {
-            isAdmin(context);
-            return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/${args.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${context.userdata?.token}`,
-                },
-            });
-        },
-        adminUpdateUser: async (_: undefined, args: { id: string, user: UserInput }, context: MyContext) => {
-            isAdmin(context);
-            return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/${args.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${context.userdata?.token}`,
-                },
-                body: JSON.stringify(args.user),
             });
         },
     }

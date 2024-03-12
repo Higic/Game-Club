@@ -66,29 +66,3 @@ mutation Mutation {
   }
 }
 `;
-
-export const ADMIN_UPDATE_USER_MUTATION = gql`
-mutation Mutation($user: UserModify!, $adminUpdateUserId: ID!) {
-  adminUpdateUser(user: $user, id: $adminUpdateUserId) {
-    user {
-      user_name
-      id
-      bio
-    }
-    message
-  }
-}
-`;
-
-export const ADMIN_DELETE_USER_MUTATION = gql`
-mutation Mutation($user: UserModify!, $adminUpdateUserId: ID!) {
-  adminUpdateUser(user: $user, id: $adminUpdateUserId) {
-    user {
-      user_name
-      id
-      bio
-    }
-    message
-  }
-}
-`;

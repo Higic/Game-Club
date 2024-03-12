@@ -219,8 +219,6 @@ export default function Debug() {
           <CreateLfg></CreateLfg>
           <button>createForumPost</button>
           <button>createForumComment</button>
-          <button>adminUpdateUser</button>
-          <button>adminDeleteUser</button>
         </div>
       </div>
     </div>
