@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_ALL_USERS, GET_USER_BY_ID } from "../api/graphql/queries/userQueries";
+import { CHECK_TOKEN, GET_ALL_USERS, GET_USER_BY_ID } from "../api/graphql/queries/userQueries";
 import { UserOutput } from "@/types/DBTypes";
 import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
 import { CREATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
@@ -11,13 +11,27 @@ import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
  * This file contains the debug page of the app. Used for testing the earlier versions of the functions.
  */
 
+function CheckToken () {
+  const { loading, error, data } = useQuery(CHECK_TOKEN);
+  console.log("checking token");
+  return (
+    <div>
+      <h2>Check token</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && <p>message: {data.checkToken.message}</p>}
+    </div>
+  )
+
+}
+
 function Users () {
   const { loading, error, data } = useQuery(GET_ALL_USERS); 
   return (
     <div>
       <h2>Users</h2>
       {loading && <p>Loading...</p>}
-      {error && <p>Error: ${error.message}</p>}
+      {error && <p>Error: {error.message}</p>}
       {data && data.users.map((user: UserOutput) => (
         <div key={user.id} className="post">
           <p>name: {user.user_name}, </p>
@@ -37,7 +51,7 @@ function UserById() {
     <div>
       <h2>User by ID</h2>
       {loading && <p>Loading...</p>}
-      {error && <p>Error: ${error.message}</p>}
+      {error && <p>Error: {error.message}</p>}
       {data && 
         <div>
           <p>name: {data.userById.user_name}, </p>
@@ -178,7 +192,7 @@ export default function Debug() {
           <button>forumCommentsByPost</button>
           <button>forumCommentsByAuhtor</button>
           <button>forumCommentById</button>
-          <button>checkToken</button>
+          <CheckToken></CheckToken>
         </div>
       </div>
       <div>
