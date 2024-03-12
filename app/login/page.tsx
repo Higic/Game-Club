@@ -8,8 +8,12 @@ import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { LOGIN_MUTATION } from "@/app/api/graphql/mutations/userMutations";
 import { Credentials } from "@/types/DBTypes";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+
+  const router = useRouter();
+
   let MIN_USERNAME_LENGTH = 4;
   let MAX_USERNAME_LENGTH = 20;
 
@@ -54,11 +58,15 @@ export default function Login() {
       // login message
       console.log(result.data.login.message);
       //set result.data.login.token to cookies
-      document.cookie = `token=${result.data.login.token}; max-age=300; path=/`;
+      document.cookie = `token=${result.data.login.token}; max-age=3000; path=/`;
 
     } catch (error) {
       console.error(error);
     }
+
+    router.refresh();
+
+    
   };
 
   return (

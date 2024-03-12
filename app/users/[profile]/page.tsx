@@ -1,6 +1,7 @@
 "use client";
 
 import { GET_USER_BY_ID } from "@/app/api/graphql/queries/userQueries";
+import GetLoggedInUser from "@/components/getLoggedInUser";
 import { useQuery } from "@apollo/client";
 import { getStaticProps } from "next/dist/build/templates/pages";
 import { useRouter } from "next/navigation";
@@ -13,14 +14,19 @@ interface User {
   bio: string;
 }
 
+export default function Page() {
 
-export default function Page({ params }: { params: { uid: string } }) {
-
-  console.log("params: ", params);
+  const currentUser = GetLoggedInUser();
   
   return (
     <div>
-      <ProfileData id={params.uid}/>
+      <div>
+        <h1>Hello, {currentUser?.user_name}</h1>
+      </div>
+      <div>
+        <p>Bio: {currentUser?.bio}</p>
+        <button>Edit</button>
+      </div>
     </div>
   );
 }
