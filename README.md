@@ -1,7 +1,7 @@
 # Game-Club
 A book club for video games made as a project for Metropolia UAS course Web-development 2.
 <br><br>
-The website is built using React NextJS and uses Graphql and mongoDB as the backend.
+The website is built using React NextJS via TypeScript and uses Graphql and mongoDB as the backend.
 
 ## Table of Contents
 
