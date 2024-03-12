@@ -1,5 +1,9 @@
 "use client";
 
+/**
+ * The login page for the app. The page contains a login form that sends the user's credentials to the server and stores the token locally.
+ */
+
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { LOGIN_MUTATION } from "@/app/api/graphql/mutations/userMutations";

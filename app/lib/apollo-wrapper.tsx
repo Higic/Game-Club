@@ -1,5 +1,9 @@
 "use client";
 
+/**
+ * Apollo wrapper used to provide the apollo client to the app. This is used for all queries and mutations.
+ */
+
 import createApolloClient from "@/apollo-client";
 import {
   ApolloClient,
