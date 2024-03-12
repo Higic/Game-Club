@@ -20,6 +20,9 @@ export default function HomePage() {
           <button onClick={() => router.push(`/login`)}>
             Login
           </button>
+          <button onClick={() => router.push(`/debug`)}>
+            Debug page
+          </button>
         </div>
     </div>
   )
