@@ -2,6 +2,7 @@ import { ForumCommentInput, ForumCommentUpdate } from "@/types/DBTypes";
 import forumCommentModel from "../models/forumCommentModel";
 import MyContext from "@/types/MyContext";
 import { isLoggedIn } from "@/functions/authorize";
+import GetUserById from "@/components/getUserById";
 
 /**
  * This file contains resolvers for the forumComment api.
@@ -31,7 +32,8 @@ const forumCommentResolver = {
         },
         deleteForumComment: async (_: undefined, args: { id: string }, context: MyContext) => {
             isLoggedIn(context);
-            if (context.userdata?.user.role !== 'admin') {
+            const user = GetUserById(context.userdata?.user.id);
+            if (user?.role !== 'admin') {
                 const filter = {_id: args.id, user: context.userdata?.user.id};
                 return await forumCommentModel.findOneAndDelete(filter);
             } else {

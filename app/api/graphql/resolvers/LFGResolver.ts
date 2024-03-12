@@ -2,6 +2,7 @@ import MyContext from "@/types/MyContext";
 import { LFGInput } from "@/types/DBTypes";
 import { isLoggedIn } from "@/functions/authorize";
 import LFGModel from "../models/LFGModel";
+import GetUserById from "@/components/getUserById";
 
 /**
  * This file contains resolvers for the lfg api.
@@ -26,7 +27,8 @@ const LFGResolver = {
         },
         deleteLfg: async (_: undefined, args: { id: string }, context: MyContext) => {
             isLoggedIn(context);
-            if (context.userdata?.user.role !== 'admin') {
+            const user = GetUserById(context.userdata?.user.id);
+            if (user?.role !== 'admin') {
                 const filter = {_id: args.id, user: context.userdata?.user.id};
                 return await LFGModel.findOneAndDelete(filter);
             } else {

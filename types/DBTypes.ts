@@ -13,6 +13,8 @@ type User = Partial<Document> &{
 
 type UserOutput = Pick<User, 'id' | 'user_name' | 'bio'>;
 
+type UserOutputWithRole = Omit<User, 'password'>;
+
 type UserInput = Omit<User, 'id' | 'role'>;
 
 type LoginUser = Omit<User, 'password' | 'role'>;
@@ -83,6 +85,7 @@ export type {
     User, 
     UserInput, 
     UserOutput, 
+    UserOutputWithRole,
     LoginUser, 
     Credentials, 
     Review,

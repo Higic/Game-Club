@@ -2,6 +2,7 @@ import { Review, ReviewInput, ReviewUpdate } from "@/types/DBTypes";
 import reviewModel from "../models/reviewModel";
 import MyContext from "@/types/MyContext";
 import { isLoggedIn } from "@/functions/authorize";
+import GetUserById from "@/components/getUserById";
 
 /**
  * This file contains resolvers for the review api.
@@ -31,7 +32,8 @@ const reviewResolver = {
         },
         deleteReview: async (_: undefined, args: { id: string }, context: MyContext) => {
             isLoggedIn(context);
-            if (context.userdata?.user.role !== 'admin') {
+            const user = GetUserById(context.userdata?.user.id);
+            if (user?.role !== 'admin') {
                 const filter = {_id: args.id, owner: context.userdata?.user.id};
                 return await reviewModel.findOneAndDelete(filter);
             } else {
