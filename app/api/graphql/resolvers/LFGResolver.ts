@@ -21,12 +21,10 @@ const lfgResolver = {
     },
     Mutation: {
         createLfg: async (_: undefined, args: { input: LFGInput }, context: MyContext) => {
-            isLoggedIn(context);
             args.input.author = context.userdata?.user.id;
             return await lfgModel.create(args.input);
         },
         deleteLfg: async (_: undefined, args: { id: string }, context: MyContext) => {
-            isLoggedIn(context);
             const user = GetUserById(context.userdata?.user.id);
             return await lfgModel.findByIdAndDelete(args.id);
         },

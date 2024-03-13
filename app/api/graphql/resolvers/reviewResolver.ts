@@ -1,4 +1,4 @@
-import { Review, ReviewInput, ReviewUpdate, TokenContent } from "@/types/DBTypes";
+import { Review, ReviewInput, ReviewModify, TokenContent } from "@/types/DBTypes";
 import reviewModel from "../models/reviewModel";
 import MyContext from "@/types/MyContext";
 import { isLoggedIn } from "@/functions/authorize";
@@ -23,7 +23,7 @@ const reviewResolver = {
         createReview: async (_: undefined, args: { input: ReviewInput}) => {
             return await reviewModel.create(args.input);
         },
-        updateReview: async (_: undefined, args: { id: string, input: ReviewUpdate }, context: MyContext) => {
+        updateReview: async (_: undefined, args: { id: string, input: ReviewModify }, context: MyContext) => {
             const filter = {_id: args.id, author: context.userdata?.user.id};
             return await reviewModel.findByIdAndUpdate(filter, args.input, { new: true });
         },

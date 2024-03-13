@@ -26,7 +26,7 @@ type Review = {
 
 type ReviewInput = Omit<Review, 'id'>;
 
-type ReviewUpdate = Omit<Review, 'game' | 'author' | 'id'>;
+type ReviewModify = Omit<Review, 'game' | 'author' | 'id'>;
 
 type LFG = {
     id: Types.ObjectId | string;
@@ -83,7 +83,7 @@ export type {
     Credentials, 
     Review,
     ReviewInput,
-    ReviewUpdate,
+    ReviewModify,
     LFG, 
     LFGInput,
     ForumPost, 

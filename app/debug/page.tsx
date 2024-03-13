@@ -2,13 +2,13 @@
 
 import { useMutation, useQuery } from "@apollo/client";
 import { CHECK_TOKEN, GET_ALL_USERS, GET_USER_BY_ID } from "../api/graphql/queries/userQueries";
-import { Game, Review, ReviewInput, TokenContent, UserOutput } from "@/types/DBTypes";
+import { Game, Review, ReviewInput, ReviewModify, TokenContent, UserOutput } from "@/types/DBTypes";
 import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
-import { CREATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
+import { CREATE_REVIEW_MUTATION, UPDATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
 import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
 import Cookies from "js-cookie";
 import GetLoggedInUser from "@/components/getLoggedInUser";
-import { GET_REVIEWS_BY_GAME } from "../api/graphql/queries/reviewQueries";
+import { GET_REVIEWS_BY_GAME, GET_REVIEW_BY_ID } from "../api/graphql/queries/reviewQueries";
 import { useState } from "react";
 
 /**
@@ -153,6 +153,28 @@ function CreateReview() {
   
 }
 
+function ReviewById () {
+  const [reviewId, setReviewId] = useState("65f1b46d8c79d12ef0b5d026");
+  const { loading, error, data } = useQuery(GET_REVIEW_BY_ID, {
+    variables: {reviewById: reviewId}
+  });
+  return (
+    <div>
+      <h2>Review by ID</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && 
+        <div className="post">
+          <p>game: {data.reviewById.game}, </p>
+          <p>author: {data.reviewById.author}, </p>
+          <p>score: {data.reviewById.score}, </p>
+          <p>text: {data.reviewById.text}</p>
+        </div>
+      }
+    </div>
+  )
+}
+
 function ReviewsByGame () {
   const [gameName, setGameName] = useState("Metal Gear Rising 2 - Revengeance");
   const { loading, error, data } = useQuery(GET_REVIEWS_BY_GAME, {
@@ -176,6 +198,38 @@ function ReviewsByGame () {
     </div>
   );
 }
+
+function UpdateReview() {
+  const [reviewId, setReviewId] = useState("65f1b46d8c79d12ef0b5d026"); // Used for getting the review id to edit
+  const [newReviewData, setNewReviewData] = useState<ReviewModify>({
+    score: 1,
+    text: "This is a new review"
+  }); // new edited review data
+
+  const [updateReviewMutation, {loading: updateReviewLoading, error: updateReviewError}] = useMutation(UPDATE_REVIEW_MUTATION);
+
+  const handleUpdate = async () =>  {
+    try {
+      const result = updateReviewMutation({variables: {updateReviewId: reviewId, input: newReviewData}});
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  return (
+    <div>
+      <h2>Update review</h2>
+      <button onClick={handleUpdate}>
+        Update review
+      </button>
+    </div>
+  
+  )
+}
+
+
+
 function CreateLfg() {
 
   const [createLfgMutation, {loading: createLfgLoading, error: createLfgError}] = useMutation(CREATE_LFG_MUTATION);
@@ -220,7 +274,7 @@ export default function Debug() {
           <UpdateBio></UpdateBio>
           <UserById></UserById>
           <ReviewsByGame></ReviewsByGame>
-          <button>reviewById</button>
+          <ReviewById></ReviewById>
           <button>lfgByUser</button>
           <button>lfgByUserlfgById</button>
           <button>lfgByGame</button>
@@ -240,7 +294,7 @@ export default function Debug() {
         <h2>Mutations</h2>
         <div>
           <button>updateUser</button>
-          <button>updateReview</button>
+          <UpdateReview></UpdateReview>
           <button>updateGame</button>
           <button>updateForumPost</button>
           <button>updateForumComment</button>
