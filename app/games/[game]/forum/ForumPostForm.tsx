@@ -25,7 +25,6 @@ export default function ForumPostForm() {
     }, []);
 
     if (!author){
-        alert("not logged in");
 
         return;
     }

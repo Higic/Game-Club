@@ -48,6 +48,7 @@ export default function ReviewPostForm() {
         try {
             const result = await createReviewMutation({ variables: { input: formData } });
             alert("Review created");
+            router.refresh();
         } catch (error) {
             console.log(error);
         }
