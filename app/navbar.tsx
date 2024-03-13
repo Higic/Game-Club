@@ -29,10 +29,22 @@ export default function NavBar({ }) {
     return gameIdFromPath;
   }
 
+  const getCorrectDirectoryFromPath= () => {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+    // Split the path by "/"
+    const pathParts = currentPath.split('/');
+    // Get the second part which contains the gameId
+    const Directory = pathParts[1];
+    console.log("Directory: ", Directory);
+    return Directory;
+  }
+
   const handleNavButtonClick = (url) => {
     let gameId = getGameIdFromPath();
+    let directory = getCorrectDirectoryFromPath();
     console.log("About to push: /games/" + gameId + "/" + url);
-    router.push(`/games/${gameId}/${url}`);
+    router.push(`/${directory}/${gameId}/${url}`);
   }
 
  /* const { loading, error, data } = useQuery(CHECK_TOKEN, {
