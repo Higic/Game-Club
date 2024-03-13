@@ -21,6 +21,15 @@ Reviews are plain objective ratings of a game. LFG is meant to help players find
 The project is meant for gamers who are looking for reviews and discussions about a particular game as well as finding other gamers to play with. The average user would discuss the game in the forums section, look for others to play with in the LFG and afterwards review the game in the review service.
 
 ## Features
+Some of the applications features include
+#### Register
+Users can register to the service with a unique user name.
+#### Reviews
+Users can write public reviews for a selection of different games.
+#### LFG's (Looking For Group)
+Users can write LFG posts to look for people to play games with.
+#### Forum
+Users can write game specific forum posts and (soon) comment on said posts.
 
 ## Installation
 Clone this repository and to install required dependencies via `npm i`.\
@@ -38,7 +47,7 @@ More to come soon...
 This project uses the following frameworks and libraries:
 
 - React
-- NextJS
+- NextJS (App Router)
 - MongoDB
 - GraphQL
 
