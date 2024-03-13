@@ -18,6 +18,13 @@ import GetLoggedInUser from "@/components/getLoggedInUser";
 export default function NavBar({ }) {
   const router = useRouter();
 
+  const logout = (message: string) => {
+    Cookies.remove("token");
+    router.push("/login");
+    alert(message);
+    router.refresh();
+  }
+
   const getGameIdFromPath = () =>{
     // Get the current URL path
     const currentPath = window.location.pathname;
@@ -25,7 +32,6 @@ export default function NavBar({ }) {
     const pathParts = currentPath.split('/');
     // Get the second part which contains the gameId
     const gameIdFromPath = pathParts[2];
-    console.log("GameID: ", gameIdFromPath);
     return gameIdFromPath;
   }
 
@@ -36,7 +42,6 @@ export default function NavBar({ }) {
     const pathParts = currentPath.split('/');
     // Get the second part which contains the gameId
     const Directory = pathParts[1];
-    console.log("Directory: ", Directory);
     return Directory;
   }
 
@@ -50,19 +55,6 @@ export default function NavBar({ }) {
     console.log("About to push: /games/" + gameId + "/" + url);
     router.push(`/${directory}/${gameId}/${url}`);
   }
-
- /* const { loading, error, data } = useQuery(CHECK_TOKEN, {
-    variables: { token: Cookies.get("token")},
-  });
-
-  if (loading) return <div><p>Loading...</p></div>;
-  if (error) return <div><p>Error: {error.message}</p></div>;
-  if (data) {
-    console.log("data: ", data);
-  }
-
-  let { user } = data.user;*/
-
   let user = GetLoggedInUser();
 
   return (
@@ -76,11 +68,11 @@ export default function NavBar({ }) {
           🏠 Profile
         </button>
         {user ? (
-          <button className="logoutButton" type="button">
+          <button className="logoutButton" type="button" onClick={() => logout("cya")} >
             🚪Logout
           </button>
         ) : (
-          <button className="loginButton" type="button">
+          <button className="logoutButton" type="button" onClick={() => router.push(`/login`)}>
             🚪Login
           </button>)}
       </div>
