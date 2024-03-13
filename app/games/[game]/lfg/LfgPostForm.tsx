@@ -5,11 +5,13 @@ import GetLoggedInUser from "@/components/getLoggedInUser";
 import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 /**
  * This component is the form used in the LFG page for making LFG posts. 
  */
 export default function LfgPostForm() {
+    const router = useRouter();
     const [game, setGame] = useState("Metal Gear Rising 2 - Revengeance");
     const [text, setText] = useState("");
     const [createLfgMutation, { loading: createLfgLoading, error: createLfgError }] = useMutation(CREATE_LFG_MUTATION);
@@ -40,6 +42,7 @@ export default function LfgPostForm() {
         try {
             const result = await createLfgMutation({ variables: { input: formData } });
             alert("LFG post created!");
+            router.refresh();
         } catch (error) {
             console.log(error);
         }
