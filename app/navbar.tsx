@@ -18,10 +18,22 @@ import GetLoggedInUser from "@/components/getLoggedInUser";
 export default function NavBar({ }) {
   const router = useRouter();
 
-  // fetch token from localStorage
-  const [game, setGame] = useState("1");
+  const getGameIdFromPath = () =>{
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+    // Split the path by "/"
+    const pathParts = currentPath.split('/');
+    // Get the second part which contains the gameId
+    const gameIdFromPath = pathParts[2];
+    console.log("GameID: ", gameIdFromPath);
+    return gameIdFromPath;
+  }
 
-
+  const handleNavButtonClick = (url) => {
+    let gameId = getGameIdFromPath();
+    console.log("About to push: /games/" + gameId + "/" + url);
+    router.push(`/games/${gameId}/${url}`);
+  }
 
  /* const { loading, error, data } = useQuery(CHECK_TOKEN, {
     variables: { token: Cookies.get("token")},
@@ -61,7 +73,7 @@ export default function NavBar({ }) {
           <button
             className="menuButton"
             type="button"
-            onClick={() => router.push(`/games/${game}/reviews`)}
+            onClick={() => handleNavButtonClick(`reviews`)}
           >
             Reviews
           </button>
@@ -70,7 +82,7 @@ export default function NavBar({ }) {
           <button
             className="menuButton"
             type="button"
-            onClick={() => router.push(`/games/${game}/lfg`)}
+            onClick={() => handleNavButtonClick(`lfg`)}
           >
             LFG
           </button>
@@ -79,7 +91,7 @@ export default function NavBar({ }) {
           <button
             className="menuButton"
             type="button"
-            onClick={() => router.push(`/games/${game}/forum`)}
+            onClick={() => handleNavButtonClick(`forum`)}
           >
             Forum
           </button>
