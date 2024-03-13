@@ -13,6 +13,7 @@ import GetLoggedInUser from "@/components/getLoggedInUser";
 export default function NavBar({ }) {
   const router = useRouter();
 
+  //Removes the token from the cookies and redirects to the login page. Takes string as parameter to display a message to the user
   const logout = (message: string) => {
     Cookies.remove("token");
     router.push("/login");
@@ -20,6 +21,7 @@ export default function NavBar({ }) {
     alert(message);
   }
 
+  //Returns the gameId as string from the current URL path
   const getGameIdFromPath = () =>{
     // Get the current URL path
     const currentPath = window.location.pathname;
@@ -30,6 +32,7 @@ export default function NavBar({ }) {
     return gameIdFromPath;
   }
 
+  //Returns the directory as string from the current URL path
   const getCorrectDirectoryFromPath= () => {
     // Get the current URL path
     const currentPath = window.location.pathname;
@@ -40,7 +43,9 @@ export default function NavBar({ }) {
     return Directory;
   }
 
+  //Logs user out if not logged in, otherwise navigates to the user's profile page
   const handleProfileButtonClick = () => {
+    //if user is not logged in, log them out
     if (!user){
         logout("Please login to view your profile");
         return;
@@ -48,16 +53,21 @@ export default function NavBar({ }) {
     router.push(`/users/${user?.id}`);
   }
 
+  //Navigates to the specified page for the currently selected game
   const handleNavButtonClick = (url: any) => {
+    // Get the gameId from the current URL path
     let gameId = getGameIdFromPath();
+    // Get the directory from the current URL path
     let directory = getCorrectDirectoryFromPath();
+    // If no gameId is found, alert the user and return
     if (!gameId) {
       alert("Select a game first!");
       return;
     }
-    console.log("About to push: /games/" + gameId + "/" + url);
+    //console.log("About to push: /games/" + gameId + "/" + url);
     router.push(`/${directory}/${gameId}/${url}`);
   }
+  //Verifies current users token and returns the user object
   let user = GetLoggedInUser();
 
   return (
