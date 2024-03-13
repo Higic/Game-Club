@@ -66,6 +66,7 @@ export default function ReviewPostForm() {
                     onChange={(e) => setText(e.target.value)}>
                 </textarea>
                 <select name="Rating" onChange={(e => setRating(e.target.value))}>
+                    <option disabled selected>Select rating</option>
                     <option value="1">1/5</option>
                     <option value="2">2/5</option>
                     <option value="3">3/5</option>

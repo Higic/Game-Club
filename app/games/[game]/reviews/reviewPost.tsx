@@ -10,7 +10,11 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import jwt from "jsonwebtoken";
 import GetLoggedInUser from "@/components/getLoggedInUser";
-import { DELETE_REVIEW_MUTATION } from "@/app/api/graphql/mutations/reviewMutations";
+import {
+  DELETE_REVIEW_MUTATION,
+  UPDATE_REVIEW_MUTATION,
+} from "@/app/api/graphql/mutations/reviewMutations";
+import { text } from "stream/consumers";
 
 function GetGameById(game: string) {
   // game variable is the name of the game
@@ -24,8 +28,20 @@ function GetGameById(game: string) {
 
 export default function ReviewPost() {
   const router = useRouter();
-  const [deleteReviewMutation, {loading: deleteReviewLoading, error: deleteReviewError}] = useMutation(DELETE_REVIEW_MUTATION);
-  
+  const [
+    deleteReviewMutation,
+    { loading: deleteReviewLoading, error: deleteReviewError },
+  ] = useMutation(DELETE_REVIEW_MUTATION);
+  const [
+    updateReviewmutation,
+    { loading: updateReviewLoading, error: updateReviewError },
+  ] = useMutation(UPDATE_REVIEW_MUTATION);
+
+  // Values for updating the review
+  const [rating, setRating] = useState("1");
+  const [text, setText] = useState("");
+
+  // Validates the user
   let user = GetLoggedInUser();
 
   const [gameId, setGameId] = useState("");
@@ -38,7 +54,7 @@ export default function ReviewPost() {
 
   const gameData = GetGameById(gameId);
   const name = gameData?.gameById.gameName;
-  
+
   const { loading, error, data } = useQuery(GET_REVIEWS_BY_GAME, {
     variables: { reviewsByGame: gameId },
   });
@@ -46,15 +62,35 @@ export default function ReviewPost() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const handleDelete = async(id: string) => {
+  // Deletes a review from user
+  const handleDelete = async (id: string) => {
     try {
-      const results = await deleteReviewMutation({variables: {deleteReviewId: id}})
+      const results = await deleteReviewMutation({
+        variables: { deleteReviewId: id },
+      });
 
       router.refresh();
     } catch (error) {
       console.log("Error: ", error);
     }
-  }
+  };
+
+  // Updates a review from user
+  const handleEdit = async (id: string) => {
+    try {
+      const results = await updateReviewmutation({
+        variables: {
+          updateReviewId: id,
+          input: { text: text, score: parseInt(rating) },
+        },
+      });
+      setRating("");
+      alert("Review updated!");
+      router.refresh();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
   return (
     <div>
@@ -69,11 +105,34 @@ export default function ReviewPost() {
               <p>score: {reviews.score}, </p>
               <p>text: {reviews.text}</p>
             </div>
-            { reviews.author === user?.user_name &&
-              <div>
-                <button onClick={() => handleDelete(reviews.id as string)}>Delete</button>
+            {reviews.author === user?.user_name && (
+              <div className="form-container">
+                <textarea
+                  rows={4}
+                  maxLength={200}
+                  value={text}
+                  placeholder="Edit review..."
+                  onChange={(e) => setText(e.target.value)}
+                ></textarea>
+                <select
+                  name="Rating"
+                  onChange={(e) => setRating(e.target.value)}
+                >
+                  <option disabled selected>select rating</option>
+                  <option value="1">1/5</option>
+                  <option value="2">2/5</option>
+                  <option value="3">3/5</option>
+                  <option value="4">4/5</option>
+                  <option value="5">5/5</option>
+                </select>
+                <button onClick={() => handleDelete(reviews.id as string)}>
+                  Delete
+                </button>
+                <button onClick={() => handleEdit(reviews.id as string)}>
+                  Edit
+                </button>
               </div>
-            }
+            )}
           </div>
         ))}
     </div>
