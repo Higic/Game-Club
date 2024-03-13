@@ -8,22 +8,17 @@ import { useRouter } from "next/navigation";
  */
 export default function HomePage() {
   const router = useRouter();
-  
+
   return (
     <div className="homePageIntro">
-        <h1>Welcome to Game Club!</h1>
-        <p>Use the search bar to find the game you are looking for</p>
-        <div>
-          <button onClick={() => router.push(`/register`)}>
-            Register
-          </button>
-          <button onClick={() => router.push(`/login`)}>
-            Login
-          </button>
-          <button onClick={() => router.push(`/debug`)}>
-            Debug page
-          </button>
-        </div>
+      <h1>Welcome to Game Club!</h1>
+      <p>Use the search bar to find the game you are looking for</p>
+      <div>
+        <button onClick={() => router.push(`/games`)}>Games</button>
+        <button onClick={() => router.push(`/register`)}>Register</button>
+        <button onClick={() => router.push(`/login`)}>Login</button>
+        <button onClick={() => router.push(`/debug`)}>Debug page</button>
+      </div>
     </div>
-  )
+  );
 }
