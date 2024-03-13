@@ -9,11 +9,11 @@ export default function Title() {
   const [title, setTitle] = useState("Game Club");
 
   return (
-    <Link href="/" style={{ textDecoration: 'none'}}>
+    <Link href="/games" style={{ textDecoration: 'none'}}>
       <h1 className="title">
         {title}
       </h1>
     </Link>
-    
+
   );
 }
