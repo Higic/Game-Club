@@ -3,7 +3,7 @@ import gameModel from "../models/gameModel";
 import MyContext from "@/types/MyContext";
 
 /**
- * This file contains resolvers for the game api.
+ * This file contains resolvers for apollo.
  */
 const gameResolver = {
     Query: {
@@ -13,8 +13,8 @@ const gameResolver = {
         gameById: async (_: undefined, args: {id: string}) => {
             return await gameModel.findById(args.id);
         },
-        gameByName: async (_: undefined, args: {game_name: string}) => {
-            return await gameModel.findOne({game_name: args.game_name});
+        gameByName: async (_: undefined, args: {gameName: string}) => {
+            return await gameModel.findOne({gameName: args.gameName});
         }
     },
 
@@ -30,3 +30,5 @@ const gameResolver = {
         },
     }
 };
+
+export default gameResolver;

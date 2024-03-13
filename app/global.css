@@ -166,6 +166,13 @@ button:hover {
   margin: var(--global-margin);
 }
 
+
+.gamePost:hover {
+  background-color: var(--button-hover);
+  cursor: pointer;
+
+}
+
 /* Styling for forms */
 
 .form-container {

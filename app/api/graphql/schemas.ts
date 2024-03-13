@@ -62,13 +62,13 @@ type User {
 
 type Game {
     id: ID!
-    game_name: String!
+    gameName: String!
     publisher: String!
     genre: String!
 }
 
 input GameInput {
-    game_name: String!
+    gameName: String!
     publisher: String!
     genre: String!
 }
@@ -111,7 +111,7 @@ type Query {
     checkToken(token: ID!): UserResponse
     games: [Game]
     gameById(id: ID!): Game
-    gameByName(game_name: String!): Game
+    gameByName(gameName: String!): Game
     reviewById(id: ID!):Review
     reviewsByGame(game: String!): [Review]
     reviewsByAuthor(authorId: ID!): [Review]

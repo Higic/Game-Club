@@ -5,7 +5,7 @@ import mongoose from "mongoose";
  * This file contains models for the game api. This is used by mongoose to create the schema.
  */
 const gameModel = new mongoose.Schema<Game>({
-    game_name: {
+    gameName: {
         type: String,
         required: true,
         unique: true

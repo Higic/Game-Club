@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 /**
  * This file contains models for the LFG. This is used by mongoose to create the schema.
  */
-const LFGModel = new mongoose.Schema<LFG>({
+const lfgModel = new mongoose.Schema<LFG>({
     game_id: {
         type: mongoose.Schema.Types.ObjectId, 
         required: true
@@ -20,4 +20,4 @@ const LFGModel = new mongoose.Schema<LFG>({
     }
 });
 
-export default mongoose.models.LFG || mongoose.model<LFG>('LFG', LFGModel);
+export default mongoose.models.LFG || mongoose.model<LFG>('LFG', lfgModel);

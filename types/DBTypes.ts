@@ -69,7 +69,7 @@ type TokenContent = {
 
 type Game = {
     id: Types.ObjectId | string;
-    game_name: string;
+    gameName: string;
     publisher: string;
     genre: string;
 }
