@@ -5,7 +5,7 @@
  * It contains the review post form and the reviews for the game.
  */
 
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Review from "./review";
 import ReviewPostForm from "./ReviewPostForm";
 import { Review as reviewType } from "@/types/DBTypes";
@@ -16,6 +16,19 @@ export default function Page() {
     // Function to get reviews from the database
     // fetch from api where game.id = currentGame.id
   };
+
+  //gameID from URL path
+  const [gameId, setGameId] = useState('');
+
+  useEffect(() => {
+        // Get the current URL path
+        const currentPath = window.location.pathname;
+        // Split the path by "/"
+        const pathParts = currentPath.split('/');
+        // Get the second part which contains the gameId
+        const gameIdFromPath = pathParts[2];
+        setGameId(gameIdFromPath);
+        }, []);
 
   return (
     <div>
