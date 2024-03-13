@@ -2,14 +2,15 @@
 
 import { useMutation, useQuery } from "@apollo/client";
 import { CHECK_TOKEN, GET_ALL_USERS, GET_USER_BY_ID } from "../api/graphql/queries/userQueries";
-import { Game, Review, ReviewInput, ReviewModify, TokenContent, UserOutput } from "@/types/DBTypes";
+import { Game, LFG, LFGInput, Review, ReviewInput, ReviewModify, TokenContent, UserOutput } from "@/types/DBTypes";
 import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
 import { CREATE_REVIEW_MUTATION, UPDATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
 import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
 import Cookies from "js-cookie";
 import GetLoggedInUser from "@/components/getLoggedInUser";
-import { GET_REVIEWS_BY_GAME, GET_REVIEW_BY_ID } from "../api/graphql/queries/reviewQueries";
+import { GET_REVIEWS_BY_AUTHOR, GET_REVIEWS_BY_GAME, GET_REVIEW_BY_ID } from "../api/graphql/queries/reviewQueries";
 import { useState } from "react";
+import { GET_LFG_BY_GAME } from "../api/graphql/queries/lfgQueries";
 
 /**
  * This file contains the debug page of the app. Used for testing the earlier versions of the functions.
@@ -20,7 +21,6 @@ function CheckToken () {
   const { loading, error, data } = useQuery(CHECK_TOKEN, {
     variables: {token: token},
   });
-  console.log("checking token");
   return (
     <div>
       <h2>Check token</h2>
@@ -115,8 +115,6 @@ function CreateForumComment() {
 }
 
 function CreateReview() {
-
-  
   const [createReviewMutation, {loading: createReviewLoading, error: createReviewError}] = useMutation(CREATE_REVIEW_MUTATION);
   
   const author = GetLoggedInUser();
@@ -127,13 +125,12 @@ function CreateReview() {
     return null;
   }
   
-  
-    const formData: ReviewInput = {
-      text: "This is a test review",
-      game: "Metal Gear Rising 2 - Revengeance",
-      author: author.user_name,
-      score: 5,
-    }
+  const formData: ReviewInput = {
+    text: "This is a test review",
+    game: "Metal Gear Rising 2 - Revengeance",
+    author: author.user_name,
+    score: 5,
+  }
 
   const handleCreate = async () => {
 
@@ -145,12 +142,11 @@ function CreateReview() {
     }
   }
   
-    return (
-      <button onClick={handleCreate}>
-        Create review
-      </button>
-    )
-  
+  return (
+    <button onClick={handleCreate}>
+      Create review
+    </button>
+  )
 }
 
 function ReviewById () {
@@ -199,6 +195,29 @@ function ReviewsByGame () {
   );
 }
 
+function ReviewsByAuthor () {
+  const [authorName, setAuthorName] = useState("admin");
+  const { loading, error, data } = useQuery(GET_REVIEWS_BY_AUTHOR, {
+    variables: {reviewsByAuthor: authorName}
+  });
+
+  return (
+    <div>
+      <h2>Reviews by author {authorName}</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && data.reviewsByAuthor.map((review: Review) => (
+        <div key={review.id} className="post">
+          <p>game: {review.game}, </p>
+          <p>author: {review.author}, </p>
+          <p>score: {review.score}, </p>
+          <p>text: {review.text}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function UpdateReview() {
   const [reviewId, setReviewId] = useState("65f1b46d8c79d12ef0b5d026"); // Used for getting the review id to edit
   const [newReviewData, setNewReviewData] = useState<ReviewModify>({
@@ -231,16 +250,21 @@ function UpdateReview() {
 
 
 function CreateLfg() {
-
   const [createLfgMutation, {loading: createLfgLoading, error: createLfgError}] = useMutation(CREATE_LFG_MUTATION);
 
-  const formData = {
-    text: "This is a test LFG",
-    game: "Metal Gear Rising 2 - Revengeance"
+  const author = GetLoggedInUser();
+  const token = Cookies.get("token");
+
+  if (!author || !token) {
+    console.log("No user logged in");
+    return null;
   }
 
-  // Note, when using this, get the formData from the DOM
-
+  const formData: LFGInput = {
+    text: "This is a test LFG",
+    game: "Metal Gear Rising 2 - Revengeance",
+    author: author.user_name,
+  }
 
   const handleCreate = async () => {
     console.log("Creating LFG...");
@@ -251,14 +275,36 @@ function CreateLfg() {
     } catch (error) {
       console.log(error);
     }
-    
-  };
+  }
 
   return (
     <button onClick={handleCreate}>
       Create LFG
     </button>
   )
+}
+
+function LfgByGame() {
+  const [gameName, setGameName] = useState("Metal Gear Rising 2 - Revengeance");
+  const { loading, error, data } = useQuery(GET_LFG_BY_GAME, {
+    variables: {lfgByGame: gameName}
+  });
+
+  return (
+    <div>
+      <h2>LFG by game {gameName}</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && data.lfgByGame.map((lfg: LFG) => (
+        <div key={lfg.id} className="post">
+          <p>game: {lfg.game}, </p>
+          <p>author: {lfg.author}, </p>
+          <p>text: {lfg.text}</p>
+        </div>
+
+      ))}
+    </div>
+  );
 }
 
 
@@ -274,10 +320,11 @@ export default function Debug() {
           <UpdateBio></UpdateBio>
           <UserById></UserById>
           <ReviewsByGame></ReviewsByGame>
+          <ReviewsByAuthor></ReviewsByAuthor>
           <ReviewById></ReviewById>
           <button>lfgByUser</button>
           <button>lfgByUserlfgById</button>
-          <button>lfgByGame</button>
+          <LfgByGame></LfgByGame>
           <button>games</button>
           <button>gameByName</button>
           <button>gameById</button>

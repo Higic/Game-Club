@@ -28,13 +28,14 @@ input ForumPostInput {
 type LFG {
     id: ID!
     game: String!
-    user: User!
+    author: String!
     text: String!
 }
 
 input LFGInput {
-    game: String!
     text: String!
+    game: String!
+    author: String!
 }
 
 type Review {
@@ -117,15 +118,15 @@ type Query {
     gameByName(gameName: String!): Game
     reviewById(id: ID!):Review
     reviewsByGame(game: String!): [Review]
-    reviewsByAuthor(authorId: ID!): [Review]
+    reviewsByAuthor(author: String!): [Review]
     lfgById(id: ID!): LFG
-    lfgByUser(userId: ID!): [LFG]
+    lfgByAuthor(userId: ID!): [LFG]
     lfgByGame(game: String!): [LFG]
     forumPostById(id: ID!): ForumPost
     forumPostsByGame(game: String!): [ForumPost]
-    forumPostsByAuthor(authorId: ID!): [ForumPost]
+    forumPostsByAuthor(author: String!): [ForumPost]
     forumCommentsByPost(forumPostID: ID!): [ForumComment]
-    forumCommentsByAuthor(authorId: ID!): [ForumComment]
+    forumCommentsByAuthor(author: String!): [ForumComment]
     forumCommentById(id: ID!): ForumComment  
 }
 

@@ -16,6 +16,7 @@ query Query($lfgById: ID!) {
 export const GET_LFG_BY_GAME = gql`
 query Query($lfgByGame: String!) {
   lfgByGame(game: $lfgByGame) {
+    id
     game
     author
     text
