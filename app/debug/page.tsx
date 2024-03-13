@@ -2,11 +2,14 @@
 
 import { useMutation, useQuery } from "@apollo/client";
 import { CHECK_TOKEN, GET_ALL_USERS, GET_USER_BY_ID } from "../api/graphql/queries/userQueries";
-import { UserOutput } from "@/types/DBTypes";
+import { Game, Review, ReviewInput, TokenContent, UserOutput } from "@/types/DBTypes";
 import { UPDATE_BIO_MUTATION } from "../api/graphql/mutations/userMutations";
 import { CREATE_REVIEW_MUTATION } from "../api/graphql/mutations/reviewMutations";
 import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
 import Cookies from "js-cookie";
+import GetLoggedInUser from "@/components/getLoggedInUser";
+import { GET_REVIEWS_BY_GAME } from "../api/graphql/queries/reviewQueries";
+import { useState } from "react";
 
 /**
  * This file contains the debug page of the app. Used for testing the earlier versions of the functions.
@@ -112,16 +115,27 @@ function CreateForumComment() {
 }
 
 function CreateReview() {
-  const formData = {
-    text: "This is a test review",
-    score: 5,
-    game: "Metal Gear Rising 2 - Revengeance"
-  }
 
+  
   const [createReviewMutation, {loading: createReviewLoading, error: createReviewError}] = useMutation(CREATE_REVIEW_MUTATION);
+  
+  const author = GetLoggedInUser();
+  const token = Cookies.get("token");
+  
+  if (!author || !token) {
+    console.log("No user logged in");
+    return null;
+  }
+  
+  
+    const formData: ReviewInput = {
+      text: "This is a test review",
+      game: "Metal Gear Rising 2 - Revengeance",
+      author: author.user_name,
+      score: 5,
+    }
 
   const handleCreate = async () => {
-    console.log("Creating review...");
 
     try {
       const result = await createReviewMutation({variables: {input: formData}});
@@ -139,6 +153,29 @@ function CreateReview() {
   
 }
 
+function ReviewsByGame () {
+  const [gameName, setGameName] = useState("Metal Gear Rising 2 - Revengeance");
+  const { loading, error, data } = useQuery(GET_REVIEWS_BY_GAME, {
+    variables: {reviewsByGame: gameName}
+  }); 
+
+  return (
+    <div>
+      <h2>Reviews by game {gameName}</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && data.reviewsByGame.map((review: Review) => (
+        <div key={review.id} className="post">
+          <p>game: {review.game}, </p>
+          <p>author: {review.author}, </p>
+          <p>score: {review.score}, </p>
+          <p>text: {review.text}</p>
+        </div>
+      
+      ))}
+    </div>
+  );
+}
 function CreateLfg() {
 
   const [createLfgMutation, {loading: createLfgLoading, error: createLfgError}] = useMutation(CREATE_LFG_MUTATION);
@@ -182,7 +219,7 @@ export default function Debug() {
           <Users></Users>
           <UpdateBio></UpdateBio>
           <UserById></UserById>
-          <button>reviewsByGame</button>
+          <ReviewsByGame></ReviewsByGame>
           <button>reviewById</button>
           <button>lfgByUser</button>
           <button>lfgByUserlfgById</button>
