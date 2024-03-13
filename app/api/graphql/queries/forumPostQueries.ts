@@ -6,6 +6,18 @@ import { gql } from "@apollo/client";
 export const GET_FORUM_POST_BY_ID = gql`
 query Query($forumPostById: ID!) {
   forumPostById(id: $forumPostById) {
+    id
+    author
+    text
+    title
+  }
+}
+`;
+
+export const GET_FORUM_POSTS_BY_GAME = gql`
+query Query($game: String!) {
+  forumPostsByGame(game: $game) {
+    id
     author
     text
     title

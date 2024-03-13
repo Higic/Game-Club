@@ -9,13 +9,13 @@ import { useEffect, useState } from "react";
 
 
 function GetGameById(game: string) {
-    // game variable is the name of the game
-    const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
-        variables: { gameById: game }
-    });
-    if (data) {
-        return data;
-    }
+  // game variable is the name of the game
+  const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
+    variables: { gameById: game }
+  });
+  if (data) {
+    return data;
+  }
 }
 
 
@@ -30,10 +30,10 @@ export default function ReviewPost() {
 
   const gameData = GetGameById(gameId);
   const name = gameData?.gameById.gameName;
-  
-    const { loading, error, data } = useQuery(GET_REVIEWS_BY_GAME, {
-      variables: { reviewsByGame: gameId},
-    });
+
+  const { loading, error, data } = useQuery(GET_REVIEWS_BY_GAME, {
+    variables: { reviewsByGame: gameId },
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
