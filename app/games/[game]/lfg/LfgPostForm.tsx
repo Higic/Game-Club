@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function LfgPostForm() {
+    const router = useRouter();
     const [text, setText] = useState("");
     const [createLfgMutation, { loading: createLfgLoading, error: createLfgError }] = useMutation(CREATE_LFG_MUTATION);
 
@@ -15,8 +16,8 @@ export default function LfgPostForm() {
     const token = Cookies.get("token");
 
     if (!author || !token) {
-        console.log("No user logged in")
-        const router = useRouter(); // redirect user to login page
+        console.log("No user logged in") // redirect user to login page
+        router.push("/login");
     }
 
     const handleSubmit = async (e: any) => {
