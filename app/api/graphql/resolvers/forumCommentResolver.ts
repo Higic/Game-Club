@@ -21,17 +21,14 @@ const forumCommentResolver = {
     },
     Mutation: {
         createForumComment: async (_: undefined, args: { input: ForumCommentInput }, context: MyContext) => {
-            isLoggedIn(context);
             args.input.author = context.userdata?.user.id;
             return await forumCommentModel.create(args.input);
         },
         updateForumComment: async (_: undefined, args: { id: string, input: ForumCommentUpdate }, context: MyContext) => {
-            isLoggedIn(context);
             const filter = {_id: args.id, author: context.userdata?.user.id};
             return await forumCommentModel.findByIdAndUpdate(filter, args.input, { new: true });
         },
         deleteForumComment: async (_: undefined, args: { id: string }, context: MyContext) => {
-            isLoggedIn(context);
             const user = GetUserById(context.userdata?.user.id);
             {
                 return await forumCommentModel.findByIdAndDelete(args.id);
