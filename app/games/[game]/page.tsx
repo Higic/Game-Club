@@ -3,7 +3,7 @@
 import { GET_GAME_BY_ID } from "@/app/api/graphql/queries/gameQueries";
 import { useQuery } from "@apollo/client";
 
-function Game({ gameId }: { gameId: string }) {
+export function Game({ gameId }: { gameId: string }) {
   const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
     variables: { gameById: gameId },
   });

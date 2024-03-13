@@ -3,6 +3,7 @@
 import { GET_ALL_GAMES } from "../api/graphql/queries/gameQueries"
 import { useQuery } from "@apollo/client"
 import { useRouter } from "next/navigation";
+import { Game } from "./[game]/page";
 
 
 function Games () {
@@ -15,9 +16,7 @@ function Games () {
       {error && <p>Error: {error.message}</p>}
       {data && data.games.map((game: any) => (
         <div key={game.id} className="post gamePost" onClick={() => router.push(`/games/${game.id}`)}>
-          <p>name: {game.gameName}, </p>
-          <p>publisher: {game.publisher}, </p>
-          <p>genre: {game.genre}</p>
+          <Game gameId={game.id}></Game>
         </div>
       ))}
     </div>
