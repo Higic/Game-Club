@@ -6,7 +6,7 @@ import mongoose from "mongoose";
  */
 const lfgModel = new mongoose.Schema<LFG>({
     game: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: String, 
         required: true
     },
     author: {

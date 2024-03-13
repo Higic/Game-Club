@@ -29,10 +29,10 @@ type ReviewInput = Omit<Review, 'id'>;
 type ReviewModify = Omit<Review, 'game' | 'author' | 'id'>;
 
 type LFG = {
-    id: Types.ObjectId | string;
-    game: Types.ObjectId | string;
-    author: Types.ObjectId | string;
-    text: string;
+    id?: string;
+    game: string;
+    author: string;
+    text: string | null;
 }
 
 type LFGInput = Omit<LFG, 'id'>;
