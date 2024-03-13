@@ -2,7 +2,7 @@ import MyContext from "@/types/MyContext";
 import { LFGInput } from "@/types/DBTypes";
 import { isLoggedIn } from "@/functions/authorize";
 import GetUserById from "@/components/getUserById";
-import lfgModel from "../models/lfgModel";
+import lfgModel from "../models/LFGModel";
 
 /**
  * This file contains resolvers for the lfg api.
@@ -15,15 +15,15 @@ const lfgResolver = {
         lfgByGame: async (_: undefined, args: { game: string }) => {
             return await lfgModel.find({ game: args.game });
         },
-        lfgByUser: async (_: undefined, args: { user: string }) => {
-            return await lfgModel.find({ user: args.user });
+        lfgByAuthor: async (_: undefined, args: { author: string }) => {
+            return await lfgModel.find({ user: args.author });
         },
     },
     Mutation: {
-        createLfg: async (_: undefined, args: { input: LFGInput }, context: MyContext) => {
-            args.input.author = context.userdata?.user.id;
+        createLfg: async (_: undefined, args: { input: LFGInput }) => {
             return await lfgModel.create(args.input);
         },
+        // update lfg be here
         deleteLfg: async (_: undefined, args: { id: string }, context: MyContext) => {
             const user = GetUserById(context.userdata?.user.id);
             return await lfgModel.findByIdAndDelete(args.id);

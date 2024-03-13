@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 
 const forumPostModel = new mongoose.Schema<ForumPost>({
     game: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: String, 
         required: true
     },
     author: {

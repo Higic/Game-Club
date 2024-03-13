@@ -8,6 +8,7 @@ export const CREATE_FORUM_POST_MUTATION = gql`
   mutation Mutation($input: ForumPostInput) {
     createForumPost(input: $input) {
       id
+      author
       title
       text
       game
@@ -53,7 +54,7 @@ export const UPDATE_FORUM_POST_MUTATION = gql`
   mutation Mutation($input: ForumPostInput) {
     updateForumPost(input: $input) {
       id
-      tittle
+      title
       text
       game
       author

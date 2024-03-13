@@ -1,16 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { CREATE_FORUM_POST_MUTATION } from "@/app/api/graphql/mutations/forumMutations";
+import GetLoggedInUser from "@/components/getLoggedInUser";
+import { ForumPostInput } from "@/types/DBTypes";
+import { useMutation } from "@apollo/client";
+import { get } from "http";
+import { use, useEffect, useState } from "react";
 
 export default function ForumPostForm() {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
+    const [gameid, setGame] = useState("");
+    const [createForumPostMutation, {loading: createForumPostLoading, error: createForumPostError}] = useMutation(CREATE_FORUM_POST_MUTATION);
 
+    const author = GetLoggedInUser();
+
+    useEffect(() => {
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split("/");
+        const game = pathParts[2];
+        setGame(game);
+    }, []);
+
+    if (!author){
+        console.log("User not logged in");
+        return;
+    }
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log("ForumPostForm handleSubmit. Title: " + title + " Text: " + text);
-        //Do Database Send stuff
+
+        const formData: ForumPostInput = {
+            title: title,
+            text: text,
+            game: gameid,
+            author: author?.user_name,
+        }
+
+        try{
+            const data = await createForumPostMutation({
+                variables: {input: formData}
+            });
+            console.log("data: ", data);
+            if(data){
+                console.log("Forum post created: ", data);
+            }
+        } catch (error) {
+            console.log("Error: ", error);
+        }
     }
+    
 
     return (
         <div>

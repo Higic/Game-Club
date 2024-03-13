@@ -27,7 +27,7 @@ query Query($reviewsByGame: String!) {
 `;
 
 export const GET_REVIEWS_BY_AUTHOR = gql`
-query Query($reviewsByAuthor: ID!) {
+query Query($reviewsByAuthor: String!) {
   reviewsByAuthor(author: $reviewsByAuthor) {
     game
     author
