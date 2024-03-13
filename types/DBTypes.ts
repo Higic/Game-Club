@@ -17,9 +17,9 @@ type UserInput = Omit<User, 'id'>;
 type Credentials = Pick<User, 'user_name' | 'password'>;
 
 type Review = {
-    id?: Types.ObjectId | string;
-    game_id: Types.ObjectId | string;
-    author: Types.ObjectId | User;
+    id?: string;
+    game: string;
+    author: string;
     score: number;
     text: string | null;
 }
@@ -30,7 +30,7 @@ type ReviewUpdate = Omit<Review, 'game' | 'author' | 'id'>;
 
 type LFG = {
     id: Types.ObjectId | string;
-    game_id: Types.ObjectId | string;
+    game: Types.ObjectId | string;
     author: Types.ObjectId | string;
     text: string;
 }
@@ -39,7 +39,7 @@ type LFGInput = Omit<LFG, 'id'>;
 
 type ForumPost = {
     id: Types.ObjectId | string;
-    game_id: Types.ObjectId | string;
+    game: Types.ObjectId | string;
     author: Types.ObjectId | string;
     title: string;
     text: string;

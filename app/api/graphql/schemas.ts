@@ -6,14 +6,14 @@ const typeDefs = `#graphql
 type ForumComment {
     id: ID!
     forumPostID: ID!
-    author: User!
+    author: String!
     text: String!
 }
 
 type ForumPost {
     id: ID!
     game: String!
-    author: User!
+    author: String!
     tittle: String!
     text: String!
 }
@@ -38,15 +38,16 @@ input LFGInput {
 type Review {
     id: ID!
     game: String!
-    author: User!
+    author: String!
     score: Int!
     text: String!
 }
 
 input ReviewInput {
-    game: String!
-    score: Int!
     text: String!
+    game: String!
+    author: String!
+    score: Int!
 }
 
 input ReviewModify {

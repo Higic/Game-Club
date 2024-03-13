@@ -11,11 +11,6 @@ export const CREATE_FORUM_POST_MUTATION = gql`
       title
       text
       game
-      author {
-        user_name
-        id
-        bio
-      }
     }
   }
 `;
@@ -26,11 +21,7 @@ export const CREATE_FORUM_COMMENT_MUTATION = gql`
       id
       forumPostId
       text
-      author {
-        user_name
-        id
-        bio
-      }
+      author
     }
   }
 `;
@@ -42,11 +33,7 @@ export const DELETE_FORUM_POST_MUTATION = gql`
       title
       text
       game
-      author {
-        user_name
-        id
-        bio
-      }
+      author
     }
   }
 `;
@@ -57,11 +44,7 @@ export const DELETE_FORUM_COMMENT_MUTATION = gql`
       id
       forumPostId
       text
-      author {
-        user_name
-        id
-        bio
-      }
+      author
     }
   }
 `;
@@ -73,11 +56,7 @@ export const UPDATE_FORUM_POST_MUTATION = gql`
       tittle
       text
       game
-      author {
-        user_name
-        id
-        bio
-      }
+      author
     }
   }
 `;
@@ -88,11 +67,7 @@ export const UPDATE_FORUM_COMMENT_MUTATION = gql`
       id
       forumPostID
       text
-      author {
-        id
-        user_name
-        bio
-      }
+      author
     }
   }
 `;

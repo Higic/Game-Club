@@ -8,13 +8,9 @@ export const CREATE_REVIEW_MUTATION = gql`
     createReview(input: $input) {
       id
       text
-      score
       game
-      author {
-        id
-        user_name
-        bio
-      }
+      author
+      score
     }
   }
 `;
@@ -26,11 +22,7 @@ export const UPDATE_REVIEW_MUTATION = gql`
       text
       score
       game
-      author {
-        id
-        user_name
-        bio
-      }
+      author
     }
   }
 `;
@@ -42,11 +34,7 @@ export const DELETE_REVIEW_MUTATION = gql`
       text
       score
       game
-      author {
-        id
-        user_name
-        bio
-      }
+      author
     }
   }
 `;

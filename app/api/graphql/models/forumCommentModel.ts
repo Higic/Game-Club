@@ -11,8 +11,7 @@ const forumCommentModel = new mongoose.Schema<ForumComment>({
         required: true
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', 
+        type: String,
         required: true
     },
     text: {

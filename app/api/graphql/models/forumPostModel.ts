@@ -6,13 +6,12 @@ import mongoose from "mongoose";
  */
 
 const forumPostModel = new mongoose.Schema<ForumPost>({
-    game_id: {
+    game: {
         type: mongoose.Schema.Types.ObjectId, 
         required: true
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', 
+        type: String,
         required: true
     },
     title: {

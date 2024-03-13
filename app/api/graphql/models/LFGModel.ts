@@ -5,13 +5,12 @@ import mongoose from "mongoose";
  * This file contains models for the LFG. This is used by mongoose to create the schema.
  */
 const lfgModel = new mongoose.Schema<LFG>({
-    game_id: {
+    game: {
         type: mongoose.Schema.Types.ObjectId, 
         required: true
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', 
+        type: String,
         required: true
     },
     text: {
