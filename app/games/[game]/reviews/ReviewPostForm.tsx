@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
  * This component is the form used in the review page for makign reveiws. It generates a database entry for the review.
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReviewInput } from "@/types/DBTypes";
 
 export default function ReviewPostForm() {
@@ -22,6 +22,14 @@ export default function ReviewPostForm() {
 
     const author = GetLoggedInUser();
     const token = Cookies.get("token");
+
+
+    useEffect(() => {
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split("/");
+        const game = pathParts[2];
+        setGame(game);
+    }, [])
 
     if (!author || !token) {
         return
@@ -39,7 +47,7 @@ export default function ReviewPostForm() {
 
         try {
             const result = await createReviewMutation({ variables: { input: formData } });
-            console.log(result);
+            alert("Review created");
         } catch (error) {
             console.log(error);
         }

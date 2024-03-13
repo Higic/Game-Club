@@ -17,6 +17,7 @@ query Query {
 export const GET_GAME_BY_ID = gql`
 query Query($gameById: ID!) {
   gameById(id: $gameById) {
+    id
     gameName
     publisher
     genre
