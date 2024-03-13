@@ -8,7 +8,7 @@ import { CREATE_REVIEW_MUTATION, UPDATE_REVIEW_MUTATION } from "../api/graphql/m
 import { CREATE_LFG_MUTATION } from "../api/graphql/mutations/lfgMutations";
 import Cookies from "js-cookie";
 import GetLoggedInUser from "@/components/getLoggedInUser";
-import { GET_REVIEWS_BY_GAME, GET_REVIEW_BY_ID } from "../api/graphql/queries/reviewQueries";
+import { GET_REVIEWS_BY_AUTHOR, GET_REVIEWS_BY_GAME, GET_REVIEW_BY_ID } from "../api/graphql/queries/reviewQueries";
 import { useState } from "react";
 
 /**
@@ -20,7 +20,6 @@ function CheckToken () {
   const { loading, error, data } = useQuery(CHECK_TOKEN, {
     variables: {token: token},
   });
-  console.log("checking token");
   return (
     <div>
       <h2>Check token</h2>
@@ -199,6 +198,29 @@ function ReviewsByGame () {
   );
 }
 
+function ReviewsByAuthor () {
+  const [authorName, setAuthorName] = useState("admin");
+  const { loading, error, data } = useQuery(GET_REVIEWS_BY_AUTHOR, {
+    variables: {reviewsByAuthor: authorName}
+  });
+
+  return (
+    <div>
+      <h2>Reviews by author {authorName}</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && data.reviewsByAuthor.map((review: Review) => (
+        <div key={review.id} className="post">
+          <p>game: {review.game}, </p>
+          <p>author: {review.author}, </p>
+          <p>score: {review.score}, </p>
+          <p>text: {review.text}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function UpdateReview() {
   const [reviewId, setReviewId] = useState("65f1b46d8c79d12ef0b5d026"); // Used for getting the review id to edit
   const [newReviewData, setNewReviewData] = useState<ReviewModify>({
@@ -274,6 +296,7 @@ export default function Debug() {
           <UpdateBio></UpdateBio>
           <UserById></UserById>
           <ReviewsByGame></ReviewsByGame>
+          <ReviewsByAuthor></ReviewsByAuthor>
           <ReviewById></ReviewById>
           <button>lfgByUser</button>
           <button>lfgByUserlfgById</button>

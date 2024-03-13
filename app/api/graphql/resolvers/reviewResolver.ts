@@ -16,7 +16,7 @@ const reviewResolver = {
             return await reviewModel.find({ game: args.game });
         },
         reviewsByAuthor: async (_: undefined, args: { author: string }) => {
-            return await reviewModel.find({ user: args.author });
+            return await reviewModel.find({ author: args.author });
         },
     },
     Mutation: {
