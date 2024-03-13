@@ -44,22 +44,22 @@ const userResolver = {
                 body: JSON.stringify(args.user),
             });
         },
-        updateUser: async (_: undefined, args: { id: string, user: UserInput }, context: MyContext) => {
+        updateUser: async (_: undefined, args: { id: string, user: UserInput, token: string }) => {
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${context.userdata?.token}`,
+                    Authorization: `Bearer ${args.token}`,
                 },
                 body: JSON.stringify(args.user),
             });
         },
-        updateBio: async (_: undefined, args: {bio: string}, context: MyContext) => {
+        updateBio: async (_: undefined, args: {bio: string, token: string}) => {
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${context.userdata?.token}`,
+                    authorization: `Bearer ${args.token}`,
                 },
                 body: JSON.stringify({bio: args.bio}),
             });
