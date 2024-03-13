@@ -15,28 +15,36 @@ interface User {
   bio: string;
 }
 
-
+/**
+ * This is the profile page component. It is used to display the user's name and bio.
+ * There is a lot to expand for a future project but for now it is just a simple page containing the user's name and bio.
+ * @returns the user's profile page
+ */
 export default function Page() {
+  // Mutation for updating the bio
+  const [
+    updateBioMutation,
+    { loading: updateUserLoading, error: updateUserError },
+  ] = useMutation(UPDATE_BIO_MUTATION);
 
-  const [updateBioMutation, {loading: updateUserLoading, error: updateUserError}] = useMutation(UPDATE_BIO_MUTATION);
+  // Get the token from the cookie
   const token = Cookies.get("token");
   const [bio, setBio] = useState<string>("");
 
+  // Handles the bio update
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    
     try {
-      const result = await updateBioMutation({variables: {bio: bio, token: token}});
+      const result = await updateBioMutation({
+        variables: { bio: bio, token: token },
+      });
       alert("Bio updated!");
     } catch (error) {
       console.log(error);
     }
+  };
 
-    
-  }
-
-  
-
+  // Get the current user
   const currentUser = GetLoggedInUser();
 
   return (
@@ -46,19 +54,17 @@ export default function Page() {
       </div>
       <div>
         <form onSubmit={handleSubmit} className="form-container">
-                <h2>Bio</h2>
-                <textarea
-                    rows={4}
-                    maxLength={200}
-                    onChange={(e) => setBio(e.target.value)}
-                    placeholder={currentUser?.bio ? currentUser.bio : "Write a bio here..."}
-                    >
-                </textarea>
-                <input
-                    type="submit"
-                    value="Edit bio">
-                </input>
-            </form>
+          <h2>Bio</h2>
+          <textarea
+            rows={4}
+            maxLength={200}
+            onChange={(e) => setBio(e.target.value)}
+            placeholder={
+              currentUser?.bio ? currentUser.bio : "Write a bio here..."
+            }
+          ></textarea>
+          <input type="submit" value="Edit bio"></input>
+        </form>
       </div>
     </div>
   );

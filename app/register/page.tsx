@@ -15,6 +15,7 @@ import { UserInput } from "@/types/DBTypes";
   */
 export default function Register() {
   
+  // Constants for username length
   const [formData, setFormData] = useState({
     user_name: "",
     password: "",
@@ -30,6 +31,7 @@ export default function Register() {
     bio: null
   };
   
+  // Handles form data
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
@@ -38,6 +40,7 @@ export default function Register() {
     });
   };
   
+  // Handles form submission and sends the data to the server
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
@@ -45,10 +48,9 @@ export default function Register() {
       return;
     }
     
-    // DISABLED FOR TESTING
+    // user validation
     let MIN_USERNAME_LENGTH = 4;
     let MAX_USERNAME_LENGTH = 20;
-    // user validation
     if (
       !formData.user_name ||
       !formData.password ||

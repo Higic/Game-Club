@@ -14,9 +14,11 @@ export default function Login() {
 
   const router = useRouter();
 
+  // Constants for username length
   let MIN_USERNAME_LENGTH = 4;
   let MAX_USERNAME_LENGTH = 20;
 
+  // State for form data
   const [formData, setFormData] = useState<Credentials>({
     user_name: "",
     password: "",
@@ -28,6 +30,7 @@ export default function Login() {
   const handleChange = (e: any) => {
 
 
+    // Update the form data
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -35,6 +38,7 @@ export default function Login() {
     });
   };
 
+  // Handles the form submission and sends the data to the server
   const handleSubmit =  async (e: any) => {
     e.preventDefault();
 
@@ -61,10 +65,9 @@ export default function Login() {
       console.error(error);
     }
 
+    // Redirect to home page after successful login
     router.push("/");
     router.refresh();
-
-    
   };
 
   return (

@@ -24,7 +24,8 @@ function GetGameById(game: string) {
  */
 export default function LfgPost() {
 
-  const [gameId, setGameId] = useState("Metal Gear Rising 2 - Revengeance");
+  // Get the game name from the URL and set to gameId
+  const [gameId, setGameId] = useState("");
   useEffect(() => {
     const currentPath = window.location.pathname;
     const pathParts = currentPath.split("/");
@@ -32,9 +33,11 @@ export default function LfgPost() {
     setGameId(game);
   }, []);
 
+  // Get the game data
   const gameData = GetGameById(gameId);
   const name = gameData?.gameById.gameName;
 
+  // Get all LFG posts for the game
   const { loading, error, data } = useQuery(GET_LFG_BY_GAME, {
     variables: { lfgByGame: gameId }
   });

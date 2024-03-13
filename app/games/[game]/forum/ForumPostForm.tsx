@@ -8,15 +8,20 @@ import { get } from "http";
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
+/**
+ * This component displays and creates a forum post via user inputy
+ * @returns Forum creation form
+ */
 export default function ForumPostForm() {
-    const router = useRouter();
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [gameid, setGame] = useState("");
     const [createForumPostMutation, {loading: createForumPostLoading, error: createForumPostError}] = useMutation(CREATE_FORUM_POST_MUTATION);
 
+    // User authorization
     const author = GetLoggedInUser();
 
+    // Get the game name from the URL and set to gameId
     useEffect(() => {
         const currentPath = window.location.pathname;
         const pathParts = currentPath.split("/");
@@ -24,10 +29,12 @@ export default function ForumPostForm() {
         setGame(game);
     }, []);
 
+    // Prevents empty forum post creation
     if (!author){
-
         return;
     }
+
+    // Handles the forum post creation. Gets the form data and sends it to the server
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 

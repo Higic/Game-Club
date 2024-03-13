@@ -5,25 +5,28 @@ import GetLoggedInUser from "@/components/getLoggedInUser";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-/**
- * This component is the form used in the review page for makign reveiws. It generates a database entry for the review.
- */
-
 import { useEffect, useState } from "react";
 import { ReviewInput } from "@/types/DBTypes";
 
+
+/**
+ * This component is the form used in the review page for making reveiws. It generates a database entry for the review.
+ */
 export default function ReviewPostForm() {
     const router = useRouter();
-    const [game, setGame] = useState("Metal Gear Rising 2 - Revengeance");
+    const [game, setGame] = useState("");
     const [text, setText] = useState("");
     const [rating, setRating] = useState("");
 
+    // Mutation for creating a review
     const [createReviewMutation, { loading: createReviewLoading, error: createReviewError }] = useMutation(CREATE_REVIEW_MUTATION);
 
+    // User authorization and token
     const author = GetLoggedInUser();
     const token = Cookies.get("token");
 
 
+    // Get the game name from the URL and set to gameId
     useEffect(() => {
         const currentPath = window.location.pathname;
         const pathParts = currentPath.split("/");
@@ -31,11 +34,13 @@ export default function ReviewPostForm() {
         setGame(game);
     }, [])
 
+    // Prevents empty review creation
     if (!author || !token) {
         return
     }
 
 
+    // Handles the review creation. Gets the form data and sends it to the server
     const handelSubmit = async (e: any) => {
         e.preventDefault();
         const formData: ReviewInput = {

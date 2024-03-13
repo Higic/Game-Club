@@ -16,6 +16,11 @@ import {
 } from "@/app/api/graphql/mutations/reviewMutations";
 import { text } from "stream/consumers";
 
+/**
+ * Function gets a game by its id
+ * @param game game id
+ * @returns game data
+ */
 function GetGameById(game: string) {
   // game variable is the name of the game
   const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
@@ -26,8 +31,14 @@ function GetGameById(game: string) {
   }
 }
 
+/**
+ * Component for the review posts
+ * @returns all reviews for a certain game
+ */
 export default function ReviewPost() {
   const router = useRouter();
+
+  // Mutatios for deleting and updating a review
   const [
     deleteReviewMutation,
     { loading: deleteReviewLoading, error: deleteReviewError },
@@ -44,6 +55,7 @@ export default function ReviewPost() {
   // Validates the user
   let user = GetLoggedInUser();
 
+  // Get the game name from the URL and set to gameId
   const [gameId, setGameId] = useState("");
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -52,9 +64,11 @@ export default function ReviewPost() {
     setGameId(game);
   }, []);
 
+  // Get the game data and name
   const gameData = GetGameById(gameId);
   const name = gameData?.gameById.gameName;
 
+  // Get all reviews for the game
   const { loading, error, data } = useQuery(GET_REVIEWS_BY_GAME, {
     variables: { reviewsByGame: gameId },
   });

@@ -16,9 +16,11 @@ export default function LfgPostForm() {
     const [text, setText] = useState("");
     const [createLfgMutation, { loading: createLfgLoading, error: createLfgError }] = useMutation(CREATE_LFG_MUTATION);
 
+    // User authorization and token
     const author = GetLoggedInUser();
     const token = Cookies.get("token");
 
+    // Get the game name from the URL and set to gameId
     useEffect(() => {
         const currentPath = window.location.pathname;
         const pathParts = currentPath.split("/");
@@ -26,10 +28,12 @@ export default function LfgPostForm() {
         setGame(game);
     }, [])
 
+    // Prevents empty LFG post creation
     if (!author || !token) {
         return
     }
 
+    // Handles the LFG post creation. Gets the form data and sends it to the server
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         const formData = {

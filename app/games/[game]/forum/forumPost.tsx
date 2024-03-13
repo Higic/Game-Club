@@ -5,6 +5,12 @@ import { ForumPost } from "@/types/DBTypes";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
+
+/**
+ * Queries a certain game by its name
+ * @param game Game name
+ * @returns all data for a game
+ */
 function GetGameById(game: string) {
 
     const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
@@ -16,9 +22,16 @@ function GetGameById(game: string) {
 }
 
 
-
+/**
+ * Component queries and displays all forum posts for a certain game
+ * @returns all forum posts for a certain game
+ */
 export default function GetForumPost() {
-    const [gameId, setGame] = useState("Metal Gear Rising 2 - Revengeance");
+
+    // Game id
+    const [gameId, setGame] = useState("");
+
+    // Get the game name from the URL and set to gameId
     useEffect(() => {
         const currentPath = window.location.pathname;
         const pathParts = currentPath.split("/");
@@ -26,13 +39,16 @@ export default function GetForumPost() {
         setGame(game);
     }, []);
 
+    // Get the game data
     const gameData = GetGameById(gameId);
     const name = gameData?.gameById.gameName;
 
+    // Get all forum posts for the game
     const { loading, error, data } = useQuery(GET_FORUM_POSTS_BY_GAME, {
         variables: { game: gameId },
     });
 
+    // Display the forum posts if they exist
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
