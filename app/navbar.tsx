@@ -2,12 +2,7 @@
 
 import "./global.css";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { CHECK_TOKEN } from "./api/graphql/queries/userQueries";
-import { useQuery } from "@apollo/client";
 import Cookies from "js-cookie";
-import { UserOutput } from "@/types/DBTypes";
-import { set } from "mongoose";
 import GetLoggedInUser from "@/components/getLoggedInUser";
 
 /**
