@@ -1,19 +1,48 @@
 "use client";
 
+import { CREATE_REVIEW_MUTATION } from "@/app/api/graphql/mutations/reviewMutations";
+import GetLoggedInUser from "@/components/getLoggedInUser";
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 /**
  * This component is the form used in the review page for makign reveiws. It generates a database entry for the review.
  */
 
 import { useState } from "react";
+import { ReviewInput } from "@/types/DBTypes";
 
 export default function ReviewPostForm() {
+    const router = useRouter();
+    const [game, setGame] = useState("Metal Gear Rising 2 - Revengeance");
     const [text, setText] = useState("");
-    const [rating, setRating] = useState("1");
+    const [rating, setRating] = useState("");
+
+    const [createReviewMutation, { loading: createReviewLoading, error: createReviewError }] = useMutation(CREATE_REVIEW_MUTATION);
+
+    const author = GetLoggedInUser();
+    const token = Cookies.get("token");
+
+    if (!author || !token) {
+        return
+    }
+
 
     const handelSubmit = async (e: any) => {
         e.preventDefault();
-        console.log("ReviewPostForm handleSubmit. Rating: " + rating + " Text: " + text);
-        //Do Database Send stuff
+        const formData: ReviewInput = {
+            game: game,
+            author: author?.user_name,
+            score: parseInt(rating),
+            text: text
+        }
+
+        try {
+            const result = await createReviewMutation({ variables: { input: formData } });
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

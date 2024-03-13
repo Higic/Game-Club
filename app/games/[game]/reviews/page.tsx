@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import Review from "./review";
 import ReviewPostForm from "./ReviewPostForm";
 import { Review as reviewType } from "@/types/DBTypes";
+import ReviewPost from "./reviewPost";
 
 export default function Page() {
   const [reviews, setReviews] = useState([] as reviewType[]);
@@ -34,17 +35,7 @@ export default function Page() {
     <div>
       <ReviewPostForm />
       <div className="mainContent">
-        <Review
-          user_name={"Testerino"}
-          review={"Tässä vähän testiarvosteluu, en tykänny mut maistu hyvält."}
-          rating={5}
-        ></Review>
-        <Review
-          user_name={"Toinen Isoasdsadsadsda dasadsasddasasdäijä"}
-          review={"AAAAAAA AAAAAAAAAAAAAAA AAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-          rating={1}
-        ></Review>
-        {}
+        <ReviewPost></ReviewPost>
       </div>
     </div>
   );
