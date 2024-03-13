@@ -1,6 +1,6 @@
 import {Request} from 'express';
 import jwt from 'jsonwebtoken';
-import {LoginUser, TokenContent} from '../types/DBTypes';
+import { TokenContent, UserOutput} from '../types/DBTypes';
 import MyContext from '../types/MyContext';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -12,7 +12,7 @@ export default async (req: Request): Promise<MyContext> => {
       const userFromToken = jwt.verify(
         token,
         process.env.JWT_SECRET as string,
-      ) as LoginUser;
+      ) as UserOutput;
       // or check if user is in the auth server database
       // console.log(token);
       // const user = await fetchData<UserResponse>(

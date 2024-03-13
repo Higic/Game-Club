@@ -10,11 +10,9 @@ type User = Partial<Document> &{
     bio: string | null;
 }
 
-type UserOutput = Pick<User, 'id' | 'user_name' | 'bio'>;
+type UserOutput = Omit<User, 'password'>;
 
 type UserInput = Omit<User, 'id'>;
-
-type LoginUser = Omit<User, 'password'>;
 
 type Credentials = Pick<User, 'user_name' | 'password'>;
 
@@ -64,7 +62,7 @@ type ForumCommentUpdate = Pick<ForumComment, 'text'>;
 
 type TokenContent = {
     token: string;
-    user: LoginUser;
+    user: UserOutput;
 }
 
 type Game = {
@@ -82,7 +80,6 @@ export type {
     User, 
     UserInput, 
     UserOutput, 
-    LoginUser, 
     Credentials, 
     Review,
     ReviewInput,
