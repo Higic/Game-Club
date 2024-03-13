@@ -16,7 +16,6 @@ const userResolver = {
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/${args.id}`);
         },
         checkToken: async (_: undefined, args: {token:string}) => {
-            console.log("token inside check " + args.token);
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users/token`, {
                 method: 'GET',
                 headers: {

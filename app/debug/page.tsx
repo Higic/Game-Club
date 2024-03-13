@@ -76,8 +76,6 @@ function UpdateBio() {
   const [updateBioMutation, {loading: updateUserLoading, error: updateUserError}] = useMutation(UPDATE_BIO_MUTATION);
 
   const handleUpdate = async () => {
-    console.log("Updating user...");
-
     const formData = {
       bio: "this is a test"
     }

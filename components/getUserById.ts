@@ -12,10 +12,8 @@ export default function GetUserById(id: string): UserOutput | null {
     const { loading, error, data } = useQuery(GET_USER_BY_ID, {
         variables: { userById: id},
     });
-    if (loading) console.log("loading...");
     if (error) console.log("error: ", error);
     if (data) {
-        console.log("data: ", data);
         user.id = data.userById.id;
         user.user_name = data.userById.user_name;
         user.bio = data.userById.bio;

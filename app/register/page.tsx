@@ -68,11 +68,8 @@ export default function Register() {
     }
     
     // Get username and password from data
-    console.log(apiData);
-
     try {
       const result = await registerMutation({ variables: { user: apiData } });
-      console.log(result.data.register);
     } catch (error) {
       console.error(error);
     }

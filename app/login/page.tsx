@@ -49,9 +49,6 @@ export default function Login() {
       return;
     }
 
-    // Log form data
-    console.log(formData);
-    
     // Send to api
     try {
       const result = await loginMutation({ variables: {credentials: formData}})
@@ -64,6 +61,7 @@ export default function Login() {
       console.error(error);
     }
 
+    router.push("/");
     router.refresh();
 
     

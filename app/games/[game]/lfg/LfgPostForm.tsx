@@ -3,28 +3,33 @@
 import { CREATE_LFG_MUTATION } from "@/app/api/graphql/mutations/lfgMutations";
 import GetLoggedInUser from "@/components/getLoggedInUser";
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
 
 export default function LfgPostForm() {
-    const router = useRouter();
+    const [game, setGame] = useState("Metal Gear Rising 2 - Revengeance");
     const [text, setText] = useState("");
     const [createLfgMutation, { loading: createLfgLoading, error: createLfgError }] = useMutation(CREATE_LFG_MUTATION);
 
     const author = GetLoggedInUser();
     const token = Cookies.get("token");
 
+    useEffect(() => {
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split("/");
+        const game = pathParts[2];
+        setGame(game);
+    }, [])
+
     if (!author || !token) {
-        console.log("No user logged in") // redirect user to login page
-        router.push("/login");
+        return
     }
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         const formData = {
             text: text,
-            game: "Metal Gear Rising 2 - Revengeance", // Hardcoded game for now
+            game: game,
             author: author?.user_name, // Add null check
         };
 
@@ -32,7 +37,6 @@ export default function LfgPostForm() {
         try {
             const result = await createLfgMutation({ variables: { input: formData } });
             alert("LFG post created!");
-            if (result) { console.log("LFG post created!", result)}
         } catch (error) {
             console.log(error);
         }
