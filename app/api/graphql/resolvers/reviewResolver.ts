@@ -27,8 +27,7 @@ const reviewResolver = {
             const filter = {_id: args.id, author: context.userdata?.user.id};
             return await reviewModel.findByIdAndUpdate(filter, args.input, { new: true });
         },
-        deleteReview: async (_: undefined, args: { id: string }, context: MyContext) => {
-            const user = GetUserById(context.userdata?.user.id);
+        deleteReview: async (_: undefined, args: { id: string }) => {
             return await reviewModel.findByIdAndDelete(args.id);
         },
     },

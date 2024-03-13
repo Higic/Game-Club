@@ -43,8 +43,8 @@ mutation Mutation($user: UserModify!) {
 `;
 
 export const UPDATE_BIO_MUTATION = gql`
-mutation Mutation($bio: String!) {
-  updateBio(bio: $bio) {
+mutation Mutation($bio: String!, $token: String!) {
+  updateBio(bio: $bio, token: $token) {
     user {
       user_name
       id
