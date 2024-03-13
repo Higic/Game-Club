@@ -21,8 +21,8 @@ export default function NavBar({ }) {
   const logout = (message: string) => {
     Cookies.remove("token");
     router.push("/login");
-    alert(message);
     router.refresh();
+    alert(message);
   }
 
   const getGameIdFromPath = () =>{
@@ -45,6 +45,14 @@ export default function NavBar({ }) {
     return Directory;
   }
 
+  const handleProfileButtonClick = () => {
+    if (!user){
+        logout("Please login to view your profile");
+        return;
+    }
+    router.push(`/users/${user?.id}`);
+  }
+
   const handleNavButtonClick = (url: any) => {
     let gameId = getGameIdFromPath();
     let directory = getCorrectDirectoryFromPath();
@@ -63,7 +71,7 @@ export default function NavBar({ }) {
         <button
           className="profileButton"
           type="button"
-          onClick={() => router.push(`/users/${user?.id}`)}
+          onClick={() => handleProfileButtonClick()}
         >
           🏠 Profile
         </button>
