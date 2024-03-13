@@ -20,8 +20,7 @@ const forumPostResolver = {
         },
     },
     Mutation: {
-        createForumPost: async (_: undefined, args: { input: ForumPostInput }, context: MyContext) => {
-            args.input.author = context.userdata?.user.id;
+        createForumPost: async (_: undefined, args: { input: ForumPostInput }) => {
             return await forumPostModel.create(args.input);
         },
         updateForumPost: async (_: undefined, args: { id: string, input: ForumPostUpdate }, context: MyContext) => {

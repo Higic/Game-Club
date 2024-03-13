@@ -14,13 +14,15 @@ type ForumPost {
     id: ID!
     game: String!
     author: String!
-    tittle: String!
+    title: String!
     text: String!
 }
 
 input ForumPostInput {
-    tittle: String!
+    title: String!
     text: String!
+    author: String!
+    game: String!
 }
 
 type LFG {

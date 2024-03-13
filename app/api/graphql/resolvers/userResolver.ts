@@ -46,7 +46,6 @@ const userResolver = {
             });
         },
         updateUser: async (_: undefined, args: { id: string, user: UserInput }, context: MyContext) => {
-            isLoggedIn(context);
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
                 method: 'PUT',
                 headers: {
@@ -57,7 +56,6 @@ const userResolver = {
             });
         },
         updateBio: async (_: undefined, args: {bio: string}, context: MyContext) => {
-            isLoggedIn(context);
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
                 method: 'PUT',
                 headers: {
@@ -67,13 +65,12 @@ const userResolver = {
                 body: JSON.stringify({bio: args.bio}),
             });
         },
-        deleteUser: async (_: undefined, __: undefined, context: MyContext) => {
-            isLoggedIn(context);
+        deleteUser: async (_: undefined, args: {context: MyContext},) => {
             return await fetchData<UserResponse>(`${process.env.AUTH_URL}/users`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${context.userdata?.token}`,
+                    Authorization: `Bearer ${args.context.userdata?.token}`,
                 },
             });
         },

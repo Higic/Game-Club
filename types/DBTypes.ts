@@ -39,8 +39,8 @@ type LFGInput = Omit<LFG, 'id'>;
 
 type ForumPost = {
     id: Types.ObjectId | string;
-    game: Types.ObjectId | string;
-    author: Types.ObjectId | string;
+    game: string;
+    author: string;
     title: string;
     text: string;
 }

@@ -2,7 +2,7 @@ import MyContext from "@/types/MyContext";
 import { LFGInput } from "@/types/DBTypes";
 import { isLoggedIn } from "@/functions/authorize";
 import GetUserById from "@/components/getUserById";
-import lfgModel from "../models/lfgModel";
+import lfgModel from "../models/LFGModel";
 
 /**
  * This file contains resolvers for the lfg api.
