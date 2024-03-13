@@ -40,9 +40,13 @@ export default function NavBar({ }) {
     return Directory;
   }
 
-  const handleNavButtonClick = (url) => {
+  const handleNavButtonClick = (url: any) => {
     let gameId = getGameIdFromPath();
     let directory = getCorrectDirectoryFromPath();
+    if (!gameId) {
+      alert("Select a game first!");
+      return;
+    }
     console.log("About to push: /games/" + gameId + "/" + url);
     router.push(`/${directory}/${gameId}/${url}`);
   }
