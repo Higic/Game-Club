@@ -5,9 +5,11 @@ import GetLoggedInUser from "@/components/getLoggedInUser";
 import { ForumPostInput } from "@/types/DBTypes";
 import { useMutation } from "@apollo/client";
 import { get } from "http";
+import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
 export default function ForumPostForm() {
+    const router = useRouter();
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [gameid, setGame] = useState("");
@@ -23,7 +25,8 @@ export default function ForumPostForm() {
     }, []);
 
     if (!author){
-        console.log("User not logged in");
+        alert("not logged in");
+
         return;
     }
     const handleSubmit = async (e: any) => {
@@ -40,7 +43,6 @@ export default function ForumPostForm() {
             const data = await createForumPostMutation({
                 variables: {input: formData}
             });
-            console.log("data: ", data);
             if(data){
                 console.log("Forum post created: ", data);
             }

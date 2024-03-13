@@ -16,8 +16,6 @@ export default function LfgPostForm() {
     const token = Cookies.get("token");
 
     if (!author || !token) {
-        console.log("No user logged in") // redirect user to login page
-        router.push("/login");
     }
 
     const handleSubmit = async (e: any) => {

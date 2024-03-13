@@ -23,10 +23,8 @@ export default function GetLoggedInUser(): UserOutput | null {
     variables: { token: token },
   });
 
-  if (loading) console.log("loading...");
   if (error) console.log("error: ", error);
   if (data) {
-    console.log("data: ", data);
     user.id = data.checkToken.user.id;
     user.user_name = data.checkToken.user.user_name;
     user.bio = data.checkToken.user.bio;
