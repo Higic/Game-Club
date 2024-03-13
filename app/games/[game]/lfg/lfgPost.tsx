@@ -6,16 +6,22 @@ import { LFG } from "@/types/DBTypes";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
+/**
+ * Function to get game by game id
+ */
 function GetGameById(game: string) {
-    // game variable is the name of the game
-    const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
-        variables: { gameById: game }
-    });
-    if (data) {
-        return data;
-    }
+  // game variable is the name of the game
+  const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
+    variables: { gameById: game }
+  });
+  if (data) {
+      return data;
+  }
 }
 
+/**
+ * Component for the LFG posts
+ */
 export default function LfgPost() {
 
   const [gameId, setGameId] = useState("Metal Gear Rising 2 - Revengeance");

@@ -6,6 +6,9 @@ import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
+/**
+ * This component is the form used in the LFG page for making LFG posts. 
+ */
 export default function LfgPostForm() {
     const [game, setGame] = useState("Metal Gear Rising 2 - Revengeance");
     const [text, setText] = useState("");
