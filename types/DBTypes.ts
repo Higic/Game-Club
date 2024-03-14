@@ -14,6 +14,8 @@ type UserOutput = Omit<User, 'password'>;
 
 type UserInput = Omit<User, 'id'>;
 
+type UserTest = Partial<User>;
+
 type Credentials = Pick<User, 'user_name' | 'password'>;
 
 type Review = {
@@ -79,7 +81,8 @@ type GameUpdate = Partial<Omit<Game, 'id'>>;
 export type {
     User, 
     UserInput, 
-    UserOutput, 
+    UserOutput,
+    UserTest,
     Credentials, 
     Review,
     ReviewInput,
