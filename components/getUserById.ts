@@ -2,6 +2,10 @@ import { GET_USER_BY_ID } from "@/app/api/graphql/queries/userQueries";
 import { User, UserOutput} from "@/types/DBTypes";
 import { useQuery } from "@apollo/client";
 
+
+/**
+ * Function to get user by user id
+ */
 export default function GetUserById(id: string): UserOutput | null {
 
     let user: UserOutput = {

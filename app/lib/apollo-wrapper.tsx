@@ -24,6 +24,7 @@ function makeClient() {
       uri: "https://main--spacex-l4uc6p.apollographos.net/graphql",
   });
 
+  // Create a new ApolloClient instance
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
     link:
@@ -38,6 +39,7 @@ function makeClient() {
   });
 }
 
+// This function wraps the entire app with the Apollo client. Used to get the queries and mutations working
 export function ApolloWrapper({ children }: React.PropsWithChildren<{}>) {
   return (
     <ApolloProvider client={createApolloClient()}>

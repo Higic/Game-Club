@@ -8,7 +8,10 @@ const getUserToken = () => {
   return Cookies.get("token");
 };
 
-
+/**
+ * This function is used globally to get the logged in user's token and validate it. Used in many components.
+ * @returns the logged in user
+ */
 export default function GetLoggedInUser(): UserOutput | null {
   const token = getUserToken() as MyContext;
 
@@ -18,7 +21,8 @@ export default function GetLoggedInUser(): UserOutput | null {
     bio: "",
   };
 
-  console.log("token: ", token);
+
+  // Query to check the token
   const { loading, error, data } = useQuery(CHECK_TOKEN, {
     variables: { token: token },
   });

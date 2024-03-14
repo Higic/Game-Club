@@ -14,7 +14,6 @@ import resolvers from "./resolvers";
  * Connect to the database
  */
 const uri = process.env.DATABASE_URL;
-
 const connectDB = async () => {
   try {
     if (uri) {

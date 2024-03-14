@@ -5,7 +5,10 @@ import { useQuery } from "@apollo/client"
 import { useRouter } from "next/navigation";
 import { Game } from "./[game]/page";
 
-
+/**
+ * The main page for all games
+ * @returns all games in an array
+ */
 function Games () {
   const router = useRouter();
   const { loading, error, data } = useQuery(GET_ALL_GAMES); 
@@ -23,14 +26,11 @@ function Games () {
   );
 }
 
-
-export default function HomePage() {
-
-
-
-
-  
-  
+/**
+ * The main page for all games, displays the Games component inside
+ * @returns the Games component
+ */
+export default function GamePage() {
   return (
     <div>
       <div>

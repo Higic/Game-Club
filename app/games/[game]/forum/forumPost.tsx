@@ -18,7 +18,10 @@ function GetGameById(game: string) {
 }
 
 
-
+/**
+ * Component queries and displays all forum posts for a certain game
+ * @returns all forum posts for a certain game
+ */
 export default function GetForumPost() {
     const [gameId, setGame] = useState("");
     useEffect(() => {
@@ -32,10 +35,12 @@ export default function GetForumPost() {
     const gameData = GetGameById(gameId);
     const name = gameData?.gameById.gameName;
 
+    // Get all forum posts for the game
     const { loading, error, data } = useQuery(GET_FORUM_POSTS_BY_GAME, {
         variables: { game: gameId },
     });
 
+    // Display the forum posts if they exist
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
     return (

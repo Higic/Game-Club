@@ -141,7 +141,7 @@ type Mutation {
     login(credentials: Credentials!): LoginResponse
     register(user: UserInput!): UserResponse
     updateUser(user: UserModify!): UserResponse
-    updateBio(bio: String!): UserResponse
+    updateBio(bio: String!, token: String!): UserResponse
     deleteUser: UserResponse
     createGame(input: GameInput): Game
     updateGame(id: ID!, input: GameModify): Game

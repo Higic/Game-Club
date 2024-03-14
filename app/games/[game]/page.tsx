@@ -3,6 +3,11 @@
 import { GET_GAME_BY_ID } from "@/app/api/graphql/queries/gameQueries";
 import { useQuery } from "@apollo/client";
 
+/**
+ * This function is used to display a game by its id
+ * @param gameId game id from database
+ * @returns Game component to be displayed on the page
+ */
 export function Game({ gameId }: { gameId: string }) {
   const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
     variables: { gameById: gameId },
@@ -22,6 +27,7 @@ export function Game({ gameId }: { gameId: string }) {
   );
 }
 
+// This is the page that displays a game by the id gotten as a parameter
 export default function Page({ params }: { params: { game: string } }) {
   return (
     <div>

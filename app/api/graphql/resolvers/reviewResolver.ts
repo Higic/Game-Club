@@ -23,12 +23,10 @@ const reviewResolver = {
         createReview: async (_: undefined, args: { input: ReviewInput}) => {
             return await reviewModel.create(args.input);
         },
-        updateReview: async (_: undefined, args: { id: string, input: ReviewModify }, context: MyContext) => {
-            const filter = {_id: args.id, author: context.userdata?.user.id};
-            return await reviewModel.findByIdAndUpdate(filter, args.input, { new: true });
+        updateReview: async (_: undefined, args: { id: string, input: ReviewModify }) => {
+            return await reviewModel.findByIdAndUpdate(args.id, args.input, { new: true });
         },
-        deleteReview: async (_: undefined, args: { id: string }, context: MyContext) => {
-            const user = GetUserById(context.userdata?.user.id);
+        deleteReview: async (_: undefined, args: { id: string }) => {
             return await reviewModel.findByIdAndDelete(args.id);
         },
     },
