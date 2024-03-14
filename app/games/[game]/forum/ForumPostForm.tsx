@@ -76,14 +76,20 @@ export default function ForumPostForm() {
                 <label>Text:</label>
                 <textarea
                     rows={4}
+                    maxLength={1000}
                     value={text}
                     placeholder="Make a post..."
                     onChange={(e) => setText(e.target.value)}>
                 </textarea>
+                <div>
+                    <span style={{ fontSize: "12px" }}>Characters remaining: {1000 - text.length}</span>
+                </div>
                 <input
                     type="submit"
-                    value="Submit">
-                </input>
+                    value="Submit"
+                    disabled={createForumPostLoading}
+                />
+                {createForumPostError && <p>Error creating LFG: {createForumPostError.message}</p>}
             </form>
         </div>
     );

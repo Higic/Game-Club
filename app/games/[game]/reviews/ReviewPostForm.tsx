@@ -70,6 +70,9 @@ export default function ReviewPostForm() {
                     placeholder="Make a review..."
                     onChange={(e) => setText(e.target.value)}>
                 </textarea>
+                <div>
+                    <span style={{ fontSize: "12px" }}>Characters remaining: {200 - text.length}</span>
+                </div>
                 <select name="Rating" onChange={(e => setRating(e.target.value))}>
                     <option disabled selected>Select rating</option>
                     <option value="1">1/5</option>
@@ -80,8 +83,10 @@ export default function ReviewPostForm() {
                 </select>
                 <input
                     type="submit"
-                    value="Submit">
-                </input>
+                    value="Submit"
+                    disabled={createReviewLoading}
+                />
+                {createReviewError && <p>Error creating LFG: {createReviewError.message}</p>}
             </form>
         </div>
     );
