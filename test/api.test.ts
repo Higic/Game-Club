@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import { getNotFound } from "./testFunctions";
 import app from "../app";
 import { LoginResponse } from "../types/MessageTypes";
-import { ReviewInput, UserTest } from "../types/DBTypes";
+import { ReviewInput, ReviewModify, ReviewTest, UserTest } from "../types/DBTypes";
 import randomstring from "randomstring";
 import { getSingleUser, getUser, loginUser, postUser, putUser } from "./userFunctions";
-import { postReview } from "./reviewFunctions";
+import { deleteReview, getReviewsByGame, postReview, putReview } from "./reviewFunctions";
 
 describe('Testing graphql api', () => {
   beforeAll(async () => {
@@ -44,6 +44,29 @@ describe('Testing graphql api', () => {
     author: 'Testauthor',
     score: 5,
   };
+
+  const testReview2: ReviewInput = {
+    text: 'Test review ' + randomstring.generate(7),
+    game: 'Testgame',
+    author: 'Testauthor',
+    score: 5,
+  };
+
+  const testReviewId: ReviewTest = {
+    id: '',
+  };
+
+  const testReviewUpdate: ReviewTest = {
+    id: '',
+    game: 'Testgame',
+    author: 'Testauthor',
+    score: 5,
+    text: 'Test review ' + randomstring.generate(7),
+  };
+
+  // fortnite game id
+  const testGameId: string = '65f0eca2001216c537c1e646';
+
 
   // create first user
   it('should create a new user', async () => {
@@ -94,6 +117,28 @@ describe('Testing graphql api', () => {
 
   // test post review
   it('should post a review', async () => {
-    await postReview(app, testReview1);
+    const result = await postReview(app, testReview1);
+    testReviewId.id = result.id;
   });
+
+  // delete review
+  it('should delete a review', async () => {
+    await deleteReview(app, testReviewId.id as string);
+  });
+
+  // get fortnite reviews
+  it('should return reviews for fortnite', async () => {
+    await getReviewsByGame(app, testGameId);
+  });
+
+  /* THIS TEST IS STILL WORK IN PROGRESS
+  it('should update a review', async () => {
+    const newReview: ReviewTest = {
+      game: 'Testgame',
+      author: 'Testauthor',
+      score: 5,
+      text: 'Test review ' + randomstring.generate(7),
+    };
+    await putReview(app, testReviewId.id as string);
+  }); */
 });
