@@ -45,7 +45,7 @@ export default function ReviewPostForm() {
         e.preventDefault();
         const formData: ReviewInput = {
             game: game,
-            author: author?.user_name,
+            author: author?.user_name as string,
             score: parseInt(rating),
             text: text
         }
