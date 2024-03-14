@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "@/app/api/graphql/mutations/userMutations";
 import { UserInput } from "@/types/DBTypes";
+import { useRouter } from "next/navigation";
 
 /**
   * Register component
@@ -14,6 +15,8 @@ import { UserInput } from "@/types/DBTypes";
   * - Sends data to the server
   */
 export default function Register() {
+
+  const router = useRouter();
   
   // Constants for username length
   const [formData, setFormData] = useState({
@@ -72,6 +75,10 @@ export default function Register() {
     // Get username and password from data
     try {
       const result = await registerMutation({ variables: { user: apiData } });
+      if (result) {
+        alert("User registered successfully!");
+        router.push("/login");
+      }
     } catch (error) {
       console.error(error);
     }

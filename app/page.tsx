@@ -12,12 +12,8 @@ export default function HomePage() {
   return (
     <div className="homePageIntro">
       <h1>Welcome to Game Club!</h1>
-      <p>Use the search bar to find the game you are looking for</p>
+      <p>Click the logo to find the game you are looking for!</p>
       <div>
-        <button onClick={() => router.push(`/games`)}>Games</button>
-        <button onClick={() => router.push(`/register`)}>Register</button>
-        <button onClick={() => router.push(`/login`)}>Login</button>
-        <button onClick={() => router.push(`/debug`)}>Debug page</button>
       </div>
     </div>
   );

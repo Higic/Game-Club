@@ -34,7 +34,6 @@ export default function GamePage() {
   return (
     <div>
       <div>
-        <h1>Would you rather have games?!</h1>
       </div>
       <div>
         <Games />
