@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import { getNotFound } from "./testFunctions";
 import app from "../app";
 import { LoginResponse } from "../types/MessageTypes";
-import { ForumPostInput, LFGInput, LFGTest, ReviewInput, ReviewModify, ReviewTest, UserTest } from "../types/DBTypes";
+import { ForumPostInput, ForumPostTest, LFGInput, LFGTest, ReviewInput, ReviewModify, ReviewTest, UserTest } from "../types/DBTypes";
 import randomstring from "randomstring";
 import { getSingleUser, getUser, loginUser, postUser, putUser } from "./userFunctions";
 import { deleteReview, getReviewsByGame, postReview, putReview } from "./reviewFunctions";
 import { deleteLfg, getLfgByGame, postLfg } from "./lfgFunctions";
-import { postForumPost } from "./forumPostFunctions";
+import { deleteForumPost, postForumPost } from "./forumPostFunctions";
 
 describe('Testing graphql api', () => {
   beforeAll(async () => {
@@ -26,7 +26,6 @@ describe('Testing graphql api', () => {
   // test create user
   let userData: LoginResponse;
   let userData2: LoginResponse;
-  let adminData: LoginResponse;
 
   const testUser: UserTest = {
     user_name: 'Test User ' + randomstring.generate(7),
@@ -72,6 +71,10 @@ describe('Testing graphql api', () => {
   };
 
   const testLfgId: LFGTest = {
+    id: '',
+  };
+
+  const testForumPostId: ForumPostTest = {
     id: '',
   };
 
@@ -177,10 +180,13 @@ describe('Testing graphql api', () => {
     await getLfgByGame(app, testGameId);
   });
 
-  /* Doesnt want to work, says ForumPostInput doesnt have id?
   // test post forum post
   it('should post a new forum post', async () => {
     const result = await postForumPost(app, testForumPost1);
-    testForumPost1.id = result.id; 
-  }); */
+    testForumPostId.id = result.id; 
+  });
+
+  it('should delete a forum post', async () => {
+    await deleteForumPost(app, testForumPostId.id as string);
+  });
 });
