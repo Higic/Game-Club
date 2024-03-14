@@ -38,15 +38,15 @@ const getSingleUser = (
       .post('/graphql')
       .set('Content-type', 'application/json')
       .send({
-        query: `query UserById($userId: String!) {
-          userById(id: $userId) {
+        query: `query Query($userById: ID!) {
+          userById(id: $userById) {
+            bio
             id
             user_name
-            bio
           }
         }`,
         variables: {
-          userId: id,
+          userById: id,
         },
       })
       .expect(200, (err, response) => {
@@ -56,7 +56,7 @@ const getSingleUser = (
           const user = response.body.data.userById;
           expect(user.id).toBe(id);
           expect(user).toHaveProperty('user_name');
-          expect(user).toHaveProperty('email');
+          expect(user).toHaveProperty('bio');
           resolve(response.body.data.userById);
         }
       });
@@ -108,7 +108,7 @@ const postUser = (
 
 const loginUser = (
   url: string | Application,
-  vars: {credentials: {username: string; password: string}},
+  vars: {credentials: {user_name: string; password: string}},
 ): Promise<LoginResponse> => {
   return new Promise((resolve, reject) => {
     request(url)
@@ -139,8 +139,43 @@ const loginUser = (
           expect(userData).toHaveProperty('token');
           expect(userData).toHaveProperty('user');
           expect(userData.user).toHaveProperty('id');
-          //expect(userData.user.email).toBe(user.username);
           resolve(response.body.data.login);
+        }
+      });
+  });
+};
+
+const putUser = (url: string | Application, token: string) => {
+  return new Promise((resolve, reject) => {
+    const newValue = 'Bio Update ' + randomstring.generate(7);
+    request(url)
+      .post('/graphql')
+      .set('Content-type', 'application/json')
+      .set('Authorization', 'Bearer ' + token)
+      .send({
+        query: `mutation updateBio($bio: String!, $token: String!) {
+          updateBio(bio: $bio, token: $token) {
+            user {
+              user_name
+              id
+              bio
+            }
+          }
+        }`,
+        variables: {
+          bio: newValue,
+          token: token,
+        },
+      })
+      .expect(200, (err, response) => {
+        if (err) {
+          reject(err);
+        } else {
+          const userData = response.body.data.updateBio;
+          expect(userData).toHaveProperty('user');
+          expect(userData.user).toHaveProperty('id');
+          expect(userData.user.bio).toBe(newValue);
+          resolve(response.body.data.updateBio);
         }
       });
   });
@@ -151,4 +186,5 @@ export {
     getSingleUser,
     postUser,
     loginUser,
+    putUser,
 };

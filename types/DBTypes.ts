@@ -26,6 +26,8 @@ type Review = {
     text: string | null;
 }
 
+type ReviewTest = Partial<Review>;
+
 type ReviewInput = Omit<Review, 'id'>;
 
 type ReviewModify = Omit<Review, 'game' | 'author' | 'id'>;
@@ -98,5 +100,6 @@ export type {
     TokenContent,
     Game,
     GameInput,
-    GameUpdate
+    GameUpdate,
+    ReviewTest
 };
