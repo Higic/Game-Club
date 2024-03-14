@@ -1,10 +1,12 @@
 'use client';
 
+import { DELETE_LFG_MUTATION } from "@/app/api/graphql/mutations/lfgMutations";
 import { GET_GAME_BY_ID } from "@/app/api/graphql/queries/gameQueries";
 import { GET_LFG_BY_GAME } from "@/app/api/graphql/queries/lfgQueries";
 import { LFG } from "@/types/DBTypes";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 /**
  * Function to get game by game id
@@ -23,6 +25,7 @@ function GetGameById(game: string) {
  * Component for the LFG posts
  */
 export default function LfgPost() {
+  const [deleteLfgMutation, { loading: deleteLfgLoading, error: deleteLfgError }] = useMutation(DELETE_LFG_MUTATION);
 
   // Get the game name from the URL and set to gameId
   const [gameId, setGameId] = useState("");
@@ -32,7 +35,20 @@ export default function LfgPost() {
     const game = pathParts[2];
     setGameId(game);
   }, []);
-
+  const router = useRouter();
+  const handleDelete = async (id: string) => {
+    try {
+      const data = await deleteLfgMutation({
+        variables: { deleteLfgId: id }
+      });
+      if (data) {
+        console.log("LFG post deleted: ", data);
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+    router.refresh();
+  }
   // Get the game data
   const gameData = GetGameById(gameId);
   const name = gameData?.gameById.gameName;
@@ -57,7 +73,7 @@ export default function LfgPost() {
             <p>{lfg.text}</p>
           </div>
           <div className="postButton">
-            <button>Join</button>
+            <button onClick={() => handleDelete(lfg.id as string)}>Delete</button>
           </div>
         </div>
         ))}

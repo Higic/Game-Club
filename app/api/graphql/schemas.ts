@@ -150,7 +150,7 @@ type Mutation {
     updateReview(id: ID!, input: ReviewModify): Review
     deleteReview(id: ID!): Review
     createLfg(input: LFGInput): LFG
-    deleteLfg(id: ID!): LFG
+    deleteLfg(id: String!): LFG
     createForumPost(input: ForumPostInput): ForumPost
     updateForumPost(input: ForumPostInput): ForumPost
     deleteForumPost(id: ID!): ForumPost

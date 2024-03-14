@@ -3,6 +3,7 @@ import { LFGInput } from "@/types/DBTypes";
 import { isLoggedIn } from "@/functions/authorize";
 import GetUserById from "@/components/getUserById";
 import lfgModel from "../models/LFGModel";
+import GetLoggedInUser from "@/components/getLoggedInUser";
 
 /**
  * This file contains resolvers for the lfg api.
@@ -24,9 +25,18 @@ const lfgResolver = {
             return await lfgModel.create(args.input);
         },
         // update lfg be here
-        deleteLfg: async (_: undefined, args: { id: string }, context: MyContext) => {
-            const user = GetUserById(context.userdata?.user.id);
-            return await lfgModel.findByIdAndDelete(args.id);
+        deleteLfg: async (_: undefined, args: { id: string }) => {
+            /*const loggedInUser = GetLoggedInUser();
+            console.log("loggedInUser", loggedInUser);
+            if (loggedInUser) {
+                const userId = loggedInUser.id;
+                const user = GetUserById(userId);
+                if (user) {*/
+                    return await lfgModel.findByIdAndDelete(args.id);
+                /*}
+            }
+            console.log("not logged in");
+            return null;*/
         },
     },
 };
