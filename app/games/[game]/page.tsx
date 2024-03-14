@@ -8,7 +8,7 @@ import { useQuery } from "@apollo/client";
  * @param gameId game id from database
  * @returns Game component to be displayed on the page
  */
-export function Game({ gameId }: { gameId: string }) {
+function Game({ gameId }: { gameId: string }) {
   const { loading, error, data } = useQuery(GET_GAME_BY_ID, {
     variables: { gameById: gameId },
   });
