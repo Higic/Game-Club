@@ -2,7 +2,7 @@
 
 A book club for video games made as a project for Metropolia UAS course Web-development 2.
 <br><br>
-The website is built using React NextJS via TypeScript and uses Graphql and mongoDB as the backend.
+The website is built using React NextJS via TypeScript and uses GraphQL and MongoDB as the backend.
 
 ## Table of Contents
 
@@ -12,6 +12,7 @@ The website is built using React NextJS via TypeScript and uses Graphql and mong
 - [Installation](#installation)
 - [Usage](#usage)
 - [Frameworks and Technologies](#frameworks-and-technologies)
+- [Developers Conclusions](#developers-conclusions)
 
 ## Description
 
@@ -59,12 +60,11 @@ Click the Game Club logo to open the list of games that are currently added to t
 <br>
 Clicking on a game opens up the page where you can navigate over to either the reviews, lfg or forum page for that single game. Users will need to register and log in to the service if they wish to interact with most of the sites content, (e.g. Write forum posts, comment on posts, leave a review etc.). The written data is accessable to everyone but adding your own requires authentication.
 <br>
-When registering an account, if succesfull, the website informs of the registration and redirects to the login page. Here you can log in with the newly created account. After that, you can create posts in the games reviews, lfgs or forums.
+When registering an account, if successful, the website informs of the registration and redirects to the login page. Here you can log in with the newly created account. After that, you can create posts in the games reviews, lfgs or forums.
 <br>
 The profile contains a small bio that can be edited. As of this version it has no actual use other than a proof of concept. The bio updates to the database.
 
 ## Frameworks and Technologies
-
 This project uses the following frameworks and libraries:
 
 - React
@@ -72,5 +72,19 @@ This project uses the following frameworks and libraries:
 - Mongoose
 - MongoDB Atlas
 - Apollo GraphQL
+- Jsonwebtoken
 
-## [Check out the website here!](gameclubmain.azurewebsites.net)
+## Developers Conclusions
+Overall our project idea was good and had potential. If we'd have more time we could've fulfilled more of the requirements. Initially, it was planned to include some sort of 3rd party game-related API for a large selection of data, but other issues had us scrap it.
+#### +
+- Got to learn some Next.js
+- Basic understanding of GraphQL
+- Basic understanding of Azure
+#### -
+- Integrating Next.js was time consuming
+- Shortage of time
+      - Implementing tests challenging
+- More specific planning of structure/architecture would've been helpful
+
+## Check out the website here!
+#### https://gameclubmain.azurewebsites.net
