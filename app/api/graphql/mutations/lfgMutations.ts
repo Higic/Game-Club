@@ -15,16 +15,12 @@ mutation Mutation($input: LFGInput) {
 `;
 
 export const DELETE_LFG_MUTATION = gql`
-  mutation Mutation($deleteLfgId: ID!) {
+  mutation Mutation($deleteLfgId: String!) {
     deleteLfg(id: $deleteLfgId) {
       id
       text
       game
-      user {
-        id
-        user_name
-        bio
-      }
+      author
     }
   }
 `;
