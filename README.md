@@ -1,9 +1,11 @@
 # Game-Club
+#### https://gameclubmain.azurewebsites.net
 
 A book club for video games made as a project for Metropolia UAS course Web-development 2.
 <br><br>
 The website is built using React NextJS via TypeScript and uses GraphQL and MongoDB as the backend.
 
+---
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -14,6 +16,7 @@ The website is built using React NextJS via TypeScript and uses GraphQL and Mong
 - [Frameworks and Technologies](#frameworks-and-technologies)
 - [Developers Conclusions](#developers-conclusions)
 
+---
 ## Description
 
 Think book club but replace 'book' with 'game'.. yeah.. a Game Club! That's what this project is supposed to be. A club for gamers by gamers. It is a combination of three services; Game reviews, forum discussions and "Looking for groups" (LFG) services. These three services are grouped up to be game specific, meaning that every game has its own collection of reviews, "LFG's" and forum discussions.
@@ -22,6 +25,7 @@ Reviews are plain objective ratings of a game. The score spans from 1 to 5 with 
 <br><br>
 The project is meant for gamers who are looking for reviews and discussions about a particular game as well as finding other gamers to play with. The average user would discuss the game in the forums section, look for others to play with in the LFG and afterwards review the game in the review service.
 
+---
 ## Features
 
 Since this is a backend course, the front end features are a bit limited.
@@ -42,15 +46,17 @@ Users can write LFG posts to look for people to play games with. These are game 
 
 Users can write game specific forum posts and comment on said posts. The posts are game specific and the omments are post specific and can be toggled on and off. This prevents any external clutter from displaying.
 
+---
 ## Installation
 
-The project can be installed locally. In order to do that, you need both this project and the [Game-Club auth server](https://github.com/TapioAJ/Game-Club-auth-server). Follow the instructions there before running continuing.
-Clone this repository and to install required dependencies via `npm i`.\
+The project can be installed locally. In order to do that, you need both this project and the [Game-Club auth server](https://github.com/TapioAJ/Game-Club-auth-server). Follow the instructions there before continuing running.
+Clone this repository and install required dependencies via `npm i`.\
 The project uses MongoDB so next you need to create a mongodb cloud database using MongoDB Atlas. After setting up the cloud database you need to generate a `.env` file. Use the `.env.sample` as a boilerplate. Using Mongo Atlas, add the database url to the DATABASE_URL value. Write down a JWT secret that is used as a key to compare the authentication. Make sure this is the same in the auth server.
 After that is done use `npm run dev` to start the development server.\
 It will open the dev server on `localhost:3000`.\
 The GraphQL API endpoint can be visited through `localhost:3000/api/graphql`.
 
+---
 ## Usage
 
 Game Club is meant for people who enjoy watching, playing and reading about videogames. The login, register and logout can be accessed from the top right at all times and are context based, meaning you cannot accidentally log in again if you are already logged in. Registering an account requires logging out.
@@ -64,7 +70,8 @@ When registering an account, if successful, the website informs of the registrat
 <br>
 The profile contains a small bio that can be edited. As of this version it has no actual use other than a proof of concept. The bio updates to the database.
 
-## Frameworks and Technologies
+---
+## Frameworks and Technologies Used
 This project uses the following frameworks and libraries:
 
 - React
@@ -73,9 +80,9 @@ This project uses the following frameworks and libraries:
 - MongoDB Atlas
 - Apollo GraphQL
 - Jsonwebtoken
-
+---
 ## Developers Conclusions
-Overall our project idea was good and had potential. If we'd have more time we could've fulfilled more of the requirements. Initially, it was planned to include some sort of 3rd party game-related API for a large selection of data, but other issues had us scrap it.
+Overall our project idea was good and had potential. If we'd have more time we could've fulfilled more of the requirements. Initially, it was planned to include some sort of 3rd party game-related API for a large selection of data, but other issues had us scrap it. At the last stages, some tests were also succesfully implemented as per requirement.
 #### +
 - Got to learn some Next.js
 - Basic understanding of GraphQL
@@ -83,8 +90,9 @@ Overall our project idea was good and had potential. If we'd have more time we c
 #### -
 - Integrating Next.js was time consuming
 - Shortage of time
-      - Implementing tests challenging
+
 - More specific planning of structure/architecture would've been helpful
 
+---
 ## Check out the website here!
 #### https://gameclubmain.azurewebsites.net
