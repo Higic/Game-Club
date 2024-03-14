@@ -17,8 +17,8 @@ export const CREATE_FORUM_POST_MUTATION = gql`
 `;
 
 export const CREATE_FORUM_COMMENT_MUTATION = gql`
-  mutation Mutation($text: String!) {
-    createForumComment(text: $text) {
+  mutation Mutation($input: ForumCommentInput) {
+    createForumComment(input: $input) {
       id
       forumPostId
       text
@@ -66,7 +66,7 @@ export const UPDATE_FORUM_COMMENT_MUTATION = gql`
   mutation Mutation($text: String!) {
     updateForumComment(text: $text) {
       id
-      forumPostID
+      forumPostId
       text
       author
     }

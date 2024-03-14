@@ -51,8 +51,8 @@ type ForumPostUpdate = Omit<ForumPost, 'game' | 'author' | 'id'>;
 
 type ForumComment = {
     id: Types.ObjectId | string;
-    forumPostId: Types.ObjectId | string;
-    author: Types.ObjectId | string;
+    forumPostId: string;
+    author: string;
     text: string;
 }
 

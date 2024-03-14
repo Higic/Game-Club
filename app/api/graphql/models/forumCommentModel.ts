@@ -6,7 +6,7 @@ import mongoose from "mongoose";
  */
 const forumCommentModel = new mongoose.Schema<ForumComment>({
     forumPostId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'ForumPost', 
         required: true
     },

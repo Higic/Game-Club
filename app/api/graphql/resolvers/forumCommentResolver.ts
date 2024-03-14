@@ -12,16 +12,15 @@ const forumCommentResolver = {
         forumCommentById: async (_: undefined, args: { id: string }) => {
             return await forumCommentModel.findById(args.id);
         },
-        forumCommentsByPost: async (_: undefined, args: { postId: string }) => {
-            return await forumCommentModel.find({ post: args.postId });
+        forumCommentsByPost: async (_: undefined, args: { forumPostId: string }) => {
+            return await forumCommentModel.find({ forumPostId: args.forumPostId });
         },
         forumCommentsByAuthor: async (_: undefined, args: { author: string }) => {
             return await forumCommentModel.find({ user: args.author });
         },
     },
     Mutation: {
-        createForumComment: async (_: undefined, args: { input: ForumCommentInput }, context: MyContext) => {
-            args.input.author = context.userdata?.user.id;
+        createForumComment: async (_: undefined, args: { input: ForumCommentInput }) => {
             return await forumCommentModel.create(args.input);
         },
         updateForumComment: async (_: undefined, args: { id: string, input: ForumCommentUpdate }, context: MyContext) => {

@@ -5,7 +5,7 @@
 const typeDefs = `#graphql
 type ForumComment {
     id: ID!
-    forumPostID: ID!
+    forumPostId: String!
     author: String!
     text: String!
 }
@@ -24,6 +24,13 @@ input ForumPostInput {
     author: String!
     game: String!
 }
+
+input ForumCommentInput {
+    text: String!
+    forumPostId: String!
+    author: String!
+}
+
 
 type LFG {
     id: ID!
@@ -125,7 +132,7 @@ type Query {
     forumPostById(id: ID!): ForumPost
     forumPostsByGame(game: String!): [ForumPost]
     forumPostsByAuthor(author: String!): [ForumPost]
-    forumCommentsByPost(forumPostID: ID!): [ForumComment]
+    forumCommentsByPost(forumPostId: String): [ForumComment]
     forumCommentsByAuthor(author: String!): [ForumComment]
     forumCommentById(id: ID!): ForumComment  
 }
@@ -147,7 +154,7 @@ type Mutation {
     createForumPost(input: ForumPostInput): ForumPost
     updateForumPost(input: ForumPostInput): ForumPost
     deleteForumPost(id: ID!): ForumPost
-    createForumComment(text: String!): ForumComment
+    createForumComment(input: ForumCommentInput): ForumComment
     updateForumComment(text: String!): ForumComment
     deleteForumComment(id: ID!): ForumComment
 }

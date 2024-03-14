@@ -1,9 +1,11 @@
 "use client";
-import { GET_FORUM_POSTS_BY_GAME } from "@/app/api/graphql/queries/forumPostQueries";
+import { GET_FORUM_POSTS_BY_GAME } from "@/app/api/graphql/queries/forumQueries";
 import { GET_GAME_BY_ID } from "@/app/api/graphql/queries/gameQueries";
-import { ForumPost } from "@/types/DBTypes";
+import { ForumComment, ForumPost } from "@/types/DBTypes";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+import ForumCommentForm from "./[forumPosts]/forumCommentForm";
+import { useRouter } from "next/navigation";
 
 function GetGameById(game: string) {
 
@@ -18,7 +20,7 @@ function GetGameById(game: string) {
 
 
 export default function GetForumPost() {
-    const [gameId, setGame] = useState("Metal Gear Rising 2 - Revengeance");
+    const [gameId, setGame] = useState("");
     useEffect(() => {
         const currentPath = window.location.pathname;
         const pathParts = currentPath.split("/");
@@ -26,6 +28,7 @@ export default function GetForumPost() {
         setGame(game);
     }, []);
 
+    const router = useRouter();
     const gameData = GetGameById(gameId);
     const name = gameData?.gameById.gameName;
 
@@ -35,7 +38,6 @@ export default function GetForumPost() {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
-
     return (
         <div>
             <h2>Forum: {name}</h2>
@@ -49,6 +51,7 @@ export default function GetForumPost() {
                             <p>title: {forumPosts.title}, </p>
                             <p>text: {forumPosts.text}</p>
                         </div>
+                        <button onClick={() => router.push(`/games/${gameId}/forum/${forumPosts.id}`)}>Comments</button>
                     </div>
                 ))}
         </div>

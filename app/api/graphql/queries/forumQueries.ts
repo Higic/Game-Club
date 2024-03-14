@@ -24,3 +24,14 @@ query Query($game: String!) {
   }
 }
 `;
+
+export const GET_FORUM_COMMENTS_BY_POST = gql`
+query Query($forumPostId: String!) {
+  forumCommentsByPost(forumPostId: $forumPostId) {
+    id
+    forumPostId
+    author
+    text
+  }
+}
+`;

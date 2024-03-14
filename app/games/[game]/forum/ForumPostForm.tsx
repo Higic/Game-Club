@@ -9,13 +9,13 @@ import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
 export default function ForumPostForm() {
-    const router = useRouter();
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [gameid, setGame] = useState("");
     const [createForumPostMutation, {loading: createForumPostLoading, error: createForumPostError}] = useMutation(CREATE_FORUM_POST_MUTATION);
 
     const author = GetLoggedInUser();
+    const router = useRouter();
 
     useEffect(() => {
         const currentPath = window.location.pathname;
@@ -25,9 +25,8 @@ export default function ForumPostForm() {
     }, []);
 
     if (!author){
-        alert("not logged in");
-
-        return;
+        console.log("User not logged in");
+        return  <p></p>;
     }
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -49,6 +48,7 @@ export default function ForumPostForm() {
         } catch (error) {
             console.log("Error: ", error);
         }
+        router.refresh();
     }
     
 
