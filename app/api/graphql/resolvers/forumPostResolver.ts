@@ -27,9 +27,8 @@ const forumPostResolver = {
             const filter = {_id: args.id, author: context.userdata?.user.id};
             return await forumPostModel.findByIdAndUpdate(filter, args.input, { new: true });
         },
-        deleteForumPost: async (_: undefined, args: { id: string }, context: MyContext) => {
-            const user = GetUserById(context.userdata?.user.id);
-                return await forumPostModel.findByIdAndDelete(args.id);
+        deleteForumPost: async (_: undefined, args: { id: string }) => {
+            return await forumPostModel.findByIdAndDelete(args.id);
             
         },
     },
