@@ -4,7 +4,7 @@ import app from "../app";
 import { LoginResponse } from "../types/MessageTypes";
 import { ForumPostInput, ForumPostTest, LFGInput, LFGTest, ReviewInput, ReviewModify, ReviewTest, UserTest } from "../types/DBTypes";
 import randomstring from "randomstring";
-import { getSingleUser, getUser, loginUser, postUser, putUser } from "./userFunctions";
+import { getSingleUser, getUser, loginBrute, loginUser, postUser, putUser } from "./userFunctions";
 import { deleteReview, getReviewsByGame, postReview, putReview } from "./reviewFunctions";
 import { deleteLfg, getLfgByGame, postLfg } from "./lfgFunctions";
 import { deleteForumPost, postForumPost } from "./forumPostFunctions";
@@ -189,4 +189,28 @@ describe('Testing graphql api', () => {
   it('should delete a forum post', async () => {
     await deleteForumPost(app, testForumPostId.id as string);
   });
+
+  // test brute force protection
+  test('Brute force attack simulation', async () => {
+    const maxAttempts = 20;
+    const mockUser: UserTest = {
+      user_name: 'Test User ' + randomstring.generate(10),
+      password: 'notthepassword',
+    };
+
+    try {
+      // Call the mock login function until the maximum number of attempts is reached
+      for (let i = 0; i < maxAttempts; i++) {
+        const result = await loginBrute(app, mockUser);
+        if (!result) throw new Error('Brute force attack unsuccessful');
+      }
+      // If the while loop completes successfully, the test fails
+      throw new Error('Brute force attack succeeded');
+
+    } catch (error) {
+      console.log(error);
+      // If the login function throws an error, the test passes
+      expect((error as Error).message).toBe('Brute force attack unsuccessful');
+    }
+  }, 15000);
 });
