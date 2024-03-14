@@ -5,7 +5,6 @@ The website is built using React NextJS via TypeScript and uses Graphql and mong
 
 ## Table of Contents
 
-- [Project Name](#project-name)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Features](#features)
