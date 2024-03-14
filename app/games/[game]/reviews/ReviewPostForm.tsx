@@ -50,6 +50,11 @@ export default function ReviewPostForm() {
             text: text
         }
 
+        if(rating ==="") {
+            alert("Please select a rating");
+            return;
+        }
+
         try {
             const result = await createReviewMutation({ variables: { input: formData } });
             alert("Review created");
