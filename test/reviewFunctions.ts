@@ -40,7 +40,6 @@ const postReview = (
         }
       });
   });
-  
 };
 
 const deleteReview = (

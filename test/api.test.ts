@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 import { getNotFound } from "./testFunctions";
 import app from "../app";
 import { LoginResponse } from "../types/MessageTypes";
-import { ReviewInput, ReviewModify, ReviewTest, UserTest } from "../types/DBTypes";
+import { ForumPostInput, LFGInput, LFGTest, ReviewInput, ReviewModify, ReviewTest, UserTest } from "../types/DBTypes";
 import randomstring from "randomstring";
 import { getSingleUser, getUser, loginUser, postUser, putUser } from "./userFunctions";
 import { deleteReview, getReviewsByGame, postReview, putReview } from "./reviewFunctions";
+import { deleteLfg, getLfgByGame, postLfg } from "./lfgFunctions";
+import { postForumPost } from "./forumPostFunctions";
 
 describe('Testing graphql api', () => {
   beforeAll(async () => {
@@ -52,7 +54,24 @@ describe('Testing graphql api', () => {
     score: 5,
   };
 
+  const testLfg1: LFGInput = {
+    text: 'Test LFG ' + randomstring.generate(7),
+    game: 'Testgame',
+    author: 'Testauthor',
+  };
+
+  const testForumPost1: ForumPostInput = {
+    author: 'Testauthor',
+    title: 'Test title ' + randomstring.generate(7),
+    text: 'Test text ' + randomstring.generate(7),
+    game: 'Testgame',
+  };
+
   const testReviewId: ReviewTest = {
+    id: '',
+  };
+
+  const testLfgId: LFGTest = {
     id: '',
   };
 
@@ -121,12 +140,12 @@ describe('Testing graphql api', () => {
     testReviewId.id = result.id;
   });
 
-  // delete review
+  // test delete review
   it('should delete a review', async () => {
     await deleteReview(app, testReviewId.id as string);
   });
 
-  // get fortnite reviews
+  // test get fortnite reviews
   it('should return reviews for fortnite', async () => {
     await getReviewsByGame(app, testGameId);
   });
@@ -140,5 +159,28 @@ describe('Testing graphql api', () => {
       text: 'Test review ' + randomstring.generate(7),
     };
     await putReview(app, testReviewId.id as string);
+  }); */
+
+  // test post LFG
+  it('should post a new LFG', async () => {
+    const result = await postLfg(app, testLfg1);
+    testLfgId.id = result.id;
+  });
+
+  // test delete LFG
+  it('should delete a LFG', async () => {
+    await deleteLfg(app, testLfgId.id as string);
+  });
+
+  // test get fortnite LFG's
+  it('should return LFGs for fortnite', async () => {
+    await getLfgByGame(app, testGameId);
+  });
+
+  /* Doesnt want to work, says ForumPostInput doesnt have id?
+  // test post forum post
+  it('should post a new forum post', async () => {
+    const result = await postForumPost(app, testForumPost1);
+    testForumPost1.id = result.id; 
   }); */
 });

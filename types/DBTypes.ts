@@ -3,6 +3,8 @@ import {Document, Types} from 'mongoose';
 /**
  * Here lies the types for the database models
  */
+
+ /* User */
 type User = Partial<Document> &{
     id: Types.ObjectId | string;
     user_name: string;
@@ -18,6 +20,12 @@ type UserTest = Partial<User>;
 
 type Credentials = Pick<User, 'user_name' | 'password'>;
 
+type TokenContent = {
+    token: string;
+    user: UserOutput;
+}
+
+/* Review */
 type Review = {
     id?: string;
     game: string;
@@ -32,6 +40,7 @@ type ReviewInput = Omit<Review, 'id'>;
 
 type ReviewModify = Omit<Review, 'game' | 'author' | 'id'>;
 
+/* LFG */
 type LFG = {
     id?: string;
     game: string;
@@ -39,15 +48,20 @@ type LFG = {
     text: string | null;
 }
 
+type LFGTest = Partial<LFG>;
+
 type LFGInput = Omit<LFG, 'id'>;
 
+/* Forum */
 type ForumPost = {
-    id: Types.ObjectId | string;
+    id?: string;
     game: string;
     author: string;
     title: string;
     text: string;
 }
+
+type ForumPostTest = Partial<ForumPost>;
 
 type ForumPostInput = Omit<ForumPost, 'id'>;
 
@@ -64,11 +78,7 @@ type ForumCommentInput = Omit<ForumComment, 'id'>;
 
 type ForumCommentUpdate = Pick<ForumComment, 'text'>;
 
-type TokenContent = {
-    token: string;
-    user: UserOutput;
-}
-
+/* Game */
 type Game = {
     id: Types.ObjectId | string;
     gameName: string;
@@ -81,25 +91,27 @@ type GameInput = Omit<Game, 'id'>;
 type GameUpdate = Partial<Omit<Game, 'id'>>;
 
 export type {
-    User, 
-    UserInput, 
+    User,
+    UserInput,
     UserOutput,
     UserTest,
-    Credentials, 
+    Credentials,
+    TokenContent,
     Review,
+    ReviewTest,
     ReviewInput,
     ReviewModify,
-    LFG, 
+    LFG,
+    LFGTest,
     LFGInput,
-    ForumPost, 
+    ForumPost,
+    ForumPostTest,
     ForumPostInput,
     ForumPostUpdate,
-    ForumComment, 
+    ForumComment,
     ForumCommentInput,
     ForumCommentUpdate,
-    TokenContent,
     Game,
     GameInput,
     GameUpdate,
-    ReviewTest
 };
