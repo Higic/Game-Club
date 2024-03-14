@@ -2,10 +2,11 @@
 import { GET_FORUM_POSTS_BY_GAME } from "@/app/api/graphql/queries/forumQueries";
 import { GET_GAME_BY_ID } from "@/app/api/graphql/queries/gameQueries";
 import { ForumComment, ForumPost } from "@/types/DBTypes";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import ForumCommentForm from "./[forumPosts]/forumCommentForm";
 import { useRouter } from "next/navigation";
+import { DELETE_FORUM_POST_MUTATION } from "@/app/api/graphql/mutations/forumMutations";
 
 function GetGameById(game: string) {
 
@@ -23,6 +24,7 @@ function GetGameById(game: string) {
  * @returns all forum posts for a certain game
  */
 export default function GetForumPost() {
+    const [deleteForumPostMutation, { loading: deleteForumPostLoading, error: deleteForumPostError }] = useMutation(DELETE_FORUM_POST_MUTATION);
     const [gameId, setGame] = useState("");
     useEffect(() => {
         const currentPath = window.location.pathname;
@@ -34,6 +36,19 @@ export default function GetForumPost() {
     const router = useRouter();
     const gameData = GetGameById(gameId);
     const name = gameData?.gameById.gameName;
+    const handleDelete = async (id: string) => {
+        try {
+            const data = await deleteForumPostMutation({
+                variables: { deleteForumPostId: id }
+            });
+            if (data) {
+                console.log("Forum post deleted: ", data);
+            }
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+        router.refresh();
+    }
 
     // Get all forum posts for the game
     const { loading, error, data } = useQuery(GET_FORUM_POSTS_BY_GAME, {
@@ -57,6 +72,7 @@ export default function GetForumPost() {
                             <p>text: {forumPosts.text}</p>
                         </div>
                         <button onClick={() => router.push(`/games/${gameId}/forum/${forumPosts.id}`)}>Comments</button>
+                        <button onClick={() => handleDelete(forumPosts.id as string)}>Delete</button>
                     </div>
                 ))}
         </div>

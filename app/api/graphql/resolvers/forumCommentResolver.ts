@@ -27,11 +27,9 @@ const forumCommentResolver = {
             const filter = {_id: args.id, author: context.userdata?.user.id};
             return await forumCommentModel.findByIdAndUpdate(filter, args.input, { new: true });
         },
-        deleteForumComment: async (_: undefined, args: { id: string }, context: MyContext) => {
-            const user = GetUserById(context.userdata?.user.id);
-            {
-                return await forumCommentModel.findByIdAndDelete(args.id);
-            }
+        deleteForumComment: async (_: undefined, args: { id: string }) => {
+
+            return await forumCommentModel.findOneAndDelete({_id: args.id});
         },
     },
 };

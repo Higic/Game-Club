@@ -37,8 +37,6 @@ app.use(
         res.send({message: 'Server running'});
       },
     );
-    // TODO Create a rate limit rule instance (not WSK2 course)
-    // TODO Create a permissions object (not WSK2 course)
 
     const schema = applyMiddleware(
       makeExecutableSchema({
