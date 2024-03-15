@@ -4,6 +4,13 @@
 A book club for video games made as a project for Metropolia UAS course Web-development 2.
 <br><br>
 The website is built using React NextJS via TypeScript and uses GraphQL and MongoDB as the backend.
+<br><br>
+## Contributors
+<a href="https://github.com/Higic/Game-Club/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Higic/Game-Club" />
+</a>
+<br><br>
+@Higic - @edvni - @TapioAJ - @Vandarks
 
 ---
 ## Table of Contents
@@ -28,7 +35,7 @@ The project is meant for gamers who are looking for reviews and discussions abou
 ---
 ## Features
 
-Since this is a backend course, the front end features are a bit limited.
+Since this was a backend course, the front end features are a bit limited.
 
 #### Register
 
@@ -90,7 +97,6 @@ Overall our project idea was good and had potential. If we'd have more time we c
 #### -
 - Integrating Next.js was time consuming
 - Shortage of time
-
 - More specific planning of structure/architecture would've been helpful
 
 ---
