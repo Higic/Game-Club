@@ -50,11 +50,11 @@ app.use(
       schema,
       introspection: true,
       plugins: [
-        process.env.NODE_ENV === 'development'
-          ? ApolloServerPluginLandingPageProductionDefault({
+        process.env.NODE_ENV === 'production'
+          ? ApolloServerPluginLandingPageLocalDefault({
               embed: true as false,
             })
-          : ApolloServerPluginLandingPageLocalDefault(),
+          : ApolloServerPluginLandingPageProductionDefault(),
       ],
       includeStacktraceInErrorResponses: false,
     });
