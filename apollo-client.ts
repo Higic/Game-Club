@@ -1,9 +1,8 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const createApolloClient = () => {
-  console.log(process.env.APOLLO_URI);
   return new ApolloClient({
-    uri: process.env.APOLLO_URI,
+    uri: "https://game-club-two.vercel.app/api/graphql",
     cache: new InMemoryCache(),
   });
 };
