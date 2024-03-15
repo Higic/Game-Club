@@ -101,4 +101,4 @@ Overall our project idea was good and had potential. If we'd have more time we c
 
 ---
 ## Check out the website here!
-#### https://gameclubmain.azurewebsites.net
+### https://game-club-git-main-onnis-projects-fd36d217.vercel.app/
