@@ -144,6 +144,51 @@ const loginUser = (
   });
 };
 
+const loginBrute = (
+  url: string | Application,
+  user: UserTest,
+): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    request(url)
+      .post('/graphql')
+      .set('Content-type', 'application/json')
+      .send({
+        query: `mutation Login($credentials: Credentials!) {
+          login(credentials: $credentials) {
+            user {
+              user_name
+              id
+              bio
+            }
+            token
+            message
+          }
+        }`,
+        variables: {
+          credentials: {
+            username: user.user_name,
+            password: user.password,
+          },
+        },
+      })
+      .expect(200, (err, response) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (
+            response.body.errors?.[0]?.message ===
+            "You are trying to access 'login' too often"
+          ) {
+            console.log('brute blocked', response.body.errors[0].message);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      });
+  });
+};
+
 const putUser = (url: string | Application, token: string) => {
   return new Promise((resolve, reject) => {
     const newValue = 'Bio Update ' + randomstring.generate(7);
@@ -186,4 +231,5 @@ export {
     postUser,
     loginUser,
     putUser,
+    loginBrute
 };
