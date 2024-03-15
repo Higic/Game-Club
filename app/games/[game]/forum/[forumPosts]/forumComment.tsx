@@ -1,6 +1,7 @@
 "use client";
 import { DELETE_FORUM_COMMENT_MUTATION } from "@/app/api/graphql/mutations/forumMutations";
 import { GET_FORUM_COMMENTS_BY_POST } from "@/app/api/graphql/queries/forumQueries";
+import GetLoggedInUser from "@/components/getLoggedInUser";
 import { ForumComment, ForumPost } from "@/types/DBTypes";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
@@ -8,13 +9,14 @@ import { useRouter } from "next/navigation";
 
 
 export default function GetForumComment(post: string) {
-    const [deleteForumCommentMutation, {loading: deleteForumCommentLoading, error: deleteForumCommentError}] = useMutation(DELETE_FORUM_COMMENT_MUTATION);
+    const [deleteForumCommentMutation, { loading: deleteForumCommentLoading, error: deleteForumCommentError }] = useMutation(DELETE_FORUM_COMMENT_MUTATION);
     const router = useRouter();
+    let user = GetLoggedInUser();
     console.log("Post: ", post);
     const handleDelete = async (id: string) => {
         try {
             const data = await deleteForumCommentMutation({
-                variables: {deleteForumCommentId: id}
+                variables: { deleteForumCommentId: id }
             });
             if (data) {
                 console.log("Forum comment deleted: ", data);
@@ -45,7 +47,9 @@ export default function GetForumComment(post: string) {
                         <div className="postData">
                             <p>{forumComment.text}</p>
                         </div>
-                        <button onClick={() => handleDelete(forumComment.id as string)}>Delete</button>
+                        {forumComment.author === user?.user_name && (
+                            <button onClick={() => handleDelete(forumComment.id as string)}>Delete</button>
+                        )}
                     </div>
                 ))}
         </div>
