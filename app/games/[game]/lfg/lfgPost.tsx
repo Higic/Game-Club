@@ -7,6 +7,7 @@ import { LFG } from "@/types/DBTypes";
 import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import GetLoggedInUser from "@/components/getLoggedInUser";
 
 /**
  * Function to get game by game id
@@ -35,6 +36,7 @@ export default function LfgPost() {
     const game = pathParts[2];
     setGameId(game);
   }, []);
+  const user = GetLoggedInUser();
   const router = useRouter();
   const handleDelete = async (id: string) => {
     try {
@@ -72,9 +74,11 @@ export default function LfgPost() {
           <div className="postData">
             <p>{lfg.text}</p>
           </div>
+          {lfg.author === user?.user_name && (
           <div className="postButton">
             <button onClick={() => handleDelete(lfg.id as string)}>Delete</button>
           </div>
+          )}
         </div>
         ))}
     </div>
