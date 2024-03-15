@@ -51,10 +51,10 @@ app.use(
       introspection: true,
       plugins: [
         process.env.NODE_ENV === 'production'
-          ? ApolloServerPluginLandingPageLocalDefault({
+          ? ApolloServerPluginLandingPageProductionDefault({
               embed: true as false,
             })
-          : ApolloServerPluginLandingPageProductionDefault(),
+          : ApolloServerPluginLandingPageLocalDefault(),
       ],
       includeStacktraceInErrorResponses: false,
     });
