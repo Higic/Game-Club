@@ -50,7 +50,7 @@ app.use(
       schema,
       introspection: true,
       plugins: [
-        process.env.NODE_ENV === 'production'
+        process.env.NODE_ENV === 'development'
           ? ApolloServerPluginLandingPageProductionDefault({
               embed: true as false,
             })
